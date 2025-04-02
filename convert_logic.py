@@ -1,8 +1,8 @@
 import openpyxl
 from typing import Dict, Any
-#from help_defs import write_productType
 
 def write_headers_to_exel(sheet: openpyxl.worksheet.worksheet.Worksheet) -> None:
+    """Записывает заголовки в exel файл заготовку."""
     # Блок Документ
     sheet['A1'] = 'file_name#имя файла'  # 0
     sheet['B1'] = 'document_anticorr#Документ - Антикоррупционный'  # 1
@@ -184,7 +184,12 @@ def write_headers_to_exel(sheet: openpyxl.worksheet.worksheet.Worksheet) -> None
 # Блок Продукты запроса Ценные бумаги
     sheet['EE1'] = 'product_securities_attr_securities_data#Продукты запроса - Ценные бумаги - Атрибуты продукта - Данные по ценным бумагам - Данные по ценным бумагам'  # 134
 
-def write_row_to_exel(row_number: int, json_body: Dict[str, Any], sheet: openpyxl.worksheet.worksheet.Worksheet) -> None:
+def write_row_to_exel(
+        row_number: int,
+        json_body: Dict[str, Any],
+        sheet: openpyxl.worksheet.worksheet.Worksheet
+) -> None:
+    """Записывает строки в exel файл заготовку."""
 # Блок Документ
     # file_name
     sheet[row_number][0].value = json_body['regNumber'] if json_body.get('regNumber') is not None else ''
@@ -694,10 +699,7 @@ def write_row_to_exel(row_number: int, json_body: Dict[str, Any], sheet: openpyx
                                 sheet[row_number][58].value = ';'.join(product['values'])
                             else:
                                 sheet[row_number][58].value = sheet[row_number][58].value + ';' + ';'.join(product['values'])
-# либо создать словарь
-    # arguments = [('PROD_ACCOUNT', 'ATTR_BANK_STATEMENT', 59), ('PROD_CARD', 'ATTR_BANK_STATEMENT', 60)]
-    # for argument in arguments:
-    #     write_productType(row_number, json_body, sheet, argument[0], argument[1], argument[2])
+
 # Блок Продукты запроса Аккредитив
     # product_credit_letter_attr_credit_letter_data
     write_productType(row_number, json_body, sheet, 'PROD_CREDIT_LETTER', 'ATTR_CREDIT_LETTER_DATA', 59)
@@ -866,7 +868,14 @@ def write_row_to_exel(row_number: int, json_body: Dict[str, Any], sheet: openpyx
     write_productType(row_number, json_body, sheet, 'PROD_SECURITIES', 'ATTR_SECURITIES_DATA', 134)
 
 
-def write_productType(row_number: int, json_body: Dict[str, Any], sheet: openpyxl.worksheet.worksheet.Worksheet,product_name: str,attr_name: str,header_number: int):
+def write_productType(
+        row_number: int,
+        json_body: Dict[str, Any],
+        sheet: openpyxl.worksheet.worksheet.Worksheet,
+        product_name: str,
+        attr_name: str,
+        header_number: int):
+    """Записывает продукт запроса из json в exel файл"""
     if json_body.get('targets') is not None:
         for target in json_body['targets']:
             if target.get('products') is not None:
