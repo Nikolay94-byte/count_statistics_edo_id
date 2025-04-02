@@ -1,0 +1,123 @@
+{
+	"regDate": "2023-10-26",
+	"targets": [
+		{
+			"id": "c70d6bed-b584-486d-9192-c99209f76914",
+			"inn": "551500892701",
+			"name": "Светлана",
+			"surname": "Полтавская",
+			"products": [
+				{
+					"id": "1e1d41bc-a257-4f1e-b592-c78fe109db44",
+					"attributes": [
+						{
+							"id": "798a9764-f6a9-4f15-aba4-5f402001cb8b",
+							"attributeType": {
+								"name": "Выписки",
+								"codeName": "ATTR_BANK_STATEMENT"
+							}
+						},
+						{
+							"id": "1488b3b9-5cbd-4ea9-9ff6-e26d0dac0cdd",
+							"attributeType": {
+								"name": "Сведения о наличии счетов и банковских карт (справки)",
+								"codeName": "ATTR_EXIST_ACCOUNT_CARD_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Счет",
+						"codeName": "PROD_ACCOUNT"
+					}
+				}
+			],
+			"birthDate": "1989-05-30",
+			"patronymic": "Георгиевна",
+			"targetType": {
+				"name": "Физическое лицо",
+				"codeName": "TARGET_INDIVIDUAL"
+			},
+			"identityDocument": {
+				"number": "797445",
+				"series": "5209",
+				"issuedBy": "ОУФМС России по Омской области",
+				"issueDate": "2009-08-17",
+				"identityDocumentType": {
+					"name": "Паспорт РФ",
+					"codeName": "DUL_PASSPORT_RF"
+				}
+			}
+		},
+		{
+			"id": "0801228b-f4bb-4227-b2e7-9716f4a4c277",
+			"name": "Артём",
+			"surname": "Полтавский",
+			"products": [
+				{
+					"id": "b92f088f-3264-43a0-a363-45eb8a950b85",
+					"attributes": [
+						{
+							"id": "4b4733b5-cb3d-475b-bfb5-cae20839075a",
+							"attributeType": {
+								"name": "Выписки",
+								"codeName": "ATTR_BANK_STATEMENT"
+							}
+						},
+						{
+							"id": "c1e81055-f567-4f2a-9c06-9ffe44d8222a",
+							"attributeType": {
+								"name": "Сведения о наличии счетов и банковских карт (справки)",
+								"codeName": "ATTR_EXIST_ACCOUNT_CARD_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Счет",
+						"codeName": "PROD_ACCOUNT"
+					}
+				}
+			],
+			"birthDate": "2010-08-19",
+			"patronymic": "Денисович",
+			"targetType": {
+				"name": "Физическое лицо",
+				"codeName": "TARGET_INDIVIDUAL"
+			},
+			"identityDocument": {
+				"identityDocumentType": {
+					"name": "Свидетельство о рождении",
+					"codeName": "DUL_BIRTH_CERTIFICATE"
+				}
+			}
+		}
+	],
+	"isParsed": true,
+	"repeated": false,
+	"applicant": {
+		"name": "ФЕДЕРАЛЬНАЯ СЛУЖБА СУДЕБНЫХ ПРИСТАВОВ ГЛАВНОЕ УПРАВЛЕНИЕ ФЕДЕРАЛЬНОЙ СЛУЖБЫ СУДЕБНЫХ ПРИСТАВОВ ПО ОМСКОЙ ОБЛАСТИ О ГУФССИ России по Омской области",
+		"phones": [
+			"3812 21-20-46"
+		],
+		"address": "ул. Ленина, д. 14, Омск, 644099"
+	},
+	"regNumber": "775003/8938",
+	"isNeedDisk": false,
+	"documentDate": "5912-10-26",
+	"documentType": {
+		"name": "Запрос антикоррупционный",
+		"codeName": "REQ_ANTI_CORRUPTION"
+	},
+	"isPersonally": false,
+	"requestSource": "SDO_FOIV",
+	"documentNumber": "23 /49849",
+	"inquirySignature": {
+		"hasStamp": false,
+		"approverName": "Г.М. Титова",
+		"approverPosition": {
+			"name": "Руководитель",
+			"codeName": "POS_MANAGER"
+		},
+		"approverSignature": true
+	},
+	"isNeedExcelFormat": false
+}

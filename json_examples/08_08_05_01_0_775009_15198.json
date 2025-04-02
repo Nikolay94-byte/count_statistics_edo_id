@@ -1,0 +1,137 @@
+{
+	"dueDate": "2023-11-01",
+	"regDate": "2023-10-27",
+	"targets": [
+		{
+			"id": "61991876-4197-4a7a-af2f-f1d7b1abc7a0",
+			"name": "Ольга",
+			"surname": "Ускова",
+			"products": [
+				{
+					"id": "ee90f636-bf2d-4990-8b72-743f3d0ef78c",
+					"rejected": false,
+					"attributes": [
+						{
+							"id": "abe9f783-af11-45af-be6c-f8cb04b861e3",
+							"toDate": "2023-10-04",
+							"isLegal": true,
+							"fromDate": "2021-01-01",
+							"rejected": false,
+							"sourceDates": {
+								"sourceToDate": "2023-10-04",
+								"sourceFromDate": "2021-01-01"
+							},
+							"attributeType": {
+								"name": "Выписки",
+								"codeName": "ATTR_BANK_STATEMENT"
+							}
+						},
+						{
+							"id": "aed1180a-af4b-4220-a226-e3851497f6d8",
+							"toDate": "2023-10-24",
+							"isLegal": true,
+							"fromDate": "1990-10-17",
+							"rejected": false,
+							"sourceDates": {
+								"sourceToDate": "2023-10-24",
+								"sourceFromDate": "1990-10-17"
+							},
+							"attributeType": {
+								"name": "Сведения о наличии счетов и банковских карт (справки)",
+								"codeName": "ATTR_EXIST_ACCOUNT_CARD_CERT"
+							}
+						}
+					],
+					"operations": [
+						{}
+					],
+					"productType": {
+						"name": "Счет",
+						"codeName": "PROD_ACCOUNT"
+					}
+				},
+				{
+					"id": "77008792-4c58-48e0-9d6a-59aa6bb63bab",
+					"rejected": false,
+					"attributes": [
+						{
+							"id": "9dbb7393-de19-4e62-93b6-8b17fe04a428",
+							"toDate": "2023-10-04",
+							"isLegal": true,
+							"fromDate": "2021-01-01",
+							"rejected": false,
+							"sourceDates": {
+								"sourceToDate": "2023-10-04",
+								"sourceFromDate": "2021-01-01"
+							},
+							"attributeType": {
+								"name": "Информация о подключении услуги Мобильный банк (к какому номеру подключена система 'Клиент-банк')",
+								"codeName": "ATTR_CLIENT_MOBILE_DBO"
+							}
+						}
+					],
+					"operations": [
+						{}
+					],
+					"productType": {
+						"name": "ДБО",
+						"codeName": "PROD_DBO"
+					}
+				}
+			],
+			"rejected": false,
+			"birthDate": "1982-02-23",
+			"patronymic": "Юрьевна",
+			"targetType": {
+				"name": "Физическое лицо",
+				"codeName": "TARGET_INDIVIDUAL"
+			}
+		}
+	],
+	"isParsed": true,
+	"rejected": false,
+	"repeated": false,
+	"applicant": {
+		"name": "ЛО МВД России на ст. Ачинск",
+		"address": "ул. Привокзальная, 13, г. Ачинск, Красноярский край, 662156",
+		"applicantType": {
+			"name": "МВД",
+			"codeName": "FOIV_MVD"
+		}
+	},
+	"regNumber": "775009/15198",
+	"isNeedDisk": false,
+	"isVerified": true,
+	"documentType": {
+		"name": "Запрос МВД",
+		"codeName": "REQ_MVD"
+	},
+	"isPersonally": false,
+	"requestBasis": {
+		"date": "2023-10-08",
+		"values": [
+			"242/23"
+		],
+		"legalClauseTypes": [],
+		"requestBasisType": {
+			"name": "Постановление суда",
+			"codeName": "BASIS_COURT_ORDER"
+		}
+	},
+	"hasTechErrors": false,
+	"requestSource": "SDO_FOIV",
+	"documentNumber": "7902",
+	"inquirySignature": {
+		"hasStamp": true,
+		"approverName": "Д.В. Герасимов",
+		"signerSignature": false,
+		"approverPosition": {
+			"name": "Руководитель",
+			"codeName": "POS_MANAGER"
+		},
+		"approverSignature": true
+	},
+	"isNeedExcelFormat": false,
+	"sdoTotalPageCount": 0,
+	"hasBusinessLogicErrors": false
+}

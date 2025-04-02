@@ -1,0 +1,198 @@
+{
+	"regDate": "2023-11-21",
+	"targets": [
+		{
+			"id": "68522d92-05dc-4aa7-836a-026a080f280d",
+			"name": "Анастасия",
+			"surname": "Алексеева",
+			"products": [
+				{
+					"id": "ef63f8ec-0bf2-4854-86c9-c894b7d00518",
+					"attributes": [
+						{
+							"id": "7c01f063-348a-4556-93b7-dca7a7995621",
+							"attributeType": {
+								"name": "Выписки",
+								"codeName": "ATTR_BANK_STATEMENT"
+							}
+						},
+						{
+							"id": "f7a44aef-c78a-4dba-8f94-49c57c25a4df",
+							"attributeType": {
+								"name": "Сведения о наличии счетов и банковских карт (справки)",
+								"codeName": "ATTR_EXIST_ACCOUNT_CARD_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Вклад",
+						"codeName": "PROD_INVESTMENT"
+					}
+				},
+				{
+					"id": "053c6348-cd44-4938-829a-1a81161293c4",
+					"attributes": [
+						{
+							"id": "fe56c7de-07ec-4c1a-8222-8991bd1e2e27",
+							"attributeType": {
+								"name": "IP адреса/Log файлы",
+								"codeName": "ATTR_IP_ADDRESS"
+							}
+						},
+						{
+							"id": "c5090c8c-c450-4234-915f-60223a4d0f0f",
+							"attributeType": {
+								"name": "Данные о лицах использовавших ip адреса",
+								"codeName": "ATTR_USED_IP_ADDRESS_PERS_DATA"
+							}
+						}
+					],
+					"productType": {
+						"name": "ДБО",
+						"codeName": "PROD_DBO"
+					}
+				},
+				{
+					"id": "f0383ba3-c561-4204-83fd-6c3c68070fe8",
+					"attributes": [
+						{
+							"id": "12a62aa4-a67c-47ca-850d-6ec6bf7784b5",
+							"attributeType": {
+								"name": "Данные о наименовании/адресе ТП, где открыт счет",
+								"codeName": "ATTR_OPENED_ACCOUNT_DEPT_DATA"
+							}
+						},
+						{
+							"id": "508d1f60-d0fb-47d8-bd8e-9b6cfc0a475c",
+							"attributeType": {
+								"name": "Анкетные данные получателя перевода",
+								"codeName": "ATTR_RECIPIENT_PERS_DATA"
+							}
+						},
+						{
+							"id": "31e9b6e5-26f1-4bd9-8ade-662069c21d86",
+							"attributeType": {
+								"name": "Выписки",
+								"codeName": "ATTR_BANK_STATEMENT"
+							}
+						},
+						{
+							"id": "7858c5fa-987f-4041-8551-671fe100c5a1",
+							"attributeType": {
+								"name": "Сведения о наличии счетов и банковских карт (справки)",
+								"codeName": "ATTR_EXIST_ACCOUNT_CARD_CERT"
+							}
+						},
+						{
+							"id": "1d6e54fd-5b67-405f-8e9c-7e28ce636934",
+							"attributeType": {
+								"name": "Справки (сведения) об остатках",
+								"codeName": "ATTR_ACCOUNT_BALANCE_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Карта",
+						"codeName": "PROD_CARD"
+					}
+				},
+				{
+					"id": "f84068ac-7238-420a-b319-894707864144",
+					"attributes": [
+						{
+							"id": "0397b0a7-87b8-4ea5-b1ba-c85173d050d7",
+							"attributeType": {
+								"name": "Данные о наименовании/адресе ТП, где открыт счет",
+								"codeName": "ATTR_OPENED_ACCOUNT_DEPT_DATA"
+							}
+						},
+						{
+							"id": "344680a4-f89c-4be9-957e-fc1f0a3b2273",
+							"attributeType": {
+								"name": "Выписки",
+								"codeName": "ATTR_BANK_STATEMENT"
+							}
+						},
+						{
+							"id": "d7ee02ab-f5f8-4444-9b5b-c702c5f7f302",
+							"attributeType": {
+								"name": "Данные по банкоматам/терминалам",
+								"codeName": "ATTR_ATM_DATA"
+							}
+						},
+						{
+							"id": "4b8dcdf4-800c-4793-80d5-2db5e5f89561",
+							"attributeType": {
+								"name": "Сведения о наличии счетов и банковских карт (справки)",
+								"codeName": "ATTR_EXIST_ACCOUNT_CARD_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Счет",
+						"codeName": "PROD_ACCOUNT"
+					}
+				}
+			],
+			"birthDate": "1981-08-28",
+			"birthPlace": "гор",
+			"patronymic": "Вячеславовна",
+			"targetType": {
+				"name": "Физическое лицо",
+				"codeName": "TARGET_INDIVIDUAL"
+			},
+			"identityDocument": {
+				"number": "285886",
+				"series": "1803",
+				"issuedBy": "Ворошиловским РОВД гор. Волгограда. Указанные денежные средства были получены",
+				"issueDate": "2023-09-25",
+				"identityDocumentType": {
+					"name": "Паспорт РФ",
+					"codeName": "DUL_PASSPORT_RF"
+				}
+			}
+		}
+	],
+	"isParsed": true,
+	"repeated": false,
+	"applicant": {
+		"name": "УПРАВЛЕНИЕ МИНИСТЕРСТВА ВНУТРЕШИИХ ДЕЛ РОССИЙСКОЙ ФЕДЕРАЦИИ по ГОРОДУ ВОЛГОГРАДУ ОТДЕЛ ПОЛИЦИИ № 5 СО - 5 СУ Управления МВД России по г. Волгограду",
+		"phones": [
+			"1803 №285886",
+			"1803 №285886"
+		],
+		"address": "ул. Баррикадиая, 21. Волгоград, 400074",
+		"applicantType": {
+			"name": "МВД",
+			"codeName": "FOIV_MVD"
+		}
+	},
+	"regNumber": "562148",
+	"isNeedDisk": false,
+	"documentType": {
+		"name": "Запрос МВД",
+		"codeName": "REQ_MVD"
+	},
+	"isPersonally": false,
+	"requestBasis": {
+		"values": [
+			"12301180032000925, возбужденное 09.10.2023"
+		],
+		"requestBasisType": {
+			"name": "Уголовное дело",
+			"codeName": "BASIS_CRIMINAL_CASE"
+		}
+	},
+	"requestSource": "SDO_FOIV",
+	"documentNumber": "5",
+	"inquirySignature": {
+		"hasStamp": true,
+		"approverName": "О.О. Потапова",
+		"approverPosition": {
+			"name": "Руководитель",
+			"codeName": "POS_MANAGER"
+		},
+		"approverSignature": false
+	},
+	"isNeedExcelFormat": false
+}

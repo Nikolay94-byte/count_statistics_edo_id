@@ -1,0 +1,107 @@
+{
+	"dueDate": "2023-11-21",
+	"regDate": "2023-11-16",
+	"targets": [
+		{
+			"id": "5f6b590d-aa8a-40b9-8f58-98a53dd797f3",
+			"name": "Александр",
+			"surname": "Юртаев",
+			"products": [
+				{
+					"id": "a0291c7f-df57-4e29-929a-438928560f0d",
+					"rejected": false,
+					"attributes": [
+						{
+							"id": "0d0477c8-c892-4bc7-8884-4fd3221a9a04",
+							"toDate": "2023-11-17",
+							"isLegal": true,
+							"fromDate": "2018-12-20",
+							"rejected": false,
+							"sourceDates": {
+								"sourceToDate": "2023-11-17",
+								"sourceFromDate": "2018-12-20"
+							},
+							"attributeType": {
+								"name": "Выписки",
+								"codeName": "ATTR_BANK_STATEMENT"
+							}
+						},
+						{
+							"id": "da9f5b8b-3423-407f-b427-5600b1311de1",
+							"toDate": "2023-11-17",
+							"isLegal": true,
+							"fromDate": "2017-01-01",
+							"rejected": false,
+							"sourceDates": {
+								"sourceToDate": "2023-11-17",
+								"sourceFromDate": "2017-01-01"
+							},
+							"attributeType": {
+								"name": "Сведения о наличии счетов и банковских карт (справки)",
+								"codeName": "ATTR_EXIST_ACCOUNT_CARD_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Счет",
+						"codeName": "PROD_ACCOUNT"
+					}
+				}
+			],
+			"rejected": false,
+			"birthDate": "1967-10-07",
+			"patronymic": "Иванович",
+			"targetType": {
+				"name": "Физическое лицо",
+				"codeName": "TARGET_INDIVIDUAL"
+			}
+		}
+	],
+	"isParsed": true,
+	"rejected": false,
+	"repeated": false,
+	"applicant": {
+		"name": "Дмитровский городской суд Московской области",
+		"address": "ул. Пушкинская, д.1, г.Дмитров, Московская область, 141800",
+		"applicantType": {
+			"name": "Суд",
+			"codeName": "FOIV_COURT"
+		}
+	},
+	"regNumber": "553434",
+	"isNeedDisk": false,
+	"isVerified": true,
+	"documentDate": "2023-11-01",
+	"documentType": {
+		"name": "Запрос суда",
+		"codeName": "REQ_COURT"
+	},
+	"isPersonally": false,
+	"requestBasis": {
+		"values": [
+			"2-4593/2023"
+		],
+		"legalClauseTypes": [],
+		"requestBasisType": {
+			"name": "Гражданское дело",
+			"codeName": "BASIS_CIVIL_CASE"
+		}
+	},
+	"hasTechErrors": false,
+	"requestSource": "SDO_FOIV",
+	"documentNumber": "2-4593/2023",
+	"inquirySignature": {
+		"hasStamp": true,
+		"approverName": "Якимова О.В.",
+		"signerSignature": false,
+		"approverPosition": {
+			"name": "Судья",
+			"codeName": "POS_JUDGE"
+		},
+		"approverSignature": true
+	},
+	"isNeedExcelFormat": false,
+	"sdoTotalPageCount": 0,
+	"manualTaskPerformed": true,
+	"hasBusinessLogicErrors": false
+}

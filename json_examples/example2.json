@@ -1,0 +1,183 @@
+{
+	"regDate": "2024-02-12",
+	"targets": [
+		{
+			"id": "40a8b743-ecd8-47eb-b3f1-451fe9f51f16",
+			"name": "Олег",
+			"surname": "Болыпетмапов",
+			"products": [
+				{
+					"id": "55572041-27d3-4e1c-8216-29d4ac3e7319",
+					"attributes": [
+						{
+							"id": "2298ef46-9256-4299-a8df-4842b5d39c1c",
+							"attributeType": {
+								"name": "Данные по кредитным договорам",
+								"codeName": "ATTR_CREDIT_CONTRACT_DATA"
+							}
+						},
+						{
+							"id": "6c33e6a2-b7b5-4455-8881-061641081c65",
+							"attributeType": {
+								"name": "Данные по остатку долга по кредиту",
+								"codeName": "ATTR_CREDIT_DEBT_BALANCE"
+							}
+						},
+						{
+							"id": "d4766dd7-fca1-4a7b-836e-70e8f9da0c94",
+							"attributeType": {
+								"name": "Досье по договорам (продуктовое досье)",
+								"codeName": "ATTR_CONTRACT_FILE"
+							}
+						},
+						{
+							"id": "d1e90b81-2e5a-42d4-a16d-bd7cea349a94",
+							"attributeType": {
+								"name": "Справка о ссудной задолженности",
+								"codeName": "ATTR_LOAN_DEBT_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Кредит",
+						"codeName": "PROD_CREDIT"
+					}
+				},
+				{
+					"id": "ef9d8c03-f0f2-4a15-8c50-30dab6876417",
+					"attributes": [
+						{
+							"id": "213bb0f9-a931-47d4-a392-117f9a3c1774",
+							"attributeType": {
+								"name": "Выписки",
+								"codeName": "ATTR_BANK_STATEMENT"
+							}
+						},
+						{
+							"id": "40b78290-1c1a-4144-abec-0af2d12572f7",
+							"attributeType": {
+								"name": "Сведения о наличии счетов и банковских карт (справки)",
+								"codeName": "ATTR_EXIST_ACCOUNT_CARD_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Счет",
+						"codeName": "PROD_ACCOUNT"
+					}
+				}
+			],
+			"patronymic": "Владимирович",
+			"targetType": {
+				"name": "Физическое лицо",
+				"codeName": "TARGET_INDIVIDUAL"
+			}
+		},
+		{
+			"id": "a53b213d-d589-4696-9974-f3a6d778135d",
+			"name": "Олег",
+			"surname": "Большешалов",
+			"products": [
+				{
+					"id": "0f8addae-8317-405d-9953-15182b825988",
+					"attributes": [
+						{
+							"id": "78c48e73-3892-442f-b627-b4bb9c50efed",
+							"attributeType": {
+								"name": "Данные по кредитным договорам",
+								"codeName": "ATTR_CREDIT_CONTRACT_DATA"
+							}
+						},
+						{
+							"id": "3d1038d6-53f3-4d48-b392-ac7a3d589074",
+							"attributeType": {
+								"name": "Данные по остатку долга по кредиту",
+								"codeName": "ATTR_CREDIT_DEBT_BALANCE"
+							}
+						},
+						{
+							"id": "e38dbaf3-254a-496a-85dc-4c210f7616b5",
+							"attributeType": {
+								"name": "Досье по договорам (продуктовое досье)",
+								"codeName": "ATTR_CONTRACT_FILE"
+							}
+						},
+						{
+							"id": "f7b14261-3809-49fc-adfd-a1bfec2cf634",
+							"attributeType": {
+								"name": "Справка о ссудной задолженности",
+								"codeName": "ATTR_LOAN_DEBT_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Кредит",
+						"codeName": "PROD_CREDIT"
+					}
+				},
+				{
+					"id": "8179b48b-7de0-40d4-83a2-4d992cbdd817",
+					"attributes": [
+						{
+							"id": "fe05cf57-d372-4554-82df-ca90fd8e137b",
+							"attributeType": {
+								"name": "Выписки",
+								"codeName": "ATTR_BANK_STATEMENT"
+							}
+						},
+						{
+							"id": "1786210f-f8fc-408a-814c-c9e6f1bd8cee",
+							"attributeType": {
+								"name": "Сведения о наличии счетов и банковских карт (справки)",
+								"codeName": "ATTR_EXIST_ACCOUNT_CARD_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Счет",
+						"codeName": "PROD_ACCOUNT"
+					}
+				}
+			],
+			"birthDate": "1979-08-04",
+			"patronymic": "Владимирович",
+			"targetType": {
+				"name": "Физическое лицо",
+				"codeName": "TARGET_INDIVIDUAL"
+			}
+		}
+	],
+	"isParsed": true,
+	"repeated": false,
+	"applicant": {
+		"address": "107078, г.Москва, ул.Маши Порываевой, 34 ПЛО «Росбанк» 660049",
+		"applicantType": {
+			"name": "Суд",
+			"codeName": "FOIV_COURT"
+		}
+	},
+	"regNumber": "775009/2029",
+	"isNeedDisk": false,
+	"documentType": {
+		"name": "Запрос суда",
+		"codeName": "REQ_COURT"
+	},
+	"isPersonally": false,
+	"requestBasis": {
+		"values": [
+			"2-192/2024"
+		],
+		"requestBasisType": {
+			"name": "Гражданское дело",
+			"codeName": "BASIS_CIVIL_CASE"
+		}
+	},
+	"requestSource": "SDO_FOIV",
+	"documentNumber": "Б/Н",
+	"inquirySignature": {
+		"hasStamp": true,
+		"approverName": "Юсупова А.Р",
+		"approverSignature": true
+	},
+	"isNeedExcelFormat": false
+}

@@ -1,0 +1,288 @@
+{
+	"regDate": "2023-10-25",
+	"targets": [
+		{
+			"id": "d0371803-2c70-4b84-8039-7cbd4ffa8722",
+			"name": "А",
+			"surname": "Гаврилова",
+			"products": [
+				{
+					"id": "4ac5ddd5-6d85-4cc3-b376-b5fbe10ac8ca",
+					"attributes": [
+						{
+							"id": "4c2a4519-ed41-4607-b056-9ac970890a41",
+							"attributeType": {
+								"name": "Анкетные данные владельца счета",
+								"codeName": "ATTR_CLIENT_PERS_DATA"
+							}
+						},
+						{
+							"id": "8a0fefeb-f2d2-4294-b55a-58d889c13c94",
+							"attributeType": {
+								"name": "Данные о наименовании/адресе ТП, где открыт счет",
+								"codeName": "ATTR_OPENED_ACCOUNT_DEPT_DATA"
+							}
+						},
+						{
+							"id": "d4047425-a4f5-4eaf-9da6-2d587243ef75",
+							"attributeType": {
+								"name": "Выписки",
+								"codeName": "ATTR_BANK_STATEMENT"
+							}
+						},
+						{
+							"id": "5d3e20f6-e32e-4c3c-8403-e71c0d8cb5f2",
+							"attributeType": {
+								"name": "Сведения о наличии счетов и банковских карт (справки)",
+								"codeName": "ATTR_EXIST_ACCOUNT_CARD_CERT"
+							}
+						},
+						{
+							"id": "d0921455-ef8a-4bc3-bb40-6b9b4f4b6ddb",
+							"attributeType": {
+								"name": "Справки (сведения) об остатках",
+								"codeName": "ATTR_ACCOUNT_BALANCE_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Карта",
+						"codeName": "PROD_CARD"
+					}
+				},
+				{
+					"id": "78799b0b-31ef-4de1-b6f5-9b8858f85c46",
+					"attributes": [
+						{
+							"id": "7d53777c-b81e-405c-b00d-9fdbc411ea42",
+							"attributeType": {
+								"name": "Анкетные данные владельца счета",
+								"codeName": "ATTR_CLIENT_PERS_DATA"
+							}
+						},
+						{
+							"id": "87f4f395-07eb-4152-85a0-60021e104095",
+							"attributeType": {
+								"name": "Данные о наименовании/адресе ТП, где открыт счет",
+								"codeName": "ATTR_OPENED_ACCOUNT_DEPT_DATA"
+							}
+						}
+					],
+					"productType": {
+						"name": "Счет",
+						"codeName": "PROD_ACCOUNT"
+					}
+				}
+			],
+			"birthDate": "2023-07-27",
+			"targetType": {
+				"name": "Физическое лицо",
+				"codeName": "TARGET_INDIVIDUAL"
+			}
+		},
+		{
+			"id": "f6d7a83f-fdbc-4c92-b4bb-6d0a27352d3c",
+			"name": "Е",
+			"surname": "Гришиной",
+			"products": [
+				{
+					"id": "d0ae4d82-8f46-4ff7-85fc-936263fb267d",
+					"attributes": [
+						{
+							"id": "acb397de-7d78-4e51-91a6-14fa86675e78",
+							"attributeType": {
+								"name": "Анкетные данные владельца счета",
+								"codeName": "ATTR_CLIENT_PERS_DATA"
+							}
+						},
+						{
+							"id": "fe88ca46-5de0-4498-bb18-ef8010504228",
+							"attributeType": {
+								"name": "Данные о наименовании/адресе ТП, где открыт счет",
+								"codeName": "ATTR_OPENED_ACCOUNT_DEPT_DATA"
+							}
+						},
+						{
+							"id": "ceabad01-a42f-40c2-8fd9-31da36122511",
+							"attributeType": {
+								"name": "Выписки",
+								"codeName": "ATTR_BANK_STATEMENT"
+							}
+						},
+						{
+							"id": "d810477a-78d1-459c-aac4-249201148551",
+							"attributeType": {
+								"name": "Сведения о наличии счетов и банковских карт (справки)",
+								"codeName": "ATTR_EXIST_ACCOUNT_CARD_CERT"
+							}
+						},
+						{
+							"id": "7e8c0473-25d1-4a45-8ad6-9d9c94791e24",
+							"attributeType": {
+								"name": "Справки (сведения) об остатках",
+								"codeName": "ATTR_ACCOUNT_BALANCE_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Карта",
+						"codeName": "PROD_CARD"
+					}
+				},
+				{
+					"id": "cb689729-d0c6-4be9-b324-9f2d5bfc67e0",
+					"attributes": [
+						{
+							"id": "9cfc699f-d88e-484f-aa26-10b781e02cd0",
+							"attributeType": {
+								"name": "Анкетные данные владельца счета",
+								"codeName": "ATTR_CLIENT_PERS_DATA"
+							}
+						},
+						{
+							"id": "415f8c69-cc5a-48fd-81d2-5a1b81e88f69",
+							"attributeType": {
+								"name": "Данные о наименовании/адресе ТП, где открыт счет",
+								"codeName": "ATTR_OPENED_ACCOUNT_DEPT_DATA"
+							}
+						}
+					],
+					"productType": {
+						"name": "Счет",
+						"codeName": "PROD_ACCOUNT"
+					}
+				}
+			],
+			"targetType": {
+				"name": "Физическое лицо",
+				"codeName": "TARGET_INDIVIDUAL"
+			}
+		},
+		{
+			"id": "52212c26-ff3c-43f7-a89b-c56f94199d83",
+			"name": "Александр",
+			"surname": "Гаврилы",
+			"products": [
+				{
+					"id": "1156b58c-cd0a-455e-969f-3abdcc13df2a",
+					"attributes": [
+						{
+							"id": "7988724a-52b7-4b84-8d33-269668a2da98",
+							"attributeType": {
+								"name": "Анкетные данные владельца счета",
+								"codeName": "ATTR_CLIENT_PERS_DATA"
+							}
+						},
+						{
+							"id": "e461ea3c-7e94-4fe7-885c-22d5a57e6ba7",
+							"attributeType": {
+								"name": "Данные о наименовании/адресе ТП, где открыт счет",
+								"codeName": "ATTR_OPENED_ACCOUNT_DEPT_DATA"
+							}
+						},
+						{
+							"id": "d50ceb2c-fb13-4040-bf76-6458ee80a8e1",
+							"attributeType": {
+								"name": "Выписки",
+								"codeName": "ATTR_BANK_STATEMENT"
+							}
+						},
+						{
+							"id": "c39866f3-fe2e-4b72-a024-26389cb65ef1",
+							"attributeType": {
+								"name": "Сведения о наличии счетов и банковских карт (справки)",
+								"codeName": "ATTR_EXIST_ACCOUNT_CARD_CERT"
+							}
+						},
+						{
+							"id": "a0c69c90-2901-4d31-9104-d3e5b21b9811",
+							"attributeType": {
+								"name": "Справки (сведения) об остатках",
+								"codeName": "ATTR_ACCOUNT_BALANCE_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Карта",
+						"codeName": "PROD_CARD"
+					}
+				},
+				{
+					"id": "c4d3a2b7-a130-46de-91af-d34593492b8b",
+					"attributes": [
+						{
+							"id": "97942261-d0b1-4a6e-a8ab-e7b6f9160dc7",
+							"attributeType": {
+								"name": "Анкетные данные владельца счета",
+								"codeName": "ATTR_CLIENT_PERS_DATA"
+							}
+						},
+						{
+							"id": "1c96aa9c-2987-4232-beb0-c92cf8386a66",
+							"attributeType": {
+								"name": "Данные о наименовании/адресе ТП, где открыт счет",
+								"codeName": "ATTR_OPENED_ACCOUNT_DEPT_DATA"
+							}
+						}
+					],
+					"productType": {
+						"name": "Счет",
+						"codeName": "PROD_ACCOUNT"
+					}
+				}
+			],
+			"birthDate": "2005-05-07",
+			"patronymic": "Романович",
+			"targetType": {
+				"name": "Физическое лицо",
+				"codeName": "TARGET_INDIVIDUAL"
+			}
+		}
+	],
+	"isParsed": true,
+	"repeated": false,
+	"applicant": {
+		"name": "ОМВД России по г, Новоалтайску",
+		"address": "ул. Октябрёнок, 42, г. Новоалтайск, 658087",
+		"applicantType": {
+			"name": "МВД",
+			"codeName": "FOIV_MVD"
+		}
+	},
+	"regNumber": "509910",
+	"isNeedDisk": false,
+	"documentDate": "2023-10-08",
+	"documentType": {
+		"name": "Запрос МВД",
+		"codeName": "REQ_MVD"
+	},
+	"isPersonally": false,
+	"requestBasis": {
+		"values": [
+			"12301010003000781"
+		],
+		"requestBasisType": {
+			"name": "Уголовное дело",
+			"codeName": "BASIS_CRIMINAL_CASE"
+		}
+	},
+	"requestSource": "SDO_FOIV",
+	"documentNumber": "64/ 7 92",
+	"inquirySignature": {
+		"hasStamp": true,
+		"signerName": "А.В. Алпатова",
+		"approverName": "А.О. Фарниев",
+		"signerPosition": {
+			"name": "Старший следователь",
+			"codeName": "POS_SENIOR_INSPECTOR"
+		},
+		"signerSignature": true,
+		"approverPosition": {
+			"name": "Руководитель",
+			"codeName": "POS_MANAGER"
+		},
+		"approverSignature": true
+	},
+	"isNeedExcelFormat": false,
+	"responseRecipientAddress": "658087, Алтайский край, г. Новоалтайск, ул. Октябренок,42,"
+}

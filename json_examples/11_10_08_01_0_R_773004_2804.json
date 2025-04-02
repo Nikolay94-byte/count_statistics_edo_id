@@ -1,0 +1,279 @@
+{
+	"dueDate": "2023-10-19",
+	"regDate": "2023-10-26",
+	"targets": [
+		{
+			"id": "dc9b09bf-70ee-413d-9fcf-25b5dc6feae3",
+			"name": "И.В",
+			"surname": "Пыжовой",
+			"products": [
+				{
+					"id": "e1b58098-a1fb-41f3-a2e9-10ddc387e912",
+					"attributes": [
+						{
+							"id": "fc16f86a-0c32-4df1-b6b4-47055c0a6633",
+							"attributeType": {
+								"name": "Сведения о наличии счетов и банковских карт (справки)",
+								"codeName": "ATTR_EXIST_ACCOUNT_CARD_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Вклад",
+						"codeName": "PROD_INVESTMENT"
+					}
+				},
+				{
+					"id": "7e33def6-2889-41f1-8364-5fc5d79990a1",
+					"attributes": [
+						{
+							"id": "9ada7c9a-9cd9-43fb-9e8f-e4866170b89d",
+							"attributeType": {
+								"name": "Выписки",
+								"codeName": "ATTR_BANK_STATEMENT"
+							}
+						},
+						{
+							"id": "8c423638-6599-490c-a08f-1a7f76f8bc2b",
+							"attributeType": {
+								"name": "Сведения о наличии счетов и банковских карт (справки)",
+								"codeName": "ATTR_EXIST_ACCOUNT_CARD_CERT"
+							}
+						},
+						{
+							"id": "a02c1bb7-d11c-4246-93e2-732449ecadad",
+							"attributeType": {
+								"name": "Справки (сведения) об остатках",
+								"codeName": "ATTR_ACCOUNT_BALANCE_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Карта",
+						"codeName": "PROD_CARD"
+					}
+				},
+				{
+					"id": "bb5b5af4-fffa-4742-8625-51b46d31eabf",
+					"attributes": [
+						{
+							"id": "b83ef8f2-54c6-40a1-b37c-3e0fdd2a49fa",
+							"attributeType": {
+								"name": "Сведения о наличии счетов и банковских карт (справки)",
+								"codeName": "ATTR_EXIST_ACCOUNT_CARD_CERT"
+							}
+						},
+						{
+							"id": "df25be12-79c7-4158-8685-4c162e95fd45",
+							"attributeType": {
+								"name": "Справки (сведения) об остатках",
+								"codeName": "ATTR_ACCOUNT_BALANCE_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Счет",
+						"codeName": "PROD_ACCOUNT"
+					}
+				}
+			],
+			"targetType": {
+				"name": "Физическое лицо",
+				"codeName": "TARGET_INDIVIDUAL"
+			}
+		},
+		{
+			"id": "d6e954f1-c7f2-431c-921d-91c6c94c2e8b",
+			"name": "Т.П",
+			"surname": "Коротких",
+			"products": [
+				{
+					"id": "d9f22965-d1c7-4d5d-af52-8362fa0f62bc",
+					"attributes": [
+						{
+							"id": "81c54f53-e103-4d2c-b717-27df1a6d65c8",
+							"attributeType": {
+								"name": "Сведения о наличии счетов и банковских карт (справки)",
+								"codeName": "ATTR_EXIST_ACCOUNT_CARD_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Вклад",
+						"codeName": "PROD_INVESTMENT"
+					}
+				},
+				{
+					"id": "3550ddc6-a0a3-47bb-a2b4-d7d7bc3721af",
+					"attributes": [
+						{
+							"id": "c94a452e-5597-448f-ac56-54ce3d1bfc6a",
+							"attributeType": {
+								"name": "Выписки",
+								"codeName": "ATTR_BANK_STATEMENT"
+							}
+						},
+						{
+							"id": "4beab49f-c244-4043-a221-701fcc6fdcbf",
+							"attributeType": {
+								"name": "Сведения о наличии счетов и банковских карт (справки)",
+								"codeName": "ATTR_EXIST_ACCOUNT_CARD_CERT"
+							}
+						},
+						{
+							"id": "80f3dc50-e00b-4e9c-88b8-167680024e6a",
+							"attributeType": {
+								"name": "Справки (сведения) об остатках",
+								"codeName": "ATTR_ACCOUNT_BALANCE_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Карта",
+						"codeName": "PROD_CARD"
+					}
+				},
+				{
+					"id": "75ebfcda-4e67-4db6-a0df-f562bce44cae",
+					"attributes": [
+						{
+							"id": "a8faf719-f2be-419f-9b4e-a6825dbf7c2c",
+							"attributeType": {
+								"name": "Сведения о наличии счетов и банковских карт (справки)",
+								"codeName": "ATTR_EXIST_ACCOUNT_CARD_CERT"
+							}
+						},
+						{
+							"id": "fff84a05-498a-43c3-8d12-fe6d343effdc",
+							"attributeType": {
+								"name": "Справки (сведения) об остатках",
+								"codeName": "ATTR_ACCOUNT_BALANCE_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Счет",
+						"codeName": "PROD_ACCOUNT"
+					}
+				}
+			],
+			"targetType": {
+				"name": "Физическое лицо",
+				"codeName": "TARGET_INDIVIDUAL"
+			}
+		},
+		{
+			"id": "8c25d843-c782-49bb-a75d-dfc68705bcba",
+			"name": "Г.П",
+			"surname": "Моцной",
+			"products": [
+				{
+					"id": "7de6ad97-b667-4827-ada7-9d1b15807235",
+					"attributes": [
+						{
+							"id": "1311eb12-4272-4266-9296-12a811cc5e01",
+							"attributeType": {
+								"name": "Сведения о наличии счетов и банковских карт (справки)",
+								"codeName": "ATTR_EXIST_ACCOUNT_CARD_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Вклад",
+						"codeName": "PROD_INVESTMENT"
+					}
+				},
+				{
+					"id": "2a42cccc-665f-4e96-af86-b001cdabb130",
+					"attributes": [
+						{
+							"id": "1a5cf4e1-290e-4512-bc65-77b7e26a507e",
+							"attributeType": {
+								"name": "Выписки",
+								"codeName": "ATTR_BANK_STATEMENT"
+							}
+						},
+						{
+							"id": "4ad57730-8203-4d49-8cb0-033bd06006dd",
+							"attributeType": {
+								"name": "Сведения о наличии счетов и банковских карт (справки)",
+								"codeName": "ATTR_EXIST_ACCOUNT_CARD_CERT"
+							}
+						},
+						{
+							"id": "5a5c5583-63fd-4dd5-b62a-1b6465198085",
+							"attributeType": {
+								"name": "Справки (сведения) об остатках",
+								"codeName": "ATTR_ACCOUNT_BALANCE_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Карта",
+						"codeName": "PROD_CARD"
+					}
+				},
+				{
+					"id": "b73d79c5-11f5-4193-b135-08ebde38c92a",
+					"attributes": [
+						{
+							"id": "ff074111-16c3-46e1-9b6e-b9c56f8a660f",
+							"attributeType": {
+								"name": "Сведения о наличии счетов и банковских карт (справки)",
+								"codeName": "ATTR_EXIST_ACCOUNT_CARD_CERT"
+							}
+						},
+						{
+							"id": "cbd06175-4e6b-486d-a5ac-9f13c1c6fa98",
+							"attributeType": {
+								"name": "Справки (сведения) об остатках",
+								"codeName": "ATTR_ACCOUNT_BALANCE_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Счет",
+						"codeName": "PROD_ACCOUNT"
+					}
+				}
+			],
+			"targetType": {
+				"name": "Физическое лицо",
+				"codeName": "TARGET_INDIVIDUAL"
+			}
+		}
+	],
+	"isParsed": true,
+	"repeated": false,
+	"applicant": {
+		"name": "Мирнинский районный суд Республики Саха /Якутия/",
+		"phones": [
+			"411-36 4-68-27",
+			"411-36 3-24-39"
+		],
+		"address": "ул. Тихонова, 29, г. Мирный, РС Я, 678170,",
+		"applicantType": {
+			"name": "Суд",
+			"codeName": "FOIV_COURT"
+		}
+	},
+	"regNumber": "773004/2804",
+	"isNeedDisk": false,
+	"documentType": {
+		"name": "Запрос суда",
+		"codeName": "REQ_COURT"
+	},
+	"isPersonally": false,
+	"requestSource": "SDO_FOIV",
+	"documentNumber": "20 91 5",
+	"inquirySignature": {
+		"hasStamp": true,
+		"approverName": "Якимова О",
+		"approverPosition": {
+			"name": "Судья",
+			"codeName": "POS_JUDGE"
+		},
+		"approverSignature": true
+	},
+	"isNeedExcelFormat": false
+}

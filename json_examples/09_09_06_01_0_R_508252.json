@@ -1,0 +1,353 @@
+{
+	"regDate": "2023-10-24",
+	"targets": [
+		{
+			"id": "1d8eb2f3-b32b-4c5e-b56a-56be362a9573",
+			"name": "Кирилл",
+			"surname": "Ширякина",
+			"products": [
+				{
+					"id": "9f66a594-7c5e-4341-98a5-5692150b76db",
+					"attributes": [
+						{
+							"id": "171477a0-0bfc-4c6a-9e06-02d1cfa66704",
+							"attributeType": {
+								"name": "Данные по кредитным договорам",
+								"codeName": "ATTR_CREDIT_CONTRACT_DATA"
+							}
+						}
+					],
+					"productType": {
+						"name": "Кредит",
+						"codeName": "PROD_CREDIT"
+					}
+				},
+				{
+					"id": "24a43e61-2d74-46ac-b843-1b9df6aec0e6",
+					"attributes": [
+						{
+							"id": "23ebd3d6-c60b-4723-89a6-da44b7d4b558",
+							"attributeType": {
+								"name": "Сведения о наличии счетов и банковских карт (справки)",
+								"codeName": "ATTR_EXIST_ACCOUNT_CARD_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Счет",
+						"codeName": "PROD_ACCOUNT"
+					}
+				},
+				{
+					"id": "8548ad16-c3cb-4f6a-a238-88fff515035e",
+					"attributes": [
+						{
+							"id": "a46b90f9-498f-43c3-b2cc-1751a44ac110",
+							"attributeType": {
+								"name": "Данные по ценным бумагам",
+								"codeName": "ATTR_SECURITIES_DATA"
+							}
+						}
+					],
+					"productType": {
+						"name": "Ценные бумаги",
+						"codeName": "PROD_SECURITIES"
+					}
+				}
+			],
+			"birthDate": "1988-11-10",
+			"birthPlace": "гор",
+			"patronymic": "Андреевич",
+			"targetType": {
+				"name": "Физическое лицо",
+				"codeName": "TARGET_INDIVIDUAL"
+			},
+			"identityDocument": {
+				"number": "903540",
+				"series": "4509",
+				"identityDocumentType": {
+					"name": "Паспорт РФ",
+					"codeName": "DUL_PASSPORT_RF"
+				}
+			}
+		},
+		{
+			"id": "4b82fa9d-9666-49b2-ae8a-59f28a8cc9a9",
+			"name": "Александра",
+			"surname": "Ширякина",
+			"products": [
+				{
+					"id": "071e8116-70d0-43f7-a7bf-ed126c92a914",
+					"attributes": [
+						{
+							"id": "abba025a-8bb6-4ca5-905e-3b67c9dac620",
+							"attributeType": {
+								"name": "Данные по кредитным договорам",
+								"codeName": "ATTR_CREDIT_CONTRACT_DATA"
+							}
+						}
+					],
+					"productType": {
+						"name": "Кредит",
+						"codeName": "PROD_CREDIT"
+					}
+				},
+				{
+					"id": "a26d3400-4a04-4cd6-9972-f8636dd42989",
+					"attributes": [
+						{
+							"id": "30f5e49d-b2c7-4ef9-a353-f528e246838d",
+							"attributeType": {
+								"name": "Сведения о наличии счетов и банковских карт (справки)",
+								"codeName": "ATTR_EXIST_ACCOUNT_CARD_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Счет",
+						"codeName": "PROD_ACCOUNT"
+					}
+				},
+				{
+					"id": "7f04db1e-9f44-4b93-b494-3580b9dd0b02",
+					"attributes": [
+						{
+							"id": "b268e9b5-93bd-4a02-b023-9df288c122ac",
+							"attributeType": {
+								"name": "Данные по ценным бумагам",
+								"codeName": "ATTR_SECURITIES_DATA"
+							}
+						}
+					],
+					"productType": {
+						"name": "Ценные бумаги",
+						"codeName": "PROD_SECURITIES"
+					}
+				}
+			],
+			"patronymic": "Владимировна",
+			"targetType": {
+				"name": "Физическое лицо",
+				"codeName": "TARGET_INDIVIDUAL"
+			}
+		},
+		{
+			"id": "762a9af9-904e-4466-a2e0-25032bf0ee5a",
+			"name": "Сергей",
+			"surname": "Ширякина",
+			"products": [
+				{
+					"id": "f0e9b1e8-5f9c-4ac3-bd46-2face38a60d0",
+					"attributes": [
+						{
+							"id": "156aad30-e5e1-4eef-80ed-d06543428881",
+							"attributeType": {
+								"name": "Данные по кредитным договорам",
+								"codeName": "ATTR_CREDIT_CONTRACT_DATA"
+							}
+						}
+					],
+					"productType": {
+						"name": "Кредит",
+						"codeName": "PROD_CREDIT"
+					}
+				},
+				{
+					"id": "d3b43c15-9d46-41cc-b86a-d12a2cdf6fa2",
+					"attributes": [
+						{
+							"id": "83750c13-9bb8-4ccf-a48b-17fdee729ee8",
+							"attributeType": {
+								"name": "Сведения о наличии счетов и банковских карт (справки)",
+								"codeName": "ATTR_EXIST_ACCOUNT_CARD_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Счет",
+						"codeName": "PROD_ACCOUNT"
+					}
+				},
+				{
+					"id": "730776c5-7c94-43ab-b7c3-9c223882383f",
+					"attributes": [
+						{
+							"id": "b159ec14-3e71-453d-9e11-e7996bc50d0f",
+							"attributeType": {
+								"name": "Данные по ценным бумагам",
+								"codeName": "ATTR_SECURITIES_DATA"
+							}
+						}
+					],
+					"productType": {
+						"name": "Ценные бумаги",
+						"codeName": "PROD_SECURITIES"
+					}
+				}
+			],
+			"patronymic": "Кириллович",
+			"targetType": {
+				"name": "Физическое лицо",
+				"codeName": "TARGET_INDIVIDUAL"
+			}
+		},
+		{
+			"id": "7f46cda8-7705-4537-9b3d-3dcf5910c68e",
+			"name": "Ширякина",
+			"surname": "К.А.",
+			"products": [
+				{
+					"id": "3e285552-5e8e-4ec3-8150-e0acf5cba762",
+					"attributes": [
+						{
+							"id": "6c3cc8f9-8a44-4a9e-bbf2-7330ffdd65bb",
+							"attributeType": {
+								"name": "Данные по кредитным договорам",
+								"codeName": "ATTR_CREDIT_CONTRACT_DATA"
+							}
+						}
+					],
+					"productType": {
+						"name": "Кредит",
+						"codeName": "PROD_CREDIT"
+					}
+				},
+				{
+					"id": "3c64effb-b163-4a49-b25d-08098cd0a686",
+					"attributes": [
+						{
+							"id": "eac6d3b8-8311-48ed-b241-e530736fe337",
+							"attributeType": {
+								"name": "Сведения о наличии счетов и банковских карт (справки)",
+								"codeName": "ATTR_EXIST_ACCOUNT_CARD_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Счет",
+						"codeName": "PROD_ACCOUNT"
+					}
+				},
+				{
+					"id": "582c5e8f-a9c9-42e1-88c0-695859fd8d27",
+					"attributes": [
+						{
+							"id": "f7e19d1d-84ef-43c8-8395-1b9b5d67922f",
+							"attributeType": {
+								"name": "Данные по ценным бумагам",
+								"codeName": "ATTR_SECURITIES_DATA"
+							}
+						}
+					],
+					"productType": {
+						"name": "Ценные бумаги",
+						"codeName": "PROD_SECURITIES"
+					}
+				}
+			],
+			"birthDate": "2015-07-24",
+			"birthPlace": "гор",
+			"regAddress": "гор. Москва, ул. Севанская, д. 46, корп. 1, кв. 72",
+			"targetType": {
+				"name": "Физическое лицо",
+				"codeName": "TARGET_INDIVIDUAL"
+			},
+			"identityDocument": {
+				"identityDocumentType": {
+					"name": "Свидетельство о рождении",
+					"codeName": "DUL_BIRTH_CERTIFICATE"
+				}
+			}
+		},
+		{
+			"id": "be5a7d70-88af-4948-af11-bad7d292c0bd",
+			"name": "Олег",
+			"surname": "Ширякина",
+			"products": [
+				{
+					"id": "272d7a03-aedd-4d96-8a16-ef393d74c06c",
+					"attributes": [
+						{
+							"id": "46690f5e-2083-4f7c-bffe-9079c93fadd7",
+							"attributeType": {
+								"name": "Данные по кредитным договорам",
+								"codeName": "ATTR_CREDIT_CONTRACT_DATA"
+							}
+						}
+					],
+					"productType": {
+						"name": "Кредит",
+						"codeName": "PROD_CREDIT"
+					}
+				},
+				{
+					"id": "0a52d905-381f-414c-b233-9738c561d0d6",
+					"attributes": [
+						{
+							"id": "8d369bf6-eeec-4840-802f-61c7db1168fc",
+							"attributeType": {
+								"name": "Сведения о наличии счетов и банковских карт (справки)",
+								"codeName": "ATTR_EXIST_ACCOUNT_CARD_CERT"
+							}
+						}
+					],
+					"productType": {
+						"name": "Счет",
+						"codeName": "PROD_ACCOUNT"
+					}
+				},
+				{
+					"id": "adb95ec8-9ec2-42cc-b773-016c23c0d73e",
+					"attributes": [
+						{
+							"id": "9f218505-c792-4925-b6aa-8304dc7f5ebc",
+							"attributeType": {
+								"name": "Данные по ценным бумагам",
+								"codeName": "ATTR_SECURITIES_DATA"
+							}
+						}
+					],
+					"productType": {
+						"name": "Ценные бумаги",
+						"codeName": "PROD_SECURITIES"
+					}
+				}
+			],
+			"patronymic": "Кириллович",
+			"targetType": {
+				"name": "Физическое лицо",
+				"codeName": "TARGET_INDIVIDUAL"
+			}
+		}
+	],
+	"isParsed": true,
+	"repeated": false,
+	"applicant": {
+		"name": "МВД России ГЛАВНОЕ УПРАВЛЕНИЕ МИНИСТЕРСТВА ВНУТРЕННИХ ДЕЛ РОССИЙСКОЙ ФЕДЕРАЦИИ ПО ГОРОДУ МОСКВЕ ГУ МВД России по г. Москве",
+		"phones": [
+			"495 694-91-28"
+		],
+		"address": "ул. Петровка, 38, Москва, 127994",
+		"applicantType": {
+			"name": "МВД",
+			"codeName": "FOIV_MVD"
+		}
+	},
+	"regNumber": "508252",
+	"isNeedDisk": false,
+	"documentDate": "0101-01-01",
+	"documentType": {
+		"name": "Запрос антикоррупционный",
+		"codeName": "REQ_ANTI_CORRUPTION"
+	},
+	"isPersonally": false,
+	"requestSource": "SDO_FOIV",
+	"documentNumber": "ПАРИ",
+	"inquirySignature": {
+		"hasStamp": false,
+		"approverName": "В.А. Новиков",
+		"approverSignature": true
+	},
+	"isNeedExcelFormat": false,
+	"responseRecipientAddress": "гор. Москва, Кавказский б-р, д. 35/2, корп. 4, кв"
+}
