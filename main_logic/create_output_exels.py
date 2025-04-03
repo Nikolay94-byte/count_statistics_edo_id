@@ -3,7 +3,7 @@ import openpyxl
 from format_exel import format_exel
 from utils import open_exel
 from settings import DATA_PATH, INPUTFILEPATH
-from convert_logic import write_headers_to_exel, write_row_to_exel
+from convert_logic import write_headers_to_exel, write_rows_to_exel
 
 
 def find_column(type_request: str) -> int:
@@ -32,7 +32,7 @@ def convert_json_to_exel(column_num_from_book: int, value_column_name: str) -> s
     write_headers_to_exel(sheet=book.active)
     # записываем строки в exel файл
     for row_number, json_body in json_numerated_bodes.items():
-        write_row_to_exel(row_number, json_body, sheet=book.active)
+        write_rows_to_exel(row_number, json_body, sheet=book.active)
     # записываем название файла
     file_name_suffix = sheet[1][column_num_from_book].value
     doc_class_name = ''

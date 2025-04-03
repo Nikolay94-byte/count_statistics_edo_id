@@ -1,196 +1,22 @@
 import openpyxl
 from typing import Dict, Any
+from utils import return_attribute_dict
+
 
 def write_headers_to_exel(sheet: openpyxl.worksheet.worksheet.Worksheet) -> None:
     """Записывает заголовки в exel файл заготовку."""
-    # Блок Документ
-    sheet['A1'] = 'file_name#имя файла'  # 0
-    sheet['B1'] = 'document_anticorr#Документ - Антикоррупционный'  # 1
-    #sheet['C1'] = 'document_outgoing_date#Документ - Исх. дата'  # 2
-    #sheet['D1'] = 'document_outgoing_number#Документ - Исх. номер'  # 3
-    sheet['E1'] = 'document_repeatedly#Документ - Повторно'  # 4
+    for cell_coordinate, attribute_name in return_attribute_dict().items():
+        sheet[cell_coordinate] = attribute_name
 
-# Блок Кто запрашивает
-    sheet['F1'] = 'applicant_signer_position#Кто запрашивает - Подписант - Должность'  # 5
-    sheet['G1'] = 'applicant_signer_name#Кто запрашивает - Подписант - ФИО'  # 6
-    sheet['H1'] = 'applicant_foiv_address#Кто запрашивает - ФОИВ - Адрес'  # 7
-    sheet['I1'] = 'applicant_foiv_name#Кто запрашивает - ФОИВ - Наименование'  # 8
-    #sheet['J1'] = 'applicant_foiv_phone#Кто запрашивает - ФОИВ - Телефон'  # 9
 
-# Блок Объект запроса ФЛ
-    sheet['K1'] = 'target_individual_name#Объект запроса - ФЛ - ФИО'  # 10
-    sheet['L1'] = 'target_individual_reg_address#Объект запроса - ФЛ - Адрес регистрации'  # 11
-    sheet['M1'] = 'target_individual_date_of_birth#Объект запроса - ФЛ - Дата рождения'  # 12
-    sheet['N1'] = 'target_individual_death_date#Объект запроса - ФЛ - Дата смерти'  # 13
-    sheet['O1'] = 'target_individual_inn#Объект запроса - ФЛ - ИНН'  # 14
-    sheet['P1'] = 'target_individual_birth_place#Объект запроса - ФЛ - Место рождения'  # 15
-    sheet['Q1'] = 'target_individual_phones#Объект запроса - ФЛ - Телефонные номера'  # 16
-    sheet['R1'] = 'target_individual_fact_address#Объект запроса - ФЛ - Фактический адрес'  # 17
-
-# Блок Объект запроса ФЛ Идентиф.документ
-    sheet['S1'] = 'target_individual_dul_date#Объект запроса - ФЛ - Идентификационный документ - 1_Дата выдачи'  # 18
-    sheet['T1'] = 'target_individual_dul_issue_code#Объект запроса - ФЛ - Идентификационный документ - 2_Код подразделения'  # 19
-    sheet['U1'] = 'target_individual_identitydocument_series#Объект запроса - ФЛ - Идентификационный документ - 3_Серия'  # 20
-    sheet['V1'] = 'target_individual_identitydocument_number#Объект запроса - ФЛ - Идентификационный документ - 4_Номер'  # 21
-    sheet['W1'] = 'target_individual_dul_org#Объект запроса - ФЛ - Идентификационный документ - 5_Орган выдачи'  # 22
-    sheet['X1'] = 'target_individual_dul_type#Объект запроса - ФЛ - Идентификационный документ - 6_Тип'  # 23
-
-# Блок Объект запроса ИП
-    sheet['Y1'] = 'target_individual_entrepreneur_name#Объект запроса - ИП - ФИО'  # 24
-    sheet['Z1'] = 'target_individual_entrepreneur_regadress#Объект запроса - ИП - Адрес регистрации'  # 25
-    sheet['AA1'] = 'target_individual_entrepreneur_date_of_birth#Объект запроса - ИП - Дата рождения'  # 26
-    sheet['AB1'] = 'target_individual_entrepreneur_inn#Объект запроса - ИП - ИНН'  # 27
-    sheet['AC1'] = 'target_individual_entrepreneur_phones#Объект запроса - ИП - Телефонные номера'  # 28
-    sheet['AD1'] = 'target_individual_entrepreneur_factadress#Объект запроса - ИП - Фактический адрес'  # 29
-
-# Блок Объект запроса ЮЛ
-    sheet['AE1'] = 'target_company_name#Объект запроса - ЮЛ - Наименование'  # 30
-    sheet['AF1'] = 'target_company_regadress#Объект запроса - ЮЛ - Адрес регистрации'  # 31
-    sheet['AG1'] = 'target_company_taxpayer_number#Объект запроса - ЮЛ - ИНН'  # 32
-    sheet['AH1'] = 'target_company_kpp#Объект запроса - ЮЛ - КПП'  # 33
-    sheet['AI1'] = 'target_company_ogrn#Объект запроса - ЮЛ - ОГРН'  # 34
-    sheet['AJ1'] = 'target_company_phones#Объект запроса - ЮЛ - Телефонные номера'  # 35
-    sheet['AK1'] = 'target_company_factadress#Объект запроса - ЮЛ - Фактический адрес'  # 36
-
-# Блок Основание для запроса
-    sheet['AL1'] = 'basis_date_court_act#Основание для запроса - Дата основания запроса'  # 37
-    sheet['AM1'] = 'basis_custom_offence_value#Основание для запроса - Административное правонарушение - Номер дела об АП'  # 38
-    sheet['AN1'] = 'basis_arbitration_case_value#Основание для запроса - Арбитражное дело - Номер арбитражного дела'  # 39
-    sheet['AO1'] = 'basis_civil_case_value#Основание для запроса - Гражданское дело - Номер гражданского дела'  # 40
-    sheet['AP1'] = 'basis_position_value#Основание для запроса - Должность - Название должности'  # 41
-    sheet['AQ1'] = 'basis_inforcement_proceeding_value#Основание для запроса - Исполнительное производство - Номер исполнительного производства'  # 42
-    sheet['AR1'] = 'basis_preliminary_inquiry_value#Основание для запроса - Материал проверки - Номер материала проверки'  # 43
-    sheet['AS1'] = 'basis_inheritance_case_value#Основание для запроса - Наследственное дело - Номер наследственного дела'  # 44
-    sheet['AT1'] = 'basis_court_order_value#Основание для запроса - Постановление суда - Номер постановления суда'  # 45
-    sheet['AU1'] = 'basis_claim_value#Основание для запроса - Претензия/жалоба - Номер претензии/жалобы'  # 46
-    sheet['AV1'] = 'basis_criminal_case_value#Основание для запроса - Уголовное дело - Номер уголовного дела'  # 47
-    sheet['AW1'] = 'basis_legal_clause_lc_fz311#Основание для запроса - Статьи - 311-ФЗ'  # 48
-    sheet['AX1'] = 'basis_legal_clause_lc_a15_notary#Основание для запроса - Статьи - ст. 15 "О нотариате"'  # 49
-    sheet['AY1'] = 'basis_legal_clause_lc_a23_fz173#Основание для запроса - Статьи - ст. 23 (173-ФЗ)'  # 50
-
-# Блок Особые условия
-    #sheet['AZ1'] = 'conditions_give_out_on_purpose#Особые условия - Выдать нарочно'  # 51
-    #sheet['BA1'] = 'conditions_whom_send_response#Особые условия - Кому направить ответ'  # 52
-    #sheet['BB1'] = 'conditions_where_send_response#Особые условия - Куда направить ответ'  # 53
-    #sheet['BC1'] = 'conditions_in_digital_format#Особые условия - Предоставить в электронном виде'  # 54
-    #sheet['BD1'] = 'conditions_response_deadline#Особые условия - Предоставить до'  # 55
-    #sheet['BE1'] = 'conditions_in_excel_format#Особые условия - Формат сведений Excel'  # 56
-
-# Блок Продукты запроса Значения продукта
-    sheet['BF1'] = 'product_card_attr_number#Продукты запроса - Карта - Значения продукта - Номер карты'  # 57
-    sheet['BG1'] = 'product_account_number#Продукты запроса - Счет - Значения продукта - Номер счета'  # 58
-
-# Блок Продукты запроса Аккредитив
-    sheet['BH1'] = 'product_credit_letter_attr_credit_letter_data#Продукты запроса - Аккредитив - Атрибуты продукта - Данные по аккредитивам - Данные по аккредитивам'  # 59
-
-# Блок Продукты запроса Банковские гарантии
-    sheet['BI1'] = 'product_bank_guarantees_attr_bank_guarantees_data#Продукты запроса - Банковские гарантии - Атрибуты продукта - Данные по банковским гарантиям - Данные по банковским гарантиям'  # 60
-    sheet['BJ1'] = 'product_bank_guarantees_attr_contract_file#Продукты запроса - Банковские гарантии - Атрибуты продукта - Досье по договорам (продуктовое досье) - Досье по договорам (продуктовое досье)'  # 61
-
-# Блок Продукты запроса Вексель
-    sheet['BK1'] = 'product_promissory_note_attr_promissory_note_data#Продукты запроса - Вексель - Атрибуты продукта - Данные по векселям - Данные по векселям'  # 62
-
-# Блок Продукты запроса Вклад
-    sheet['BL1'] = 'product_investment_attr_client_pers_data#Продукты запроса - Вклад - Атрибуты продукта - Анкетные данные владельца счета'  # 63
-    sheet['BM1'] = 'product_investment_attr_opened_account_dept_data#Продукты запроса - Вклад - Атрибуты продукта - Данные о наименовании/адресе ТП, где открыт счет'  # 64
-    sheet['BN1'] = 'product_investment_attr_deposit_paid_out_percent#Продукты запроса - Вклад - Атрибуты продукта - Данные по уплаченным процентам по вкладу (депозиту)'  # 65
-    sheet['BO1'] = 'product_investment_attr_account_file#Продукты запроса - Вклад - Атрибуты продукта - Досье по счету/карте (копии документов)'  # 66
-    sheet['BP1'] = 'product_investment_attr_bank_statement#Продукты запроса - Вклад - Атрибуты продукта - Выписки - Выписки'  # 67
-    sheet['BQ1'] = 'product_investment_attr_opened_account_pers_data#Продукты запроса - Вклад - Атрибуты продукта - Данные о лицах, открывших счета - Данные о лицах, открывших счета'  # 68
-    sheet['BR1'] = 'product_investment_attr_file#Продукты запроса - Вклад - Атрибуты продукта - Картотека - Картотека'  # 69
-    sheet['BS1'] = 'product_investment_attr_power_of_attorney_copy#Продукты запроса - Вклад - Атрибуты продукта - Копии доверенностей - Копии доверенностей'  # 70
-    sheet['BT1'] = 'product_investment_attr_exist_account_card_cert#Продукты запроса - Вклад - Атрибуты продукта - Сведения о наличии счетов и банковских карт - Сведения о наличии счетов и банковских карт (справки)'  # 71
-    sheet['BU1'] = 'product_investment_attr_phone_to_account_info#Продукты запроса - Вклад - Атрибуты продукта - Сведения о подключении телефона к счетам/картам клиента из запроса - Сведения о подключении телефона к счетам/картам клиента из запроса'  # 72
-    sheet['BV1'] = 'product_investment_attr_account_balance_cert#Продукты запроса - Вклад - Атрибуты продукта - Справки (сведения) об остатках - Справки (сведения) об остатках'  # 73
-    sheet['BW1'] = 'product_investment_attr_photo_video_office#Продукты запроса - Вклад - Атрибуты продукта - Фото/видео из отделений Банка - Фото/видео из отделений Банка'  # 74
-
-# Блок Продукты запроса ДБО
-    sheet['BX1'] = 'product_dbo_attr_dbo_connection_data#Продукты запроса - ДБО - Атрибуты продукта - Данные о подключении ДБО'  # 75
-    sheet['BY1'] = 'product_dbo_attr_ip_address#Продукты запроса - ДБО - Атрибуты продукта - IP адреса/Log файлы - IP адреса/Log файлы'  # 76
-    sheet['BZ1'] = 'product_dbo_attr_used_ip_address_pers_data#Продукты запроса - ДБО - Атрибуты продукта - Данные о лицах использовавших ip-адреса - Данные о лицах использовавших ip-адреса'  # 77
-    sheet['CA1'] = 'product_dbo_attr_dbo_connected_pers_data#Продукты запроса - ДБО - Атрибуты продукта - Данные о лицах подключивших ДБО - Данные о лицах, подключивших ДБО'  # 78
-    sheet['CB1'] = 'product_dbo_attr_dbo_document_copy#Продукты запроса - ДБО - Атрибуты продукта - Копии документов по ДБО (акты, сертификаты ключей) - Копии документов по ДБО (акты, сертификаты ключей)'  # 79
-
-# Блок Продукты запроса ИБС
-    sheet['CC1'] = 'product_ibs_attr_ibs_data#Продукты запроса - ИБС - Атрибуты продукта - Данные по ИБС (ячейкам) - Данные по ИБС (ячейкам)'  # 80
-    sheet['CD1'] = 'product_ibs_attr_contract_file#Продукты запроса - ИБС - Атрибуты продукта - Досье по договорам (продуктовое досье) - Досье по договорам (продуктовое досье)'  # 81
-
-# Блок Продукты запроса Инкассация
-    sheet['CE1'] = 'product_encashment_attr_encashment_contract_copy#Продукты запроса - Инкассация - Атрибуты продукта - Данные по договору инкассации (копии документов) - Данные по договору инкассации (копии документов)'  # 82
-
-# Блок Продукты запроса Карта
-    sheet['CF1'] = 'product_card_attr_client_pers_data#Продукты запроса - Карта - Атрибуты продукта - Анкетные данные владельца счета'  # 83
-    sheet['CG1'] = 'product_card_attr_opened_account_dept_data#Продукты запроса - Карта - Атрибуты продукта - Данные о наименовании/адресе ТП, где открыт счет'  # 84
-    sheet['CH1'] = 'product_card_attr_account_file#Продукты запроса - Карта - Атрибуты продукта - Досье по счету/карте (копии документов)'  # 85
-    sheet['CI1'] = 'product_card_attr_recipient_pers_data#Продукты запроса - Карта - Атрибуты продукта - Анкетные данные получателя перевода - Анкетные данные получателя перевода'  # 86
-    sheet['CJ1'] = 'product_card_attr_bank_statement#Продукты запроса - Карта - Атрибуты продукта - Выписки - Выписки'  # 87
-    sheet['CK1'] = 'product_card_attr_opened_account_pers_data#Продукты запроса - Карта - Атрибуты продукта - Данные о лицах, открывших счета - Данные о лицах, открывших счета'  # 88
-    sheet['CL1'] = 'product_card_attr_atm_data#Продукты запроса - Карта - Атрибуты продукта - Данные по банкоматам/терминалам - Данные по банкоматам/терминалам'  # 89
-    sheet['CM1'] = 'product_card_attr_sender_account_info#Продукты запроса - Карта - Атрибуты продукта - Данные по счетам/банковским картам получателей/отправителей - Данные по счетам/банковским картам получателей/отправителей'  # 90
-    sheet['CN1'] = 'product_card_attr_recipient_account_info#Продукты запроса - Карта - Атрибуты продукта - Данные по счетам/банковским картам получателей - Данные по счетам/банковским картам получателей'  # 91
-    sheet['CO1'] = 'product_card_attr_recipient_account_operations_info#Продукты запроса - Карта - Атрибуты продукта - Данные по счетам/банковским картам получателя перевода и операции по ним - Данные по счетам/банковским картам получателя перевода и операции по ним'  # 92
-    sheet['CP1'] = 'product_card_attr_file#Продукты запроса - Карта - Атрибуты продукта - Картотека - Картотека'  # 93
-    sheet['CQ1'] = 'product_card_attr_exist_account_card_cert#Продукты запроса - Карта - Атрибуты продукта - Сведения о наличии счетов и банковских карт - Сведения о наличии счетов и банковских карт (справки)'  # 94
-    sheet['CR1'] = 'product_card_attr_phone_to_account_info#Продукты запроса - Карта - Атрибуты продукта - Сведения о подключении телефона к счетам/картам клиента из запроса - Сведения о подключении телефона к счетам/картам клиента из запроса'  # 95
-    sheet['CS1'] = 'product_card_attr_account_balance_cert#Продукты запроса - Карта - Атрибуты продукта - Справки (сведения) об остатках - Справки (сведения) об остатках'  # 96
-    sheet['CT1'] = 'product_card_attr_photo_video_office#Продукты запроса - Карта - Атрибуты продукта - Фото/видео из отделений Банка - Фото/видео из отделений Банка'  # 97
-    sheet['CU1'] = 'product_card_attr_photo_video_atm#Продукты запроса - Карта - Атрибуты продукта - Фото/видео из устройств самообслуживания - Фото/видео из устройств самообслуживания'  # 98
-
-# Блок Продукты запроса Кредит
-    sheet['CV1'] = 'product_credit_attr_bank_statement#Продукты запроса - Кредит - Атрибуты продукта - Выписки - Выписки'  # 99
-    sheet['CW1'] = 'product_credit_attr_credit_contract_data#Продукты запроса - Кредит - Атрибуты продукта - Данные по кредитным договорам - Данные по кредитным договорам'  # 100
-    sheet['CX1'] = 'product_credit_attr_credit_debt_balance#Продукты запроса - Кредит - Атрибуты продукта - Данные по остатку долга по кредиту - Данные по остатку долга по кредиту'  # 101
-    sheet['CY1'] = 'product_credit_attr_credit_paid_out_percent#Продукты запроса - Кредит - Атрибуты продукта - Данные по уплаченным процентам по кредиту - Данные по уплаченным процентам по кредиту'  # 102
-    sheet['CZ1'] = 'product_credit_attr_contract_file#Продукты запроса - Кредит - Атрибуты продукта - Досье по договорам (продуктовое досье) - Досье по договорам (продуктовое досье)'  # 103
-    sheet['DA1'] = 'product_credit_attr_debt_credit_calc#Продукты запроса - Кредит - Атрибуты продукта - Расчет задолженности по Кредитным договорам - Расчет задолженности по Кредитным договорам'  # 104
-    sheet['DB1'] = 'product_credit_attr_loan_debt_cert#Продукты запроса - Кредит - Атрибуты продукта - Справка о ссудной задолженности - Справка о ссудной задолженности'  # 105
-
-# Блок Продукты запроса ОМС
-    sheet['DC1'] = 'product_oms_attr_oms_account_data#Продукты запроса - ОМС - Атрибуты продукта - Данные по счетам ОМС (покупка драг.металов) - Данные по счетам ОМС (покупка драг.металов)'  # 106
-
-# Блок Продукты запроса Сберегательный сертификат
-    sheet['DD1'] = 'product_saving_certificate_attr_saving_certificate_data#Продукты запроса - Сберегательный сертификат - Атрибуты продукта - Сведения о сберегательных сертификатах - Сведения о сберегательных сертификатах'  # 107
-
-# Блок Продукты запроса Страховка
-    sheet['DE1'] = 'product_insurance_attr_contract_file#Продукты запроса - Страховка - Атрибуты продукта - Досье по договорам (продуктовое досье) - Досье по договорам (продуктовое досье)'  # 108
-
-# Блок Продукты запроса Счет
-    sheet['DF1'] = 'product_account_attr_client_pers_data#Продукты запроса - Счет - Атрибуты продукта - Анкетные данные владельца счета'  # 109
-    sheet['DG1'] = 'product_account_attr_account_control_person#Продукты запроса - Счет - Атрибуты продукта - Данные о лицах имеющих право распоряжения по счетам'  # 110
-    sheet['DH1'] = 'product_account_attr_opened_account_dept_data#Продукты запроса - Счет - Атрибуты продукта - Данные о наименовании/адресе ТП, где открыт счет'  # 111
-    sheet['DI1'] = 'product_account_attr_account_file#Продукты запроса - Счет - Атрибуты продукта - Досье по счету/карте (копии документов)'  # 112
-    sheet['DJ1'] = 'product_account_attr_recipient_pers_data#Продукты запроса - Счет - Атрибуты продукта - Анкетные данные получателя перевода - Анкетные данные получателя перевода'  # 113
-    sheet['DK1'] = 'product_account_attr_bank_statement_balance#Продукты запроса - Счет - Атрибуты продукта - Выписка с текущим остатком - Выписка с текущим остатком'  # 114
-    sheet['DL1'] = 'product_account_attr_bank_statement#Продукты запроса - Счет - Атрибуты продукта - Выписки - Выписки'  # 115
-    sheet['DM1'] = 'product_account_attr_opened_account_pers_data#Продукты запроса - Счет - Атрибуты продукта - Данные о лицах, открывших счета - Данные о лицах, открывших счета'  # 116
-    sheet['DN1'] = 'product_account_attr_kop_stamp_pers_data#Продукты запроса - Счет - Атрибуты продукта - Данные о лицах, указанных в КОП и оттисков печати - Данные о лицах, указанных в КОП и оттисков печати'  # 117
-    sheet['DO1'] = 'product_account_attr_gis_gmp_payment_confirm#Продукты запроса - Счет - Атрибуты продукта - Данные по УИП (ГИС ГМП) - подтверждение платежа - Данные по УИП (ГИС ГМП) - подтверждение платежа'  # 118
-    sheet['DP1'] = 'product_account_attr_blocking_data#Продукты запроса - Счет - Атрибуты продукта - Данные по арестам/блокировкам - Данные по арестам/блокировкам'  # 119
-    sheet['DQ1'] = 'product_account_attr_atm_data#Продукты запроса - Счет - Атрибуты продукта - Данные по банкоматам/терминалам - Данные по банкоматам/терминалам'  # 120
-    sheet['DR1'] = 'product_account_attr_internet_transfer_data#Продукты запроса - Счет - Атрибуты продукта - Данные по интернет переводам - Данные по интернет переводам'  # 121
-    sheet['DS1'] = 'product_account_attr_phones_data#Продукты запроса - Счет - Атрибуты продукта - Данные по сотовым телефонам - Данные по сотовым телефонам'  # 122
-    sheet['DT1'] = 'product_account_attr_sender_account_info#Продукты запроса - Счет - Атрибуты продукта - Данные по счетам/банковским картам отправителей - Данные по счетам/банковским картам отправителей'  # 123
-    sheet['DU1'] = 'product_account_attr_recipient_account_info#Продукты запроса - Счет - Атрибуты продукта - Данные по счетам/банковским картам получателей - Данные по счетам/банковским картам получателей'  # 124
-    sheet['DV1'] = 'product_account_attr_recipient_account_operations_info#Продукты запроса - Счет - Атрибуты продукта - Данные по счетам/банковским картам получателя перевода и операции по ним - Данные по счетам/банковским картам получателя перевода и операции по ним'  # 125
-    sheet['DW1'] = 'product_account_attr_file#Продукты запроса - Счет - Атрибуты продукта - Картотека - Картотека'  # 126
-    sheet['DX1'] = 'product_account_attr_power_of_attorney_copy#Продукты запроса - Счет - Атрибуты продукта - Копии доверенностей - Копии доверенностей'  # 127
-    sheet['DY1'] = 'product_account_attr_payment_document#Продукты запроса - Счет - Атрибуты продукта - Платежные документы - Платежные документы'  # 128
-    sheet['DZ1'] = 'product_account_attr_exist_account_card_cert#Продукты запроса - Счет - Атрибуты продукта - Сведения о наличии счетов и банковских карт - Сведения о наличии счетов и банковских карт (справки)'  # 129
-    sheet['EA1'] = 'product_account_attr_phone_to_account_info#Продукты запроса - Счет - Атрибуты продукта - Сведения о подключении телефона к счетам/картам клиента из запроса - Сведения о подключении телефона к счетам/картам клиента из запроса'  # 130
-    sheet['EB1'] = 'product_account_attr_transaction_data#Продукты запроса - Счет - Атрибуты продукта - Сведения по транзакциям - Сведения по транзакциям'  # 131
-    sheet['EC1'] = 'product_account_attr_account_balance_cert#Продукты запроса - Счет - Атрибуты продукта - Справки (сведения) об остатках - Справки (сведения) об остатках'  # 132
-    sheet['ED1'] = 'product_account_attr_photo_video_atm#Продукты запроса - Счет - Атрибуты продукта - Фото/видео из устройств самообслуживания - Фото/видео из устройств самообслуживания'  # 133
-
-# Блок Продукты запроса Ценные бумаги
-    sheet['EE1'] = 'product_securities_attr_securities_data#Продукты запроса - Ценные бумаги - Атрибуты продукта - Данные по ценным бумагам - Данные по ценным бумагам'  # 134
-
-def write_row_to_exel(
+def write_rows_to_exel(
         row_number: int,
         json_body: Dict[str, Any],
         sheet: openpyxl.worksheet.worksheet.Worksheet
 ) -> None:
     """Записывает строки в exel файл заготовку."""
-# Блок Документ
+
+    # Блок Документ
     # file_name
     sheet[row_number][0].value = json_body['regNumber'] if json_body.get('regNumber') is not None else ''
     # document_anticorr
@@ -201,7 +27,8 @@ def write_row_to_exel(
     #sheet[row_number][3].value = json_body['documentNumber'] if json_body.get('documentNumber') is not None else ''
     # document_repeatedly
     sheet[row_number][4].value = json_body['repeated'] if json_body.get('repeated') is not None and json_body['repeated'] != False else ''
-# Блок Кто запрашивает
+
+    # Блок Кто запрашивает
     if json_body.get('inquirySignature') is not None:
         if json_body['inquirySignature'].get('signerPosition') is not None:
             if json_body['inquirySignature']['signerPosition'].get('name') is not None:
@@ -876,16 +703,15 @@ def write_productType(
         attr_name: str,
         header_number: int):
     """Записывает продукт запроса из json в exel файл"""
-    if json_body.get('targets') is not None:
-        for target in json_body['targets']:
-            if target.get('products') is not None:
-                for product in target['products']:
-                    if product['productType']['codeName'] == product_name:
-                        if product.get('attributes') is not None:
-                            for attribute in product['attributes']:
-                                if attribute['attributeType']['codeName'] == attr_name:
-                                    sheet[row_number][header_number].value = 'true'
-                                else:
-                                    continue
-                    else:
-                        continue
+    targets = json_body.get('targets', [])
+    for target in targets:
+        products = target.get('products', [])
+        for product in products:
+            if product.get('productType', {}).get('codeName') != product_name:
+                continue
+
+            attributes = product.get('attributes', [])
+            for attribute in attributes:
+                if attribute.get('attributeType', {}).get('codeName') == attr_name:
+                    sheet[row_number][header_number].value = 'true'
+                    break
