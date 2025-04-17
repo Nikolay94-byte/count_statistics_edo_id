@@ -1,14 +1,16 @@
 import json
+import logging
 import openpyxl
 from format_exel import format_exel
+from constants import INPUT_FILE_PATH, DOCUMENT_TYPE
 from utils import open_exel
-from settings import DATA_PATH, INPUTFILEPATH
+from settings import DATA_PATH
 from convert_logic import write_headers_to_exel, write_rows_to_exel
 
 
-def find_column(type_request: str) -> int:
-    """Находит индекс необходимой для извлечения данных колонки."""
-    sheet = open_exel(INPUTFILEPATH)
+def find_column_index(type_request: str) -> int:
+    """Находит индекс необходимой колонки для извлечения данных."""
+    sheet = open_exel(INPUT_FILE_PATH)
     for cell in sheet['1']:
         if cell.value == type_request:
             column_num_from_book = sheet[cell.coordinate].column - 1  # уменьшаем на 1 ,т.к. далее используется
@@ -16,8 +18,8 @@ def find_column(type_request: str) -> int:
             return column_num_from_book
 
 def convert_json_to_exel(column_num_from_book: int, value_column_name: str) -> str:
-    """Формирует exel файл с данными на основе json."""
-    sheet = open_exel(INPUTFILEPATH)
+    """Формирует Exel-файл с данными на основе json."""
+    sheet = open_exel(INPUT_FILE_PATH)
     file_bodes = []
 
     for row in range(2, sheet.max_row+1):
@@ -25,22 +27,22 @@ def convert_json_to_exel(column_num_from_book: int, value_column_name: str) -> s
             try:
                 file_bodes.append(json.loads(sheet[row][column_num_from_book].value))
             except Exception:
-                print(f'Ячейка (строка {row}, колонка {column_num_from_book+1}) содержит некорректный json')
+                logging.error(f'Ячейка (строка {row}, колонка {column_num_from_book+1}) содержит некорректный json')
     json_numerated_bodes = dict(enumerate(file_bodes, start=2))
-    # записываем наименования колонок в exel файл
+    # записываем наименования колонок в Exel-файл
     book = openpyxl.Workbook()
     write_headers_to_exel(sheet=book.active)
-    # записываем строки в exel файл
+    # записываем строки в Exel-файл
     for row_number, json_body in json_numerated_bodes.items():
         write_rows_to_exel(row_number, json_body, sheet=book.active)
     # записываем название файла
     file_name_suffix = sheet[1][column_num_from_book].value
     doc_class_name = ''
     for cell in sheet['1']:
-        if cell.value == 'document_type':
+        if cell.value == DOCUMENT_TYPE:
             doc_class_name = str(sheet[2][sheet[cell.coordinate].column-1].value)
             break
-    new_book_name = doc_class_name + '_' + file_name_suffix + '.xlsx'
+    new_book_name = f"{doc_class_name}_{file_name_suffix}.xlsx"
     book.save(DATA_PATH / new_book_name)
     book.close()
     return format_exel(value_column_name, new_book_name)

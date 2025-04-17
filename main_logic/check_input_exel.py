@@ -1,9 +1,12 @@
 import os.path
+import constants
+
+from constants import INPUT_FILE_PATH
 from utils import open_exel
 
 
 def check_exel(filepath: str) -> tuple:
-    """Проверяет, соответствует ли exel файл необходимому формату:
+    """Проверяет, соответствует ли Exel-файл необходимому формату:
     1 Есть ли необходимый файл с соответствующим названием - "Выгрузка с прода ФОИВ.xlsx"
     2 Есть ли 4 обязательные колонки:
     - reg_number
@@ -16,16 +19,21 @@ def check_exel(filepath: str) -> tuple:
 
     # Проверяем, есть ли необходимый файл с соответствующим названием - "Выгрузка с прода ФОИВ.xlsx"
     if not os.path.exists(filepath):
-        return (False, 'Необходимый файл отсутствует, убедитесь, что файл назван - "Выгрузка с прода ФОИВ"')
+        return (
+            False, f'Необходимый файл отсутствует, убедитесь, что файл назван верно и находится по пути {INPUT_FILE_PATH}'
+        )
 
     # Проверяем наличие обязательных колонок
     sheet = open_exel(filepath)
-    right_column_name_list = ['reg_number', 'document_type', 'document_input_request', 'document_verification_request']
+    mandatory_column_name_list = [
+        constants.REG_NUMBER, constants.DOCUMENT_TYPE, constants.DOCUMENT_INPUT_REQUEST,
+        constants.DOCUMENT_VERIFICATION_REQUEST]
     current_column_name_list = [cell.value for cell in sheet['1'] if cell.value]
-    if not set(right_column_name_list).issubset(current_column_name_list):
+    if not set(mandatory_column_name_list).issubset(current_column_name_list):
         return (
-            False, 'В файле отсутствуют обязательные колонки, убедитесь что все 4 есть в файле '
-                   '- reg_number, document_type, document_input_request, document_verification_request'
+            False, f'В файле отсутствуют обязательные колонки, убедитесь что все 4 есть в файле '
+                   f'{constants.REG_NUMBER}, {constants.DOCUMENT_TYPE}, '
+                   f'{constants.DOCUMENT_INPUT_REQUEST}, {constants.DOCUMENT_VERIFICATION_REQUEST}'
         )
     # Проверяем наличие ячеек, содержащих 32767 символа
     for row in range(2, sheet.max_row+1):

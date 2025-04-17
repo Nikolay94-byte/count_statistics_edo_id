@@ -1,29 +1,44 @@
-from create_output_exels import convert_json_to_exel, find_column
+import logging
+import sys
+from constants import INPUT_FILE_PATH, DOCUMENT_INPUT_REQUEST, DOCUMENT_VERIFICATION_REQUEST
+from create_output_exels import convert_json_to_exel, find_column_index
 from check_input_exel import check_exel
 from create_report import create_report
-from settings import INPUTFILEPATH
 from utils import CheckError
 from constants import INPUT_DATA_COLUMN_NAME, OUTPUT_DATA_COLUMN_NAME
 
 
-def convert_json_to_exel_final() -> None:
+def counting_statistics_kpss_cnts() -> None:
     """Формирует три итоговых файлика - распознанные значения, верифицированные значения,
     а также отчет по качеству распознавания
     """
-
-    check_result, fail_reason = check_exel(INPUTFILEPATH)
+    logging.info(f'Начинаем сбор статистики')
+    check_result, verdict = check_exel(INPUT_FILE_PATH)
 
     if check_result:
-        input_request_filename = convert_json_to_exel(find_column('document_input_request'), INPUT_DATA_COLUMN_NAME)
-        verification_request_filename = convert_json_to_exel(find_column('document_verification_request'),
+        input_request_filename = convert_json_to_exel(find_column_index(DOCUMENT_INPUT_REQUEST), INPUT_DATA_COLUMN_NAME)
+        verification_request_filename = convert_json_to_exel(find_column_index(DOCUMENT_VERIFICATION_REQUEST),
                                                              OUTPUT_DATA_COLUMN_NAME)
     else:
-        raise CheckError(fail_reason)
+        logging.critical(f'Входные данные не прошли проверку по причине: {verdict}')
+        raise CheckError(verdict)
 
+    logging.info(
+        f'Подготовительные файлы {input_request_filename} и {verification_request_filename} успешно сформированы'
+    )
     filenames_for_prepare_report = input_request_filename, verification_request_filename
 
     create_report(filenames_for_prepare_report)
+    logging.info(f'Отчет создан')
 
 
 if __name__ == '__main__':
-    convert_json_to_exel_final()
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format='%(asctime)s - [%(levelname)s] - %(message)s -Line: %(lineno)d',
+        handlers=[
+            logging.StreamHandler(sys.stdout),
+            logging.FileHandler(f'{__file__}.log', encoding='utf-8'),
+        ]
+    )
+    counting_statistics_kpss_cnts()

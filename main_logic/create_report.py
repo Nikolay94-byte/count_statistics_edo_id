@@ -74,7 +74,7 @@ def create_report(filenames_for_prepare_report: tuple):
         constants.FALSELY_COMPLETED_AVERAGE_AMOUNT: [falsely_completed_average_amount],
     })
 
-    report_file_name = document_name + '_' + 'report.xlsx'
+    report_file_name = f"{document_name}_report.xlsx"
 
     with pd.ExcelWriter(DATA_PATH / report_file_name) as writer:
         final_report_df.to_excel\

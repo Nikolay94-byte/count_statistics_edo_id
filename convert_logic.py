@@ -1,11 +1,11 @@
 import openpyxl
 from typing import Dict, Any
-from utils import return_attribute_dict, return_product_dict
+from utils import get_attribute_dict, get_product_dict
 
 
 def write_headers_to_exel(sheet: openpyxl.worksheet.worksheet.Worksheet) -> None:
-    """Записывает заголовки в exel файл заготовку."""
-    for cell_coordinate, attribute_name in return_attribute_dict().items():
+    """Записывает заголовки в Exel-файл заготовку."""
+    for cell_coordinate, attribute_name in get_attribute_dict().items():
         sheet[cell_coordinate] = attribute_name
 
 
@@ -14,7 +14,7 @@ def write_rows_to_exel(
         json_body: Dict[str, Any],
         sheet: openpyxl.worksheet.worksheet.Worksheet
 ) -> None:
-    """Записывает строки в exel файл заготовку."""
+    """Записывает строки в Exel-файл заготовку."""
 
     # Блок Документ
     # file_name
@@ -528,7 +528,7 @@ def write_rows_to_exel(
                                 sheet[row_number][58].value = sheet[row_number][58].value + ';' + ';'.join(product['values'])
 
     # Заполняем продукты запроса
-    for attribute, parameters in return_product_dict().items():
+    for attribute, parameters in get_product_dict().items():
         write_productType(row_number, json_body, sheet, parameters[0], parameters[1], parameters[2])
 
 def write_productType(
@@ -538,7 +538,7 @@ def write_productType(
         product_name: str,
         attr_name: str,
         header_number: int):
-    """Записывает продукт запроса из json в exel файл"""
+    """Записывает продукт запроса из json в Exel-файл"""
     targets = json_body.get('targets', [])
     for target in targets:
         products = target.get('products', [])

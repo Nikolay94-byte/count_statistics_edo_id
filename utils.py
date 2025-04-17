@@ -15,7 +15,7 @@ def open_exel(filepath: str) -> openpyxl.worksheet.worksheet.Worksheet:
     return sheet
 
 
-def return_attribute_dict() -> dict:
+def get_attribute_dict() -> dict[str, str]:
     """Возвращает список атрибутов необходимый для подсчета статистики (учитываются только атрибуты, которые имеют хотя
     бы одну регулярку).
     """
@@ -303,7 +303,7 @@ def return_attribute_dict() -> dict:
     }
     return attribute_dict
 
-def return_product_dict() -> dict:
+def get_product_dict() -> dict[str, list[str | int]]:
     """Возвращает список продуктов запроса"""
     product_dict = {
         # Блок Продукты запроса Аккредитив

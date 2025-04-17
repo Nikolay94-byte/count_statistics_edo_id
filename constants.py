@@ -1,4 +1,16 @@
-# названия колонок с данными в исходных exel файлах
+from settings import DATA_PATH
+
+
+# путь к исходному файлу от заказчика
+INPUT_FILE_PATH = DATA_PATH / "Выгрузка с прода ФОИВ.xlsx"
+
+# названия колонок в исходном Exel-файле от заказчика
+REG_NUMBER = 'reg_number'
+DOCUMENT_TYPE = 'document_type'
+DOCUMENT_INPUT_REQUEST = 'document_input_request'
+DOCUMENT_VERIFICATION_REQUEST = 'document_verification_request'
+
+# названия колонок с данными в подготовительных Exel-файлах
 FILE_NAME_COLUMN_NAME = 'Наим.файла'
 SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME = 'Сис наим.атрибута'
 ATTRIBUTE_NAME_COLUNM_NAME = 'Наим.атрибута'
@@ -19,7 +31,7 @@ FALSE_ATTRIBUTE_AMOUNT = 'Количество неверно извлеченн
 QUALITY_PERCENT = 'Качество извлечения (процент)'
 FALSELY_COMPLETED_AVERAGE_AMOUNT = 'Среднее количество ложно извлеченных на документ'
 
-# названия листов в exel файле отчета
+# названия листов в Exel-файле отчета
 FINAL_REPORT_SHEET_NAME = 'общая статистика'
 ONLY_COMPLETED_REPORT_SHEET_NAME = 'только по зап-ым атр.'
 ATTRIBUTE_STATISTICS_REPORT_SHEET_NAME = 'детализация поатрибутивно'
