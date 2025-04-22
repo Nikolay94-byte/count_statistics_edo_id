@@ -1,13 +1,22 @@
 import pandas as pd
+from pandas import DataFrame
+
 from utils import constants
-from settings import DATA_PATH
 
 
-def format_exel(value_column_name: str, new_book_name: str) -> str:
+def format_exel(value_column_name: str, dataframe_for_formating: DataFrame) -> DataFrame:
     """Форматирует эксель под необходимый формат (формат загрузки эталонки)."""
-    df = pd.read_excel(DATA_PATH / new_book_name, index_col=0, dtype=str)
     # делаем анпивот таблицы
-    unpivot_df = df.stack(dropna=False).reset_index()
+    unpivot_df = (
+        pd.melt(
+            dataframe_for_formating,
+            id_vars=[dataframe_for_formating.columns[0]],
+            var_name='attribute',
+            value_name='value'
+        )
+        .sort_values(by=[dataframe_for_formating.columns[0], 'attribute'])  # Сортировка по двум столбцам
+        .reset_index(drop=True)
+    )
     unpivot_df.columns = [constants.FILE_NAME_COLUMN_NAME, constants.COMMON_ATTRIBUTE_NAME_COLUMN_NAME,
                           value_column_name]
     # разделяем колонку Общее наим.атрибута на две
@@ -21,5 +30,4 @@ def format_exel(value_column_name: str, new_book_name: str) -> str:
                                          constants.ATTRIBUTE_NAME_COLUNM_NAME, value_column_name])
     # Удаляем строки с не нужными атрибутами (по которым не считается статистика)
     remove_unnecessary_atr_final_df = final_df.dropna(subset=[constants.ATTRIBUTE_NAME_COLUNM_NAME])
-    remove_unnecessary_atr_final_df.to_excel(DATA_PATH / new_book_name, index=False)
-    return new_book_name
+    return remove_unnecessary_atr_final_df

@@ -1,6 +1,7 @@
 import json
 import logging
 import openpyxl
+import pandas as pd
 from format_exel import format_exel
 from utils.constants import INPUT_FILE_PATH, DOCUMENT_TYPE
 from utils.utils import open_exel
@@ -43,6 +44,10 @@ def convert_json_to_exel(column_num_from_book: int, value_column_name: str) -> s
             doc_class_name = str(sheet[2][sheet[cell.coordinate].column-1].value)
             break
     new_book_name = f"{doc_class_name}_{file_name_suffix}.xlsx"
-    book.save(DATA_PATH / new_book_name)
-    book.close()
-    return format_exel(value_column_name, new_book_name)
+
+    # Преобразуем DataFrame для последующего форматирования
+    data = list(book.active.values)
+    dataframe_for_formating = pd.DataFrame(data[1:], columns=data[0])
+    formatted_dataframe = format_exel(value_column_name, dataframe_for_formating)
+    formatted_dataframe.to_excel(DATA_PATH / new_book_name, index=False)
+    return new_book_name
