@@ -1,11 +1,12 @@
 import openpyxl
 from typing import Dict, Any
-from utils import get_attribute_dict, get_product_dict
+from utils.utils import convert_file_attributes_to_dict, convert_file_products_to_dict
+from utils.constants import ATTRIBUTE_DICT_FILE_PATH, PRODUCT_DICT_FILE_PATH
 
 
 def write_headers_to_exel(sheet: openpyxl.worksheet.worksheet.Worksheet) -> None:
     """Записывает заголовки в Exel-файл заготовку."""
-    for cell_coordinate, attribute_name in get_attribute_dict().items():
+    for cell_coordinate, attribute_name in convert_file_attributes_to_dict(ATTRIBUTE_DICT_FILE_PATH).items():
         sheet[cell_coordinate] = attribute_name
 
 
@@ -528,7 +529,7 @@ def write_rows_to_exel(
                                 sheet[row_number][58].value = sheet[row_number][58].value + ';' + ';'.join(product['values'])
 
     # Заполняем продукты запроса
-    for attribute, parameters in get_product_dict().items():
+    for attribute, parameters in convert_file_products_to_dict(PRODUCT_DICT_FILE_PATH).items():
         write_productType(row_number, json_body, sheet, parameters[0], parameters[1], parameters[2])
 
 def write_productType(

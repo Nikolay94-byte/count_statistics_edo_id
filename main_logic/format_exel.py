@@ -1,5 +1,5 @@
 import pandas as pd
-import constants
+from utils import constants
 from settings import DATA_PATH
 
 

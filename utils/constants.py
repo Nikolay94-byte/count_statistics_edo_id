@@ -1,8 +1,14 @@
-from settings import DATA_PATH
+from settings import DATA_PATH, ROOT_PATH
 
 
 # путь к исходному файлу от заказчика
 INPUT_FILE_PATH = DATA_PATH / "Выгрузка с прода ФОИВ.xlsx"
+
+# путь к файлу, где описаны все атрибуты (у которых есть извлечение)
+ATTRIBUTE_DICT_FILE_PATH = ROOT_PATH / "utils" / "attributes.txt"
+
+# путь к файлу, где описаны все продукты (у которых есть извлечение)
+PRODUCT_DICT_FILE_PATH = ROOT_PATH / "utils" / "products.txt"
 
 # названия колонок в исходном Exel-файле от заказчика
 REG_NUMBER = 'reg_number'

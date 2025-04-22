@@ -1,6 +1,6 @@
 import pandas as pd
 import datetime
-import constants
+from utils import constants
 from settings import DATA_PATH
 
 

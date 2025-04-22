@@ -2,10 +2,10 @@ import json
 import logging
 import openpyxl
 from format_exel import format_exel
-from constants import INPUT_FILE_PATH, DOCUMENT_TYPE
-from utils import open_exel
+from utils.constants import INPUT_FILE_PATH, DOCUMENT_TYPE
+from utils.utils import open_exel
 from settings import DATA_PATH
-from convert_logic import write_headers_to_exel, write_rows_to_exel
+from utils.convert_logic import write_headers_to_exel, write_rows_to_exel
 
 
 def find_column_index(type_request: str) -> int:
