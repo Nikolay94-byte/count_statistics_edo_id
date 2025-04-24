@@ -1,8 +1,8 @@
 import logging
 import sys
 from utils.constants import INPUT_FILE_PATH, DOCUMENT_INPUT_REQUEST, DOCUMENT_VERIFICATION_REQUEST
-from create_output_exels import convert_json_to_exel, find_column_index
-from check_input_exel import check_exel
+from create_output_excels import convert_json_to_excel, find_column_index
+from check_input_excel import check_excel
 from create_report import create_report
 from utils.constants import INPUT_DATA_COLUMN_NAME, OUTPUT_DATA_COLUMN_NAME
 
@@ -12,10 +12,10 @@ def counting_statistics_kpss_cnts() -> None:
     а также отчет по качеству распознавания
     """
     logging.info(f'Начинаем сбор статистики')
-    check_exel(INPUT_FILE_PATH)
+    check_excel(INPUT_FILE_PATH)
 
-    input_request_filename = convert_json_to_exel(find_column_index(DOCUMENT_INPUT_REQUEST), INPUT_DATA_COLUMN_NAME)
-    verification_request_filename = convert_json_to_exel(find_column_index(DOCUMENT_VERIFICATION_REQUEST),
+    input_request_filename = convert_json_to_excel(find_column_index(DOCUMENT_INPUT_REQUEST), INPUT_DATA_COLUMN_NAME)
+    verification_request_filename = convert_json_to_excel(find_column_index(DOCUMENT_VERIFICATION_REQUEST),
                                                              OUTPUT_DATA_COLUMN_NAME)
 
     filenames_for_prepare_report = input_request_filename, verification_request_filename

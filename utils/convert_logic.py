@@ -4,18 +4,37 @@ from utils.utils import convert_file_attributes_to_dict, convert_file_products_t
 from utils.constants import ATTRIBUTE_DICT_FILE_PATH, PRODUCT_DICT_FILE_PATH
 
 
-def write_headers_to_exel(sheet: openpyxl.worksheet.worksheet.Worksheet) -> None:
-    """Записывает заголовки в Exel-файл заготовку."""
+def write_headers_to_excel(sheet: openpyxl.worksheet.worksheet.Worksheet) -> None:
+    """Записывает заголовки в excel-файл заготовку."""
     for cell_coordinate, attribute_name in convert_file_attributes_to_dict(ATTRIBUTE_DICT_FILE_PATH).items():
         sheet[cell_coordinate] = attribute_name
 
 
-def write_rows_to_exel(
+def _set_value(sheet, row, col, value):
+    """Устанавливает значение в ячейку, если оно не None"""
+    if value is not None:
+        if sheet[row][col].value is None:
+            sheet[row][col].value = str(value)
+        else:
+            sheet[row][col].value = f"{sheet[row][col].value};{value}"
+
+
+def _get_nested_value(data, *keys, default=None):
+    """Рекурсивно получает значение из вложенных словарей"""
+    for key in keys:
+        if isinstance(data, dict) and key in data:
+            data = data[key]
+        else:
+            return default
+    return data
+
+
+def write_rows_to_excel(
         row_number: int,
         json_body: Dict[str, Any],
         sheet: openpyxl.worksheet.worksheet.Worksheet
 ) -> None:
-    """Записывает строки в Exel-файл заготовку."""
+    """Записывает строки в excel-файл заготовку."""
 
     # Блок Документ
     # file_name
@@ -539,7 +558,7 @@ def write_productType(
         product_name: str,
         attr_name: str,
         header_number: int):
-    """Записывает продукт запроса из json в Exel-файл"""
+    """Записывает продукт запроса из json в excel-файл"""
     targets = json_body.get('targets', [])
     for target in targets:
         products = target.get('products', [])

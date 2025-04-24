@@ -1,19 +1,19 @@
 import os.path
 
 from utils.constants import INPUT_FILE_PATH
-from utils.utils import open_exel
+from utils.utils import open_excel
 from utils import constants
 
 
-def check_exel(filepath: str):
-    """Проверяет, соответствует ли Exel-файл необходимому формату:
+def check_excel(filepath: str):
+    """Проверяет, соответствует ли excel-файл необходимому формату:
     1 Есть ли необходимый файл с соответствующим названием - "Выгрузка с прода ФОИВ.xlsx"
     2 Есть ли 4 обязательные колонки:
     - reg_number
     - document_type
     - document_input_request
     - document_verification_request
-    3 Есть ли ячейки, содержащие 32767 символов (32767 - максимально допустимое количество символов в ячейке Exel,
+    3 Есть ли ячейки, содержащие 32767 символов (32767 - максимально допустимое количество символов в ячейке excel,
     что означает, что json не полный, сломанный
     """
 
@@ -22,7 +22,7 @@ def check_exel(filepath: str):
             f'Необходимый файл отсутствует, убедитесь, что файл назван верно и находится по пути {INPUT_FILE_PATH}'
         )
 
-    sheet = open_exel(filepath)
+    sheet = open_excel(filepath)
     mandatory_column_name_list = [
         constants.REG_NUMBER, constants.DOCUMENT_TYPE, constants.DOCUMENT_INPUT_REQUEST,
         constants.DOCUMENT_VERIFICATION_REQUEST]

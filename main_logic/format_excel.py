@@ -4,7 +4,7 @@ from pandas import DataFrame
 from utils import constants
 
 
-def format_exel(value_column_name: str, dataframe_for_formating: DataFrame) -> DataFrame:
+def format_excel(value_column_name: str, dataframe_for_formating: DataFrame) -> DataFrame:
     """Форматирует эксель под необходимый формат (формат загрузки эталонки)."""
     # делаем анпивот таблицы
     unpivot_df = (

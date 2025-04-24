@@ -1,7 +1,7 @@
 import openpyxl
 
 
-def open_exel(filepath: str) -> openpyxl.worksheet.worksheet.Worksheet:
+def open_excel(filepath: str) -> openpyxl.worksheet.worksheet.Worksheet:
     """Открывает файл, создает рабочую книгу для работы с данными"""
     book = openpyxl.open(filepath)
     sheet = book.active
