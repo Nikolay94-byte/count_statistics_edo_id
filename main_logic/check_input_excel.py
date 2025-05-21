@@ -15,6 +15,7 @@ def check_excel(filepath: str):
     - document_verification_request
     3 Есть ли ячейки, содержащие 32767 символов (32767 - максимально допустимое количество символов в ячейке excel,
     что означает, что json не полный, сломанный
+    4 Проверяет, если дубли в колонке reg_number
     """
 
     if not os.path.exists(filepath):
@@ -40,3 +41,31 @@ def check_excel(filepath: str):
                 raise ValueError(
                     f'Ячейка (строка {row}, колонка {sheet[cell.coordinate].column}) содержит 32767 символов'
                 )
+
+    reg_numbers = {}
+    duplicates = {}
+    reg_number_col = None
+
+    # Находим индекс колонки reg_number
+    for idx, cell in enumerate(sheet['1'], 1):
+        if cell.value == constants.REG_NUMBER:
+            reg_number_col = idx
+            break
+
+    if reg_number_col is not None:
+        for row in range(2, sheet.max_row + 1):
+            cell = sheet.cell(row=row, column=reg_number_col)
+            reg_number = cell.value
+
+            if reg_number in reg_numbers:
+                if reg_number not in duplicates:
+                    duplicates[reg_number] = [reg_numbers[reg_number]]  # Добавляем первую строку с этим значением
+                duplicates[reg_number].append(row)  # Добавляем текущую строку
+            else:
+                reg_numbers[reg_number] = row  # Сохраняем номер строки для этого значения
+
+        if duplicates:
+            error_message = "Найдены дубликаты reg_number:\n"
+            for reg_number, rows in duplicates.items():
+                error_message += f"- Значение '{reg_number}' повторяется в строках: {', '.join(map(str, rows))}\n"
+            raise ValueError(error_message)

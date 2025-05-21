@@ -9,7 +9,7 @@ def open_excel(filepath: str) -> openpyxl.worksheet.worksheet.Worksheet:
 
 
 def convert_file_attributes_to_dict(file_path) -> dict[str, str]:
-    """Возвращает словарь атрибутов необходимый для подсчета статистики."""
+    """Возвращает словарь атрибутов, необходимый для подсчета статистики."""
     result_dict = {}
 
     try:
