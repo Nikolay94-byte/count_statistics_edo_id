@@ -70,8 +70,9 @@ def write_rows_to_excel(
     ) -> None:
         """Обрабатывает targets заданного типа и заполняет ячейки согласно field_mapping"""
         for target in targets:
-            if target['targetType']['codeName'] != target_type:
-                continue
+            if target.get('targetType'):
+                if target['targetType']['codeName'] != target_type:
+                    continue
 
             for field, col in field_mapping.items():
                 if '.' in field:
@@ -132,18 +133,20 @@ def write_rows_to_excel(
         targets = json_body['targets']
 
         # Обработка специального случая для ФИО (TARGET_INDIVIDUAL)
-        for target in targets:
-            if target['targetType']['codeName'] == 'TARGET_INDIVIDUAL':
-                parts = []
-                if target.get('surname'):
-                    parts.append(target['surname'])
-                if target.get('name'):
-                    parts.append(target['name'])
-                if target.get('patronymic'):
-                    parts.append(target['patronymic'])
 
-                if parts:
-                    _set_value(sheet, row_number, 10, ' '.join(parts))
+        for target in targets:
+            if target.get('targetType'):
+                if target['targetType']['codeName'] == 'TARGET_INDIVIDUAL':
+                    parts = []
+                    if target.get('surname'):
+                        parts.append(target['surname'])
+                    if target.get('name'):
+                        parts.append(target['name'])
+                    if target.get('patronymic'):
+                        parts.append(target['patronymic'])
+
+                    if parts:
+                        _set_value(sheet, row_number, 10, ' '.join(parts))
 
         # Обработка остальных полей
         for target_type, field_mapping in target_mappings.items():
@@ -189,8 +192,9 @@ def write_rows_to_excel(
         for target in json_body['targets']:
             if target.get('products'):
                 for product in target['products']:
-                    if product['productType']['codeName'] == product_type and product.get('values'):
-                        values.extend(product['values'])
+                    if product.get('productType'):
+                        if product['productType']['codeName'] == product_type and product.get('values'):
+                            values.extend(product['values'])
 
         if values:
             _set_value(sheet, row_number, header_number, ';'.join(values))
