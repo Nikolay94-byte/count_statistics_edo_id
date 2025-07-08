@@ -1,6 +1,19 @@
 from settings import DATA_PATH, ROOT_PATH
 
 
+# INPUT, путь к папке с исходными файлами в формате .csv
+INPUT_DATA_DIRECTORY_PATH = DATA_PATH / "INPUT"
+
+# OUTPUT, пути к папкам с исходящими данными
+# путь к папке с исходными файлами в формате .csv (копируются в том же самом виде из папки INPUT_DATA_DIRECTORY_PATH
+OUTPUT_INPUT_DATA_FORMAT_CSV_DIRECTORY_PATH = DATA_PATH / "OUTPUT" / "INPUT_DATA_FORMAT_CSV"
+# путь к папке к исходными файлами в формате .xlsx
+OUTPUT_INPUT_DATA_FORMAT_XLSX_DIRECTORY_PATH = DATA_PATH / "OUTPUT" / "INPUT_DATA_FORMAT_XLSX"
+# путь к папке с отчетами
+OUTPUT_REPORTS_DIRECTORY_PATH = DATA_PATH / "OUTPUT" / "OUTPUT_REPORTS"
+# путь к папке со вспомогательными файлами
+OUTPUT_AUXILIARY_FILES_DIRECTORY_PATH = DATA_PATH / "OUTPUT" / "OUTPUT_AUXILIARY_FILES"
+
 # путь к исходному файлу от заказчика
 INPUT_FILE_PATH = DATA_PATH / "Выгрузка с прода ФОИВ.xlsx"
 
