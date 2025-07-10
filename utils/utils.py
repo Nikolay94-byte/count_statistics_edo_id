@@ -20,30 +20,28 @@ def convert_csv_to_excel_in_folder(
     os.makedirs(output_csv_folder, exist_ok=True)
 
     for filename in os.listdir(input_folder):
+        file_path = os.path.join(input_folder, filename)
+
         if filename.endswith('.csv'):
-            csv_path = os.path.join(input_folder, filename)
+            # Обработка CSV
+            # 1. Копируем оригинал в output_csv_folder
+            csv_copy_path = os.path.join(output_csv_folder, filename)
+            shutil.copy2(file_path, csv_copy_path)
+            logging.info(f"[CSV] Скопирован оригинал: {filename} → {output_csv_folder}")
 
-            # Копируем CSV в OUTPUT_INPUT_DATA_FORMAT_CSV
-            output_csv_path = os.path.join(output_csv_folder, filename)
-            shutil.copy2(csv_path, output_csv_path)
-            logging.info(
-                f"[CSV] Скопирован: {filename} → {output_csv_folder}"
-            )
-
-            # Конвертируем в Excel
+            # 2. Конвертируем в XLSX и сохраняем в output_excel_folder
             excel_filename = filename.replace('.csv', '.xlsx')
             excel_path = os.path.join(output_excel_folder, excel_filename)
-
             try:
-                df = pd.read_csv(csv_path, delimiter=',')
+                df = pd.read_csv(file_path, delimiter=',')
                 df.to_excel(excel_path, index=False, engine='openpyxl')
-                logging.info(
-                    f"[XLSX] Успешно преобразован: {filename} → {excel_filename}"
-                )
+                logging.info(f"[XLSX] Успешно преобразован: {filename} → {excel_filename}")
             except Exception as e:
-                logging.error(
-                    f"Ошибка при обработке {filename}: {e}"
-                )
+                logging.error(f"Ошибка конвертации {filename}: {e}")
+        else:
+            # Копируем НЕ-CSV файлы в output_excel_folder
+            shutil.copy2(file_path, output_excel_folder)
+            logging.info(f"Конвертация в .xlsx не нужна! Файл {filename} скопирован → {output_excel_folder}")
 
 
 def open_excel(filepath: str) -> openpyxl.worksheet.worksheet.Worksheet:
