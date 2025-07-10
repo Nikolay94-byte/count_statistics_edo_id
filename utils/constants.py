@@ -14,22 +14,18 @@ OUTPUT_REPORTS_DIRECTORY_PATH = DATA_PATH / "OUTPUT" / "OUTPUT_REPORTS"
 # путь к папке со вспомогательными файлами
 OUTPUT_AUXILIARY_FILES_DIRECTORY_PATH = DATA_PATH / "OUTPUT" / "OUTPUT_AUXILIARY_FILES"
 
-# путь к исходному файлу от заказчика
-INPUT_FILE_PATH = DATA_PATH / "Выгрузка с прода ФОИВ.xlsx"
-
 # путь к файлу, где описаны все атрибуты (у которых есть извлечение)
 ATTRIBUTE_DICT_FILE_PATH = ROOT_PATH / "utils" / "attributes.txt"
 
 # путь к файлу, где описаны все продукты (у которых есть извлечение)
 PRODUCT_DICT_FILE_PATH = ROOT_PATH / "utils" / "products.txt"
 
-# названия колонок в исходном excel-файле от заказчика
+# названия обязательных колонок в исходном excel-файле от заказчика
 REG_NUMBER = 'reg_number'
-DOCUMENT_TYPE = 'document_type'
 DOCUMENT_INPUT_REQUEST = 'document_input_request'
 DOCUMENT_VERIFICATION_REQUEST = 'document_verification_request'
 
-# названия колонок с данными в подготовительных excel-файлах
+# названия колонок с данными в вспомогательных excel-файлах
 FILE_NAME_COLUMN_NAME = 'Наим.файла'
 SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME = 'Сис наим.атрибута'
 ATTRIBUTE_NAME_COLUNM_NAME = 'Наим.атрибута'

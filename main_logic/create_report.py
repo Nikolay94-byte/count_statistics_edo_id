@@ -1,15 +1,17 @@
-import pandas as pd
 import datetime
+
+import pandas as pd
+
 from utils import constants
-from settings import DATA_PATH
+from utils.constants import OUTPUT_AUXILIARY_FILES_DIRECTORY_PATH, OUTPUT_REPORTS_DIRECTORY_PATH
 
 
 def create_report(filenames_for_prepare_report: tuple):
     """Создает отчет по качеству распознавания."""
     input_request_filename, verification_request_filename = filenames_for_prepare_report
 
-    input_request_df = pd.read_excel(DATA_PATH / input_request_filename, index_col=None, dtype=str)
-    verification_request_df = pd.read_excel(DATA_PATH / verification_request_filename, index_col=None, dtype=str)
+    input_request_df = pd.read_excel(OUTPUT_AUXILIARY_FILES_DIRECTORY_PATH / input_request_filename, index_col=None, dtype=str)
+    verification_request_df = pd.read_excel(OUTPUT_AUXILIARY_FILES_DIRECTORY_PATH / verification_request_filename, index_col=None, dtype=str)
 
     # пятый лист - "ст-ка по всем атр."
     general_report_df = pd.merge(
@@ -76,7 +78,7 @@ def create_report(filenames_for_prepare_report: tuple):
 
     report_file_name = f"{document_name}_report.xlsx"
 
-    with pd.ExcelWriter(DATA_PATH / report_file_name) as writer:
+    with pd.ExcelWriter(OUTPUT_REPORTS_DIRECTORY_PATH / report_file_name) as writer:
         final_report_df.to_excel\
             (writer, sheet_name=constants.FINAL_REPORT_SHEET_NAME, index=False)
         attribute_statistics_report_df_counted.to_excel\

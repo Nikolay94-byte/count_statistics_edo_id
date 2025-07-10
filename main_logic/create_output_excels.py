@@ -1,26 +1,28 @@
 import json
 import logging
+from pathlib import Path
+
 import openpyxl
 import pandas as pd
+
 from format_excel import format_excel
-from utils.constants import INPUT_FILE_PATH, DOCUMENT_TYPE
-from utils.utils import open_excel
-from settings import DATA_PATH
+from utils.constants import OUTPUT_AUXILIARY_FILES_DIRECTORY_PATH
 from utils.convert_logic import write_headers_to_excel, write_rows_to_excel
+from utils.utils import open_excel
 
 
-def find_column_index(type_request: str) -> int:
+def find_column_index(filepath: str, type_request: str) -> int:
     """Находит индекс необходимой колонки для извлечения данных."""
-    sheet = open_excel(INPUT_FILE_PATH)
+    sheet = open_excel(filepath)
     for cell in sheet['1']:
         if cell.value == type_request:
             column_num_from_book = sheet[cell.coordinate].column - 1  # уменьшаем на 1 ,т.к. далее используется
             # нумерация колонок с индекса 0
             return column_num_from_book
 
-def convert_json_to_excel(column_num_from_book: int, value_column_name: str) -> str:
+def convert_json_to_excel(filepath: str, column_num_from_book: int, value_column_name: str) -> str:
     """Формирует excel-файл с данными на основе json."""
-    sheet = open_excel(INPUT_FILE_PATH)
+    sheet = open_excel(filepath)
     file_bodes = []
 
     for row in range(2, sheet.max_row+1):
@@ -37,17 +39,11 @@ def convert_json_to_excel(column_num_from_book: int, value_column_name: str) -> 
     for row_number, json_body in json_numerated_bodes.items():
         write_rows_to_excel(row_number, json_body, sheet=book.active)
     # записываем название файла
-    file_name_suffix = sheet[1][column_num_from_book].value
-    doc_class_name = ''
-    for cell in sheet['1']:
-        if cell.value == DOCUMENT_TYPE:
-            doc_class_name = str(sheet[2][sheet[cell.coordinate].column-1].value)
-            break
-    new_book_name = f"{doc_class_name}_{file_name_suffix}.xlsx"
+    new_book_name = f"{Path(filepath).stem}_{sheet[1][column_num_from_book].value}.xlsx"
 
     # Преобразуем DataFrame для последующего форматирования
     data = list(book.active.values)
     dataframe_for_formating = pd.DataFrame(data[1:], columns=data[0])
     formatted_dataframe = format_excel(value_column_name, dataframe_for_formating)
-    formatted_dataframe.to_excel(DATA_PATH / new_book_name, index=False)
+    formatted_dataframe.to_excel(OUTPUT_AUXILIARY_FILES_DIRECTORY_PATH / new_book_name, index=False)
     return new_book_name

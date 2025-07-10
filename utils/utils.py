@@ -1,4 +1,5 @@
 import os
+import logging
 import shutil
 from pathlib import Path
 
@@ -12,8 +13,7 @@ def convert_csv_to_excel_in_folder(
         output_excel_folder: str | Path,
 ) -> None:
     """
-    Конвертирует все CSV-файлы из input_folder в XLSX (в output_excel_folder)
-    и копирует исходные CSV в output_csv_folder.
+    Конвертирует все CSV-файлы в XLSX и копирует исходные CSV.
     """
     # Создаём папки, если их нет
     os.makedirs(output_excel_folder, exist_ok=True)
@@ -23,21 +23,27 @@ def convert_csv_to_excel_in_folder(
         if filename.endswith('.csv'):
             csv_path = os.path.join(input_folder, filename)
 
-            # 1. Копируем CSV в OUTPUT_INPUT_DATA_FORMAT_CSV
+            # Копируем CSV в OUTPUT_INPUT_DATA_FORMAT_CSV
             output_csv_path = os.path.join(output_csv_folder, filename)
             shutil.copy2(csv_path, output_csv_path)
-            print(f"[CSV] Скопирован: {filename} → {output_csv_folder}")
+            logging.info(
+                f"[CSV] Скопирован: {filename} → {output_csv_folder}"
+            )
 
-            # 2. Конвертируем в Excel
+            # Конвертируем в Excel
             excel_filename = filename.replace('.csv', '.xlsx')
             excel_path = os.path.join(output_excel_folder, excel_filename)
 
             try:
                 df = pd.read_csv(csv_path, delimiter=',')
                 df.to_excel(excel_path, index=False, engine='openpyxl')
-                print(f"[XLSX] Успешно преобразован: {filename} → {excel_filename}")
+                logging.info(
+                    f"[XLSX] Успешно преобразован: {filename} → {excel_filename}"
+                )
             except Exception as e:
-                print(f"Ошибка при обработке {filename}: {e}")
+                logging.error(
+                    f"Ошибка при обработке {filename}: {e}"
+                )
 
 
 def open_excel(filepath: str) -> openpyxl.worksheet.worksheet.Worksheet:
