@@ -1,5 +1,6 @@
 import logging
 import os
+import statistics
 import sys
 from pathlib import Path
 
@@ -24,6 +25,9 @@ def counting_statistics_kpss_cnts() -> None:
     """Формирует три итоговых файлика - распознанные значения, верифицированные значения,
     а также отчет по качеству распознавания
     """
+    quality_percent = []
+    falsely_completed_average_amount = []
+
     logging.info(
         f'Преобразуем исходные файлы из формата .csv в формат .xlsx, а также копируем исходники в итоговую папку OUTPUT'
     )
@@ -45,11 +49,19 @@ def counting_statistics_kpss_cnts() -> None:
         logging.info(f'Создаем вспомогательный файл с верифицированными данными по {Path(filepath).stem}')
         verification_request_filename = convert_json_to_excel(filepath, find_column_index(filepath, DOCUMENT_VERIFICATION_REQUEST), OUTPUT_DATA_COLUMN_NAME)
 
-        filenames_for_prepare_report = input_request_filename, verification_request_filename
-
         logging.info(f'Создаем отчет по {Path(filepath).stem}')
-        create_report(filenames_for_prepare_report)
+        quality, false_avg = create_report((input_request_filename, verification_request_filename))
+        quality_percent.append(quality)
+        falsely_completed_average_amount.append(false_avg)
         logging.info(f'Отчет по {Path(filepath).stem} успешно создан')
+
+    logging.info(
+        f"Среднее качество извлечения: {statistics.median(quality_percent)}"
+    )
+    logging.info(
+        f"Среднее количество ложных: {statistics.median(falsely_completed_average_amount)}"
+    )
+
 
 
 if __name__ == '__main__':

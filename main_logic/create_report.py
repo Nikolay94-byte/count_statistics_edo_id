@@ -6,7 +6,7 @@ from utils import constants
 from utils.constants import OUTPUT_AUXILIARY_FILES_DIRECTORY_PATH, OUTPUT_REPORTS_DIRECTORY_PATH
 
 
-def create_report(filenames_for_prepare_report: tuple):
+def create_report(filenames_for_prepare_report: tuple) -> tuple[float, float]:
     """Создает отчет по качеству распознавания."""
     input_request_filename, verification_request_filename = filenames_for_prepare_report
 
@@ -89,3 +89,5 @@ def create_report(filenames_for_prepare_report: tuple):
             (writer, sheet_name=constants.ONLY_COMPLETED_REPORT_SHEET_NAME, index=False)
         general_report_df.to_excel\
             (writer, sheet_name=constants.GENERAL_REPORT_SHEET_NAME, index=False)
+
+    return quality_percent, falsely_completed_average_amount
