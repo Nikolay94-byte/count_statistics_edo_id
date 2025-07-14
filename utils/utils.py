@@ -8,9 +8,9 @@ import openpyxl
 
 
 def convert_csv_to_excel_in_folder(
-        input_folder: str | Path,
-        output_csv_folder: str | Path,
-        output_excel_folder: str | Path,
+        input_folder: str,
+        output_csv_folder: str,
+        output_excel_folder: str,
 ) -> None:
     """
     Конвертирует все CSV-файлы в XLSX и копирует исходные CSV.
@@ -51,7 +51,7 @@ def open_excel(filepath: str) -> openpyxl.worksheet.worksheet.Worksheet:
     return sheet
 
 
-def convert_file_attributes_to_dict(file_path) -> dict[str, str]:
+def convert_file_attributes_to_dict(file_path) -> dict:
     """Возвращает словарь атрибутов, необходимый для подсчета статистики."""
     result_dict = {}
 
@@ -72,7 +72,7 @@ def convert_file_attributes_to_dict(file_path) -> dict[str, str]:
     return result_dict
 
 
-def convert_file_products_to_dict(file_path) -> dict[str, list[str | int]]:
+def convert_file_products_to_dict(file_path) -> dict:
     """Возвращает словарь продуктов запроса"""
     result_dict = {}
 

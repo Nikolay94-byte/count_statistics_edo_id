@@ -55,13 +55,24 @@ def counting_statistics_kpss_cnts() -> None:
         falsely_completed_average_amount.append(false_avg)
         logging.info(f'Отчет по {Path(filepath).stem} успешно создан')
 
+    logging.info(quality_percent)
+    if len(quality_percent) > 1:
+        logging.info(f'Выборочная дисперсия {statistics.variance(quality_percent)}')
+        logging.info(f'Стандартное отклонение {statistics.pstdev(quality_percent)}')
+        logging.info(f'Размах {max(quality_percent) - min(quality_percent)}')
+
+    logging.info(falsely_completed_average_amount)
+    if len(falsely_completed_average_amount) > 1:
+        logging.info(f'Выборочная дисперсия {statistics.variance(falsely_completed_average_amount)}')
+        logging.info(f'Стандартное отклонение {statistics.pstdev(falsely_completed_average_amount)}')
+        logging.info(f'Размах {max(falsely_completed_average_amount) - min(falsely_completed_average_amount)}')
+
     logging.info(
         f"Среднее качество извлечения: {statistics.median(quality_percent)}"
     )
     logging.info(
         f"Среднее количество ложных: {statistics.median(falsely_completed_average_amount)}"
     )
-
 
 
 if __name__ == '__main__':
