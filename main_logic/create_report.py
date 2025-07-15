@@ -1,38 +1,45 @@
 import datetime
-
+from pathlib import Path
 import pandas as pd
 
 from utils import constants
-from utils.constants import OUTPUT_AUXILIARY_FILES_DIRECTORY_PATH, OUTPUT_REPORTS_DIRECTORY_PATH
+from utils.constants import OUTPUT_REPORTS_DIRECTORY_PATH
 
 
-def create_report(filenames_for_prepare_report: tuple) -> tuple[float, float]:
+def create_report(filepath: str) -> float:
     """Создает отчет по качеству распознавания."""
-    input_request_filename, verification_request_filename = filenames_for_prepare_report
 
-    input_request_df = pd.read_excel(OUTPUT_AUXILIARY_FILES_DIRECTORY_PATH / input_request_filename, index_col=None, dtype=str)
-    verification_request_df = pd.read_excel(OUTPUT_AUXILIARY_FILES_DIRECTORY_PATH / verification_request_filename, index_col=None, dtype=str)
+    # четвертый лист - 'исходые данные'
+    input_data_df = pd.read_excel(filepath, index_col=None, dtype=str)
 
-    # пятый лист - "ст-ка по всем атр."
-    general_report_df = pd.merge(
-        verification_request_df, input_request_df,
-        left_on=[constants.FILE_NAME_COLUMN_NAME, constants.SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME,
-                 constants.ATTRIBUTE_NAME_COLUNM_NAME],
-        right_on=[constants.FILE_NAME_COLUMN_NAME, constants.SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME,
-                  constants.ATTRIBUTE_NAME_COLUNM_NAME]
+
+    # второй лист - 'детализация попакетно'
+    paket_statistics_report_df = input_data_df.copy()
+    # оставляем только необходимые колонки и переименовывем их
+    columns_to_keep = [constants.REGNUMBER, constants.ATTRIBUTE_NAME, constants.RUS_ATTRIBUTE_NAME,
+                       constants.TEXT_NORMALIZED, constants.TEXT_VERIFICATION]
+    new_columns_name = [constants.FILE_NAME_COLUMN_NAME, constants.SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME, constants.ATTRIBUTE_NAME_COLUNM_NAME,
+                       constants.INPUT_DATA_COLUMN_NAME, constants.OUTPUT_DATA_COLUMN_NAME]
+    paket_statistics_report_df = paket_statistics_report_df[columns_to_keep]
+    paket_statistics_report_df = (paket_statistics_report_df[columns_to_keep].set_axis(new_columns_name, axis=1)
     )
-    general_report_df = general_report_df.fillna('')
-    general_report_df[constants.COMPARISON_COLUMN_NAME] = \
-        general_report_df[constants.OUTPUT_DATA_COLUMN_NAME].str.replace(' ', '') \
-        == general_report_df[constants.INPUT_DATA_COLUMN_NAME].str.replace(' ', '')
+    # оставляем только необходимые атрибуты
+    paket_statistics_report_df = paket_statistics_report_df[
+        paket_statistics_report_df[constants.SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME].isin(constants.PERF_LIST_ATTRIBUTES.keys())
+    ]
+    # переименовываем значения в колонке Наим.атрибута
+    paket_statistics_report_df[constants.ATTRIBUTE_NAME_COLUNM_NAME] = paket_statistics_report_df[
+        constants.SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME
+    ].map(constants.PERF_LIST_ATTRIBUTES)
+    # производим подсчет
+    paket_statistics_report_df = paket_statistics_report_df.fillna('')
+    paket_statistics_report_df[constants.COMPARISON_COLUMN_NAME] = \
+        paket_statistics_report_df[constants.OUTPUT_DATA_COLUMN_NAME].str.replace(' ', '') \
+        == paket_statistics_report_df[constants.INPUT_DATA_COLUMN_NAME].str.replace(' ', '')
 
-    # второй лист - "только по зап-ым атр." (статистика по атрибутам, которые были заполнены верификаторами)
-    only_completed_report_df = general_report_df.copy()
-    only_completed_report_df_cleaned = \
-        only_completed_report_df[only_completed_report_df[constants.OUTPUT_DATA_COLUMN_NAME] != ""]
 
-    # третий лист - "детализация поатрибутивно" (отражает в каких атрибутах больше всего ошибок)
-    attribute_statistics_report_df = only_completed_report_df_cleaned.copy()
+    # третий лист - 'детализация поатрибутивно' (отражает в каких атрибутах больше всего ошибок)
+    attribute_statistics_report_df = paket_statistics_report_df.copy()
     attribute_statistics_report_df = attribute_statistics_report_df.drop\
         ([constants.FILE_NAME_COLUMN_NAME,
           constants.SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME,
@@ -45,27 +52,13 @@ def create_report(filenames_for_prepare_report: tuple) -> tuple[float, float]:
     attribute_statistics_report_df_counted = attribute_statistics_report_series.reset_index\
         (name=constants.FALSE_ATTRIBUTE_AMOUNT)
 
-    # четвертый лист "ложно извлеч атр." (отражает статистику по ложно извлеченным атрибутам, которые верификатор
-    # удалил полностью)
-    falsely_completed_report_df = general_report_df.copy()
-    falsely_completed_report_df = falsely_completed_report_df[falsely_completed_report_df
-                                                              [constants.OUTPUT_DATA_COLUMN_NAME] == ""]
-    falsely_completed_report_series = \
-        falsely_completed_report_df[falsely_completed_report_df[constants.COMPARISON_COLUMN_NAME] == False] \
-            .groupby(constants.ATTRIBUTE_NAME_COLUNM_NAME).size().sort_values(ascending=False)
-    falsely_completed_report_df_counted = falsely_completed_report_series.reset_index \
-        (name=constants.FALSELY_COMPLETED_AMOUNT_ATTRIBUTE_COLUMN_NAME)
-
-    # первый лист "общая статистика"
-    document_name = input_request_filename.split("_document_")[0]
+    # первый лист 'общая статистика'
+    document_name = f"{Path(filepath).stem}"
     count_date = datetime.date.today()
-    amount_examples = general_report_df[constants.FILE_NAME_COLUMN_NAME].nunique()
-    true_attribute_amount = (only_completed_report_df_cleaned[constants.COMPARISON_COLUMN_NAME] == True).sum()
-    false_attribute_amount = (only_completed_report_df_cleaned[constants.COMPARISON_COLUMN_NAME] == False).sum()
+    amount_examples = paket_statistics_report_df[constants.FILE_NAME_COLUMN_NAME].nunique()
+    true_attribute_amount = (paket_statistics_report_df[constants.COMPARISON_COLUMN_NAME] == True).sum()
+    false_attribute_amount = (paket_statistics_report_df[constants.COMPARISON_COLUMN_NAME] == False).sum()
     quality_percent = round(true_attribute_amount * 100/(true_attribute_amount + false_attribute_amount), 1)
-    falsely_completed_average_amount = \
-        round(falsely_completed_report_df_counted[constants.FALSELY_COMPLETED_AMOUNT_ATTRIBUTE_COLUMN_NAME]
-              .sum()/amount_examples, 1)
     final_report_df = pd.DataFrame({
         constants.DOCUMENT_NAME: [document_name],
         constants.COUNT_DATE: [count_date],
@@ -73,7 +66,6 @@ def create_report(filenames_for_prepare_report: tuple) -> tuple[float, float]:
         constants.TRUE_ATTRIBUTE_AMOUNT: [true_attribute_amount],
         constants.FALSE_ATTRIBUTE_AMOUNT: [false_attribute_amount],
         constants.QUALITY_PERCENT: [quality_percent],
-        constants.FALSELY_COMPLETED_AVERAGE_AMOUNT: [falsely_completed_average_amount],
     })
 
     report_file_name = f"{document_name}_report.xlsx"
@@ -81,13 +73,11 @@ def create_report(filenames_for_prepare_report: tuple) -> tuple[float, float]:
     with pd.ExcelWriter(OUTPUT_REPORTS_DIRECTORY_PATH / report_file_name) as writer:
         final_report_df.to_excel\
             (writer, sheet_name=constants.FINAL_REPORT_SHEET_NAME, index=False)
+        paket_statistics_report_df.to_excel\
+            (writer, sheet_name=constants.PAKET_REPORT_SHEET_NAME, index=False)
         attribute_statistics_report_df_counted.to_excel\
             (writer, sheet_name=constants.ATTRIBUTE_STATISTICS_REPORT_SHEET_NAME, index=False)
-        falsely_completed_report_df_counted.to_excel\
-            (writer, sheet_name=constants.FALSELY_COMPLETED_REPORT_SHEET_NAME, index=False)
-        only_completed_report_df_cleaned.to_excel\
-            (writer, sheet_name=constants.ONLY_COMPLETED_REPORT_SHEET_NAME, index=False)
-        general_report_df.to_excel\
-            (writer, sheet_name=constants.GENERAL_REPORT_SHEET_NAME, index=False)
+        input_data_df.to_excel\
+            (writer, sheet_name=constants.INPUT_DATA_SHEET_NAME, index=False)
 
-    return quality_percent, falsely_completed_average_amount
+    return quality_percent
