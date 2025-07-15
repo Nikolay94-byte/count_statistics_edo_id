@@ -4,6 +4,7 @@ import pandas as pd
 
 from utils import constants
 from utils.constants import OUTPUT_REPORTS_DIRECTORY_PATH
+from utils.utils import normalize_dataframe
 
 
 def create_report(filepath: str) -> float:
@@ -23,14 +24,19 @@ def create_report(filepath: str) -> float:
     paket_statistics_report_df = paket_statistics_report_df[columns_to_keep]
     paket_statistics_report_df = (paket_statistics_report_df[columns_to_keep].set_axis(new_columns_name, axis=1)
     )
-    # оставляем только необходимые атрибуты
-    paket_statistics_report_df = paket_statistics_report_df[
-        paket_statistics_report_df[constants.SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME].isin(constants.PERF_LIST_ATTRIBUTES.keys())
-    ]
-    # переименовываем значения в колонке Наим.атрибута
-    paket_statistics_report_df[constants.ATTRIBUTE_NAME_COLUNM_NAME] = paket_statistics_report_df[
-        constants.SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME
-    ].map(constants.PERF_LIST_ATTRIBUTES)
+
+
+    paket_statistics_report_df = normalize_dataframe(constants.PERF_LIST_ATTRIBUTES, paket_statistics_report_df)
+    # # оставляем только необходимые атрибуты
+    # paket_statistics_report_df = paket_statistics_report_df[
+    #     paket_statistics_report_df[constants.SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME].isin(constants.PERF_LIST_ATTRIBUTES.keys())
+    # ]
+    # # переименовываем значения в колонке Наим.атрибута
+    # paket_statistics_report_df[constants.ATTRIBUTE_NAME_COLUNM_NAME] = paket_statistics_report_df[
+    #     constants.SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME
+    # ].map(constants.PERF_LIST_ATTRIBUTES)
+
+
     # производим подсчет
     paket_statistics_report_df = paket_statistics_report_df.fillna('')
     paket_statistics_report_df[constants.COMPARISON_COLUMN_NAME] = \

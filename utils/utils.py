@@ -1,9 +1,10 @@
 import os
 import logging
 import shutil
-
+from pandas import DataFrame
 import pandas as pd
 import openpyxl
+from . import constants
 
 
 def convert_csv_to_excel_in_folder(
@@ -48,3 +49,16 @@ def open_excel(filepath: str) -> openpyxl.worksheet.worksheet.Worksheet:
     book = openpyxl.open(filepath)
     sheet = book.active
     return sheet
+
+
+def normalize_dataframe(doc_attributes: dict, dataframe_for_formating: DataFrame) -> DataFrame:
+    """Оставляет необходимые атрибуты, переименовывает их русские названия"""
+    # оставляем только необходимые атрибуты
+    new_dataframe = dataframe_for_formating[
+        dataframe_for_formating[constants.SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME].isin(doc_attributes.keys())
+    ].copy()
+    # переименовываем значения в колонке Наим.атрибута
+    new_dataframe[constants.ATTRIBUTE_NAME_COLUNM_NAME] = new_dataframe[
+        constants.SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME
+    ].map(doc_attributes)
+    return new_dataframe
