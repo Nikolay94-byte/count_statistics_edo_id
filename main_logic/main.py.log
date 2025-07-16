@@ -62,3 +62,115 @@
 2025-07-15 17:45:46,746-[INFO]- Module: main - Line:46 - Стандартное отклонение 3.75
 2025-07-15 17:45:46,746-[INFO]- Module: main - Line:47 - Размах 7.5
 2025-07-15 17:45:46,746-[INFO]- Module: main - Line:49 - Среднее качество извлечения: 48.15
+2025-07-16 11:57:28,190-[INFO]- Module: main - Line:23 - Преобразуем исходные файлы из формата .csv в формат .xlsx, а также копируем исходники в итоговую папку OUTPUT
+2025-07-16 11:57:28,217-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_09_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 11:57:28,230-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_10_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 11:57:28,231-[INFO]- Module: main - Line:35 - Начинаем проверку и редактирование исходника LABOUR_COMMISSION_09_06_2025
+2025-07-16 11:59:47,338-[INFO]- Module: main - Line:23 - Преобразуем исходные файлы из формата .csv в формат .xlsx, а также копируем исходники в итоговую папку OUTPUT
+2025-07-16 11:59:47,342-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_09_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 11:59:47,343-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_10_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 11:59:47,345-[INFO]- Module: main - Line:35 - Начинаем проверку и редактирование исходника LABOUR_COMMISSION_09_06_2025
+2025-07-16 11:59:47,462-[INFO]- Module: check_input_excel - Line:60 - Файл LABOUR_COMMISSION_09_06_2025 не содержит проблемных строк (32767 символов в ячейке)
+2025-07-16 11:59:47,462-[INFO]- Module: main - Line:38 - Создаем отчет по LABOUR_COMMISSION_09_06_2025
+2025-07-16 12:00:05,443-[INFO]- Module: main - Line:23 - Преобразуем исходные файлы из формата .csv в формат .xlsx, а также копируем исходники в итоговую папку OUTPUT
+2025-07-16 12:00:05,462-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_09_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 12:00:05,463-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_10_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 12:00:05,465-[INFO]- Module: main - Line:35 - Начинаем проверку и редактирование исходника LABOUR_COMMISSION_09_06_2025
+2025-07-16 12:00:05,577-[INFO]- Module: check_input_excel - Line:60 - Файл LABOUR_COMMISSION_09_06_2025 не содержит проблемных строк (32767 символов в ячейке)
+2025-07-16 12:00:05,577-[INFO]- Module: main - Line:38 - Создаем отчет по LABOUR_COMMISSION_09_06_2025
+2025-07-16 12:02:31,574-[INFO]- Module: main - Line:23 - Преобразуем исходные файлы из формата .csv в формат .xlsx, а также копируем исходники в итоговую папку OUTPUT
+2025-07-16 12:02:31,588-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_09_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 12:02:31,600-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_10_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 12:02:31,602-[INFO]- Module: main - Line:35 - Начинаем проверку и редактирование исходника LABOUR_COMMISSION_09_06_2025
+2025-07-16 12:02:31,736-[INFO]- Module: check_input_excel - Line:60 - Файл LABOUR_COMMISSION_09_06_2025 не содержит проблемных строк (32767 символов в ячейке)
+2025-07-16 12:02:31,737-[INFO]- Module: main - Line:38 - Создаем отчет по LABOUR_COMMISSION_09_06_2025
+2025-07-16 12:24:52,514-[INFO]- Module: main - Line:23 - Преобразуем исходные файлы из формата .csv в формат .xlsx, а также копируем исходники в итоговую папку OUTPUT
+2025-07-16 12:24:52,517-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_09_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 12:24:52,518-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_10_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 12:24:52,520-[INFO]- Module: main - Line:35 - Начинаем проверку и редактирование исходника LABOUR_COMMISSION_09_06_2025
+2025-07-16 12:24:52,636-[INFO]- Module: check_input_excel - Line:60 - Файл LABOUR_COMMISSION_09_06_2025 не содержит проблемных строк (32767 символов в ячейке)
+2025-07-16 12:24:52,636-[INFO]- Module: main - Line:38 - Создаем отчет по LABOUR_COMMISSION_09_06_2025
+2025-07-16 12:25:27,794-[INFO]- Module: main - Line:23 - Преобразуем исходные файлы из формата .csv в формат .xlsx, а также копируем исходники в итоговую папку OUTPUT
+2025-07-16 12:25:27,795-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_09_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 12:25:27,796-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_10_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 12:25:27,797-[INFO]- Module: main - Line:35 - Начинаем проверку и редактирование исходника LABOUR_COMMISSION_09_06_2025
+2025-07-16 12:25:27,828-[INFO]- Module: check_input_excel - Line:60 - Файл LABOUR_COMMISSION_09_06_2025 не содержит проблемных строк (32767 символов в ячейке)
+2025-07-16 12:25:27,828-[INFO]- Module: main - Line:38 - Создаем отчет по LABOUR_COMMISSION_09_06_2025
+2025-07-16 12:26:53,042-[INFO]- Module: main - Line:23 - Преобразуем исходные файлы из формата .csv в формат .xlsx, а также копируем исходники в итоговую папку OUTPUT
+2025-07-16 12:26:53,044-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_09_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 12:26:53,044-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_10_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 12:26:53,045-[INFO]- Module: main - Line:35 - Начинаем проверку и редактирование исходника LABOUR_COMMISSION_09_06_2025
+2025-07-16 12:26:53,076-[INFO]- Module: check_input_excel - Line:60 - Файл LABOUR_COMMISSION_09_06_2025 не содержит проблемных строк (32767 символов в ячейке)
+2025-07-16 12:26:53,076-[INFO]- Module: main - Line:38 - Создаем отчет по LABOUR_COMMISSION_09_06_2025
+2025-07-16 12:29:01,105-[INFO]- Module: main - Line:23 - Преобразуем исходные файлы из формата .csv в формат .xlsx, а также копируем исходники в итоговую папку OUTPUT
+2025-07-16 12:29:01,108-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_09_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 12:29:01,109-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_10_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 12:29:01,110-[INFO]- Module: main - Line:35 - Начинаем проверку и редактирование исходника LABOUR_COMMISSION_09_06_2025
+2025-07-16 12:29:01,225-[INFO]- Module: check_input_excel - Line:60 - Файл LABOUR_COMMISSION_09_06_2025 не содержит проблемных строк (32767 символов в ячейке)
+2025-07-16 12:29:01,226-[INFO]- Module: main - Line:38 - Создаем отчет по LABOUR_COMMISSION_09_06_2025
+2025-07-16 12:29:38,475-[INFO]- Module: main - Line:23 - Преобразуем исходные файлы из формата .csv в формат .xlsx, а также копируем исходники в итоговую папку OUTPUT
+2025-07-16 12:29:38,478-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_09_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 12:29:38,479-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_10_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 12:29:38,481-[INFO]- Module: main - Line:35 - Начинаем проверку и редактирование исходника LABOUR_COMMISSION_09_06_2025
+2025-07-16 12:29:38,601-[INFO]- Module: check_input_excel - Line:60 - Файл LABOUR_COMMISSION_09_06_2025 не содержит проблемных строк (32767 символов в ячейке)
+2025-07-16 12:29:38,601-[INFO]- Module: main - Line:38 - Создаем отчет по LABOUR_COMMISSION_09_06_2025
+2025-07-16 12:29:43,615-[INFO]- Module: main - Line:23 - Преобразуем исходные файлы из формата .csv в формат .xlsx, а также копируем исходники в итоговую папку OUTPUT
+2025-07-16 12:29:43,617-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_09_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 12:29:43,618-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_10_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 12:29:43,618-[INFO]- Module: main - Line:35 - Начинаем проверку и редактирование исходника LABOUR_COMMISSION_09_06_2025
+2025-07-16 12:29:43,649-[INFO]- Module: check_input_excel - Line:60 - Файл LABOUR_COMMISSION_09_06_2025 не содержит проблемных строк (32767 символов в ячейке)
+2025-07-16 12:29:43,649-[INFO]- Module: main - Line:38 - Создаем отчет по LABOUR_COMMISSION_09_06_2025
+2025-07-16 12:29:50,398-[INFO]- Module: main - Line:23 - Преобразуем исходные файлы из формата .csv в формат .xlsx, а также копируем исходники в итоговую папку OUTPUT
+2025-07-16 12:29:50,401-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_09_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 12:29:50,402-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_10_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 12:29:50,403-[INFO]- Module: main - Line:35 - Начинаем проверку и редактирование исходника LABOUR_COMMISSION_09_06_2025
+2025-07-16 12:29:50,517-[INFO]- Module: check_input_excel - Line:60 - Файл LABOUR_COMMISSION_09_06_2025 не содержит проблемных строк (32767 символов в ячейке)
+2025-07-16 12:29:50,517-[INFO]- Module: main - Line:38 - Создаем отчет по LABOUR_COMMISSION_09_06_2025
+2025-07-16 12:34:17,165-[INFO]- Module: main - Line:23 - Преобразуем исходные файлы из формата .csv в формат .xlsx, а также копируем исходники в итоговую папку OUTPUT
+2025-07-16 12:34:17,166-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_09_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 12:34:17,168-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_10_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 12:34:17,168-[INFO]- Module: main - Line:35 - Начинаем проверку и редактирование исходника LABOUR_COMMISSION_09_06_2025
+2025-07-16 12:34:17,208-[INFO]- Module: check_input_excel - Line:60 - Файл LABOUR_COMMISSION_09_06_2025 не содержит проблемных строк (32767 символов в ячейке)
+2025-07-16 12:34:17,209-[INFO]- Module: main - Line:38 - Создаем отчет по LABOUR_COMMISSION_09_06_2025
+2025-07-16 12:34:17,376-[INFO]- Module: main - Line:41 - Отчет по LABOUR_COMMISSION_09_06_2025 успешно создан
+2025-07-16 12:34:17,376-[INFO]- Module: main - Line:35 - Начинаем проверку и редактирование исходника LABOUR_COMMISSION_10_06_2025
+2025-07-16 12:34:17,413-[INFO]- Module: check_input_excel - Line:60 - Файл LABOUR_COMMISSION_10_06_2025 не содержит проблемных строк (32767 символов в ячейке)
+2025-07-16 12:34:17,413-[INFO]- Module: main - Line:38 - Создаем отчет по LABOUR_COMMISSION_10_06_2025
+2025-07-16 12:34:17,512-[INFO]- Module: main - Line:41 - Отчет по LABOUR_COMMISSION_10_06_2025 успешно создан
+2025-07-16 12:34:17,513-[INFO]- Module: main - Line:43 - [np.float64(37.5), np.float64(51.9)]
+2025-07-16 12:34:17,513-[INFO]- Module: main - Line:45 - Выборочная дисперсия 103.67999999999998
+2025-07-16 12:34:17,513-[INFO]- Module: main - Line:46 - Стандартное отклонение 7.199999999999999
+2025-07-16 12:34:17,513-[INFO]- Module: main - Line:47 - Размах 14.399999999999999
+2025-07-16 12:34:17,513-[INFO]- Module: main - Line:49 - Среднее качество извлечения: 44.7
+2025-07-16 12:35:15,808-[INFO]- Module: main - Line:23 - Преобразуем исходные файлы из формата .csv в формат .xlsx, а также копируем исходники в итоговую папку OUTPUT
+2025-07-16 12:35:15,809-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_09_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 12:35:15,809-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_10_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 12:35:15,810-[INFO]- Module: main - Line:35 - Начинаем проверку и редактирование исходника LABOUR_COMMISSION_09_06_2025
+2025-07-16 12:35:15,841-[INFO]- Module: check_input_excel - Line:60 - Файл LABOUR_COMMISSION_09_06_2025 не содержит проблемных строк (32767 символов в ячейке)
+2025-07-16 12:35:15,841-[INFO]- Module: main - Line:38 - Создаем отчет по LABOUR_COMMISSION_09_06_2025
+2025-07-16 12:35:15,935-[INFO]- Module: main - Line:41 - Отчет по LABOUR_COMMISSION_09_06_2025 успешно создан
+2025-07-16 12:35:15,936-[INFO]- Module: main - Line:35 - Начинаем проверку и редактирование исходника LABOUR_COMMISSION_10_06_2025
+2025-07-16 12:35:15,965-[INFO]- Module: check_input_excel - Line:60 - Файл LABOUR_COMMISSION_10_06_2025 не содержит проблемных строк (32767 символов в ячейке)
+2025-07-16 12:35:15,966-[INFO]- Module: main - Line:38 - Создаем отчет по LABOUR_COMMISSION_10_06_2025
+2025-07-16 12:35:16,051-[INFO]- Module: main - Line:41 - Отчет по LABOUR_COMMISSION_10_06_2025 успешно создан
+2025-07-16 12:35:16,051-[INFO]- Module: main - Line:43 - [np.float64(37.5), np.float64(51.9)]
+2025-07-16 12:35:16,052-[INFO]- Module: main - Line:45 - Выборочная дисперсия 103.67999999999998
+2025-07-16 12:35:16,052-[INFO]- Module: main - Line:46 - Стандартное отклонение 7.199999999999999
+2025-07-16 12:35:16,052-[INFO]- Module: main - Line:47 - Размах 14.399999999999999
+2025-07-16 12:35:16,052-[INFO]- Module: main - Line:49 - Среднее качество извлечения: 44.7
+2025-07-16 12:38:47,587-[INFO]- Module: main - Line:23 - Преобразуем исходные файлы из формата .csv в формат .xlsx, а также копируем исходники в итоговую папку OUTPUT
+2025-07-16 12:38:47,589-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_09_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 12:38:47,590-[INFO]- Module: utils - Line:44 - Конвертация в .xlsx не нужна! Файл LABOUR_COMMISSION_10_06_2025.xlsx скопирован → H:\Python projects\count_statistics_edo_id\data\OUTPUT\INPUT_DATA_FORMAT_XLSX
+2025-07-16 12:38:47,592-[INFO]- Module: main - Line:35 - Начинаем проверку и редактирование исходника LABOUR_COMMISSION_09_06_2025
+2025-07-16 12:38:47,629-[INFO]- Module: check_input_excel - Line:60 - Файл LABOUR_COMMISSION_09_06_2025 не содержит проблемных строк (32767 символов в ячейке)
+2025-07-16 12:38:47,629-[INFO]- Module: main - Line:38 - Создаем отчет по LABOUR_COMMISSION_09_06_2025
+2025-07-16 12:38:47,751-[INFO]- Module: main - Line:41 - Отчет по LABOUR_COMMISSION_09_06_2025 успешно создан
+2025-07-16 12:38:47,751-[INFO]- Module: main - Line:35 - Начинаем проверку и редактирование исходника LABOUR_COMMISSION_10_06_2025
+2025-07-16 12:38:47,780-[INFO]- Module: check_input_excel - Line:60 - Файл LABOUR_COMMISSION_10_06_2025 не содержит проблемных строк (32767 символов в ячейке)
+2025-07-16 12:38:47,780-[INFO]- Module: main - Line:38 - Создаем отчет по LABOUR_COMMISSION_10_06_2025
+2025-07-16 12:38:47,865-[INFO]- Module: main - Line:41 - Отчет по LABOUR_COMMISSION_10_06_2025 успешно создан
+2025-07-16 12:38:47,865-[INFO]- Module: main - Line:43 - [np.float64(37.5), np.float64(51.9)]
+2025-07-16 12:38:47,866-[INFO]- Module: main - Line:45 - Выборочная дисперсия 103.67999999999998
+2025-07-16 12:38:47,866-[INFO]- Module: main - Line:46 - Стандартное отклонение 7.199999999999999
+2025-07-16 12:38:47,866-[INFO]- Module: main - Line:47 - Размах 14.399999999999999
+2025-07-16 12:38:47,866-[INFO]- Module: main - Line:49 - Среднее качество извлечения: 44.7

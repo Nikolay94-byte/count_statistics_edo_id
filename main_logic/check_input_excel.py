@@ -7,8 +7,9 @@ from utils.utils import open_excel
 
 def check_and_clean_file(filepath: str):
     """Проверяет, соответствует ли excel-файл необходимому формату:
-    1 Есть ли 5 обязательных колонок:
+    1 Есть ли 6 обязательных колонок:
     - regnumber
+    - doc_class
     - attribute_name
     - rus_attribute_name
     - text_normalized
@@ -21,13 +22,13 @@ def check_and_clean_file(filepath: str):
     sheet = open_excel(filepath)
     book = sheet.parent
     mandatory_column_name_list = [
-        constants.REGNUMBER, constants.ATTRIBUTE_NAME,
+        constants.REGNUMBER, constants.DOC_CLASS, constants.ATTRIBUTE_NAME,
         constants.RUS_ATTRIBUTE_NAME, constants.TEXT_NORMALIZED, constants.TEXT_VERIFICATION]
     current_column_name_list = [cell.value for cell in sheet['1'] if cell.value]
     if not set(mandatory_column_name_list).issubset(current_column_name_list):
         raise ValueError(
-            f'В файле {filepath} отсутствуют обязательные колонки, убедитесь что все 5 есть в файле '
-            f'{constants.REGNUMBER},{constants.ATTRIBUTE_NAME}, {constants.RUS_ATTRIBUTE_NAME}'
+            f'В файле {filepath} отсутствуют обязательные колонки, убедитесь что все 6 есть в файле '
+            f'{constants.REGNUMBER},{constants.DOC_CLASS}, {constants.ATTRIBUTE_NAME}, {constants.RUS_ATTRIBUTE_NAME}'
             f'{constants.TEXT_NORMALIZED},{constants.TEXT_VERIFICATION}'
         )
 

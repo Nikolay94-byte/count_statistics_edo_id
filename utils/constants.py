@@ -14,6 +14,7 @@ OUTPUT_REPORTS_DIRECTORY_PATH = DATA_PATH / "OUTPUT" / "OUTPUT_REPORTS"
 
 # названия обязательных колонок в исходном excel-файле выгрузке
 REGNUMBER = 'regnumber'
+DOC_CLASS = 'doc_class'
 ATTRIBUTE_NAME = 'attribute_name'
 RUS_ATTRIBUTE_NAME = 'rus_attribute_name'
 TEXT_NORMALIZED = 'text_normalized'
@@ -106,4 +107,12 @@ APPLICATION_FOR_THE_RECOVERY_ATTRIBUTES = {
     'recovery_claimer_entity_kbk': '02.Взыскатель - 01.Взыскатель - 09.КБК',
     'recovery_claimer_entity_oktmo': '02.Взыскатель - 01.Взыскатель - 10.ОКТМО',
     'recovery_claimer_entity_uin': '02.Взыскатель - 01.Взыскатель - 11.УИН'
+}
+# маппинг классов и словарей атрибутов к ним
+class_attribute_mapping = {
+    'PERF_LIST': PERF_LIST_ATTRIBUTES,
+    'LABOUR_COMMISSION': LABOUR_COMMISSION_ATTRIBUTES,
+    'COURT_ORDER': COURT_ORDER_ATTRIBUTES,
+    'APPLICATION_FOR_WITHDRAWAL': APPLICATION_FOR_WITHDRAWAL_ATTRIBUTES,
+    'APPLICATION_FOR_THE_RECOVERY': APPLICATION_FOR_THE_RECOVERY_ATTRIBUTES
 }

@@ -3,7 +3,7 @@ from pathlib import Path
 import pandas as pd
 
 from utils import constants
-from utils.constants import OUTPUT_REPORTS_DIRECTORY_PATH
+from utils.constants import OUTPUT_REPORTS_DIRECTORY_PATH, class_attribute_mapping
 from utils.utils import normalize_dataframe
 
 
@@ -16,6 +16,8 @@ def create_report(filepath: str) -> float:
 
     # второй лист - 'детализация попакетно'
     paket_statistics_report_df = input_data_df.copy()
+    # определяем класс документа
+    doc_name = (paket_statistics_report_df.loc[1, constants.DOC_CLASS]).upper()
     # оставляем только необходимые колонки и переименовывем их
     columns_to_keep = [constants.REGNUMBER, constants.ATTRIBUTE_NAME, constants.RUS_ATTRIBUTE_NAME,
                        constants.TEXT_NORMALIZED, constants.TEXT_VERIFICATION]
@@ -24,18 +26,8 @@ def create_report(filepath: str) -> float:
     paket_statistics_report_df = paket_statistics_report_df[columns_to_keep]
     paket_statistics_report_df = (paket_statistics_report_df[columns_to_keep].set_axis(new_columns_name, axis=1)
     )
-
-
-    paket_statistics_report_df = normalize_dataframe(constants.PERF_LIST_ATTRIBUTES, paket_statistics_report_df)
-    # # оставляем только необходимые атрибуты
-    # paket_statistics_report_df = paket_statistics_report_df[
-    #     paket_statistics_report_df[constants.SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME].isin(constants.PERF_LIST_ATTRIBUTES.keys())
-    # ]
-    # # переименовываем значения в колонке Наим.атрибута
-    # paket_statistics_report_df[constants.ATTRIBUTE_NAME_COLUNM_NAME] = paket_statistics_report_df[
-    #     constants.SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME
-    # ].map(constants.PERF_LIST_ATTRIBUTES)
-
+    doc_type = class_attribute_mapping.get(doc_name, doc_name)
+    paket_statistics_report_df = normalize_dataframe(doc_type, paket_statistics_report_df)
 
     # производим подсчет
     paket_statistics_report_df = paket_statistics_report_df.fillna('')
