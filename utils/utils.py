@@ -1,10 +1,13 @@
-import os
 import logging
+import os
 import shutil
-from pandas import DataFrame
-import pandas as pd
+import statistics
+
 import openpyxl
-from . import constants
+import pandas as pd
+from pandas import DataFrame
+
+from utils import constants
 
 
 def convert_csv_to_excel_in_folder(
@@ -62,3 +65,17 @@ def normalize_dataframe(doc_attributes: dict, dataframe_for_formating: DataFrame
         constants.SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME
     ].map(doc_attributes)
     return new_dataframe
+
+
+def show_in_logs_document_statistic(doc_type: str, quality_percent_list: list):
+    """Выводит логи статистики в консоль"""
+    logging.info(f'[{doc_type}] Список показателей качества извлечения: {quality_percent_list}')
+    if len(quality_percent_list) > 1:
+        logging.info(f'[{doc_type}] Выборочная дисперсия {statistics.variance(quality_percent_list)}')
+        logging.info(f'[{doc_type}] Стандартное отклонение {statistics.pstdev(quality_percent_list)}')
+        logging.info(f'[{doc_type}] Размах {max(quality_percent_list) - min(quality_percent_list)}')
+
+    logging.info(
+        f"[{doc_type}] Среднее качество извлечения: {statistics.median(quality_percent_list)}"
+    )
+

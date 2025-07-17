@@ -1,9 +1,13 @@
 import datetime
 from pathlib import Path
+
 import pandas as pd
 
 from utils import constants
-from utils.constants import OUTPUT_REPORTS_DIRECTORY_PATH, class_attribute_mapping
+from utils.constants import (
+    CLASS_ATTRIBUTE_MAPPING,
+    OUTPUT_REPORTS_DIRECTORY_PATH,
+)
 from utils.utils import normalize_dataframe
 
 
@@ -13,7 +17,6 @@ def create_report(filepath: str) -> float:
     # четвертый лист - 'исходые данные'
     input_data_df = pd.read_excel(filepath, index_col=None, dtype=str)
 
-
     # второй лист - 'детализация попакетно'
     paket_statistics_report_df = input_data_df.copy()
     # определяем класс документа
@@ -21,20 +24,19 @@ def create_report(filepath: str) -> float:
     # оставляем только необходимые колонки и переименовывем их
     columns_to_keep = [constants.REGNUMBER, constants.ATTRIBUTE_NAME, constants.RUS_ATTRIBUTE_NAME,
                        constants.TEXT_NORMALIZED, constants.TEXT_VERIFICATION]
-    new_columns_name = [constants.FILE_NAME_COLUMN_NAME, constants.SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME, constants.ATTRIBUTE_NAME_COLUNM_NAME,
-                       constants.INPUT_DATA_COLUMN_NAME, constants.OUTPUT_DATA_COLUMN_NAME]
+    new_columns_name = [constants.FILE_NAME_COLUMN_NAME, constants.SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME,
+                        constants.ATTRIBUTE_NAME_COLUNM_NAME, constants.INPUT_DATA_COLUMN_NAME,
+                        constants.OUTPUT_DATA_COLUMN_NAME]
     paket_statistics_report_df = paket_statistics_report_df[columns_to_keep]
-    paket_statistics_report_df = (paket_statistics_report_df[columns_to_keep].set_axis(new_columns_name, axis=1)
-    )
-    doc_type = class_attribute_mapping.get(doc_name, doc_name)
+    paket_statistics_report_df = (paket_statistics_report_df[columns_to_keep].set_axis(new_columns_name, axis=1))
+    # оставляем необходимые атрибуты согласно классу документа
+    doc_type = CLASS_ATTRIBUTE_MAPPING.get(doc_name, doc_name)
     paket_statistics_report_df = normalize_dataframe(doc_type, paket_statistics_report_df)
-
     # производим подсчет
     paket_statistics_report_df = paket_statistics_report_df.fillna('')
     paket_statistics_report_df[constants.COMPARISON_COLUMN_NAME] = \
         paket_statistics_report_df[constants.OUTPUT_DATA_COLUMN_NAME].str.replace(' ', '') \
         == paket_statistics_report_df[constants.INPUT_DATA_COLUMN_NAME].str.replace(' ', '')
-
 
     # третий лист - 'детализация поатрибутивно' (отражает в каких атрибутах больше всего ошибок)
     attribute_statistics_report_df = paket_statistics_report_df.copy()
