@@ -2,6 +2,7 @@ import logging
 import os
 import shutil
 import statistics
+from pathlib import Path
 
 import openpyxl
 import pandas as pd
@@ -67,7 +68,31 @@ def normalize_dataframe(doc_attributes: dict, dataframe_for_formating: DataFrame
     return new_dataframe
 
 
-def show_in_logs_document_statistic(doc_type: str, quality_percent_list: list):
+def prepare_input_data(input_data_directory: str) -> None:
+    """Создает копию исходного файла, заменяя класс на Заявление на взыскание. Распределяет исходники по папкам"""
+    for filepath in Path(input_data_directory).glob('*.xlsx'):
+        input_data_df = pd.read_excel(filepath, index_col=None, dtype=str)
+        doc_name = (input_data_df.loc[1, constants.DOC_CLASS]).upper()
+        if doc_name in [constants.PERF_LIST, constants.LABOUR_COMMISSION, constants.COURT_ORDER]:
+            os.makedirs(constants.OUTPUT_INPUT_DATA_FORMAT_XLSX_MAIN_DIRECTORY_PATH, exist_ok=True)
+            os.makedirs(constants.OUTPUT_INPUT_DATA_FORMAT_XLSX_APPLICATION_DIRECTORY_PATH, exist_ok=True)
+            input_data_df[constants.DOC_CLASS] = constants.APPLICATION_FOR_THE_RECOVERY
+            application_for_the_recovery_file_name = \
+                f"{Path(filepath).stem}_{constants.APPLICATION_FOR_THE_RECOVERY}.xlsx"
+            with pd.ExcelWriter(
+                    constants.OUTPUT_INPUT_DATA_FORMAT_XLSX_APPLICATION_DIRECTORY_PATH
+                    / application_for_the_recovery_file_name
+            ) as writer:
+                input_data_df.to_excel(writer, sheet_name="Data", index=False)
+            target_path = constants.OUTPUT_INPUT_DATA_FORMAT_XLSX_MAIN_DIRECTORY_PATH / filepath.name
+            if target_path.exists():
+                os.remove(target_path)
+            os.rename(filepath, target_path)
+        else:
+            break
+
+
+def show_in_logs_document_statistic(doc_type: str, quality_percent_list: list) -> None:
     """Выводит логи статистики в консоль"""
     logging.info(f'[{doc_type}] Список показателей качества извлечения: {quality_percent_list}')
     if len(quality_percent_list) > 1:
@@ -78,4 +103,3 @@ def show_in_logs_document_statistic(doc_type: str, quality_percent_list: list):
     logging.info(
         f"[{doc_type}] Среднее качество извлечения: {statistics.median(quality_percent_list)}"
     )
-
