@@ -1,3 +1,4 @@
+import re
 import datetime
 from pathlib import Path
 
@@ -34,6 +35,24 @@ def create_report(filepath: str) -> float:
     paket_statistics_report_df = normalize_dataframe(doc_type, paket_statistics_report_df)
     # производим подсчет
     paket_statistics_report_df = paket_statistics_report_df.fillna('')
+    # Преобразование формата даты для атрибутов с _date или _birthdate в названии
+    date_attrs = paket_statistics_report_df[
+        paket_statistics_report_df[constants.SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME].str.contains(r'_date|_birthdate',
+                                                                                             case=False, regex=True)
+    ]
+
+    for idx, row in date_attrs.iterrows():
+        date_value = row[constants.OUTPUT_DATA_COLUMN_NAME]
+        if date_value and re.match(r'^\d{4}-\d{2}-\d{2}$', str(date_value)):
+            try:
+                # Преобразуем из гггг-мм-дд в дд.мм.гггг
+                dt = datetime.datetime.strptime(date_value, '%Y-%m-%d')
+                paket_statistics_report_df.at[idx, constants.OUTPUT_DATA_COLUMN_NAME] = dt.strftime('%d.%m.%Y')
+            except ValueError:
+                # Если не удалось преобразовать, оставляем как есть
+                pass
+
+    # Сравнение данных после возможного преобразования дат
     paket_statistics_report_df[constants.COMPARISON_COLUMN_NAME] = \
         paket_statistics_report_df[constants.OUTPUT_DATA_COLUMN_NAME].str.replace(' ', '') \
         == paket_statistics_report_df[constants.INPUT_DATA_COLUMN_NAME].str.replace(' ', '')

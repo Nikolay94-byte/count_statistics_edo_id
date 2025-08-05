@@ -17,35 +17,75 @@ def convert_csv_to_excel_in_folder(
         output_excel_folder: str,
 ) -> None:
     """
-    Конвертирует все CSV-файлы в XLSX и копирует исходные CSV.
+    Конвертирует CSV в XLSX без пропуска битых строк.
+    Определяет кодировку перебором стандартных вариантов.
     """
-    # Создаём папки, если их нет
     os.makedirs(output_excel_folder, exist_ok=True)
     os.makedirs(output_csv_folder, exist_ok=True)
 
+    # Приоритетные кодировки для кириллицы (можно добавить другие)
+    ENCODINGS = ['utf-8', 'utf-8-sig', 'windows-1251', 'cp1251', 'iso-8859-5', 'cp866']
+
     for filename in os.listdir(input_folder):
+        if not filename.endswith('.csv'):
+            # Копируем не-CSV файлы без изменений
+            shutil.copy2(
+                os.path.join(input_folder, filename),
+                output_excel_folder
+            )
+            logging.info(f"[SKIP] Не CSV: {filename} → {output_excel_folder}")
+            continue
+
         file_path = os.path.join(input_folder, filename)
+        csv_copy_path = os.path.join(output_csv_folder, filename)
+        excel_path = os.path.join(
+            output_excel_folder,
+            filename.replace('.csv', '.xlsx')
+        )
 
-        if filename.endswith('.csv'):
-            # Обработка CSV
-            # 1. Копируем оригинал в output_csv_folder
-            csv_copy_path = os.path.join(output_csv_folder, filename)
-            shutil.copy2(file_path, csv_copy_path)
-            logging.info(f"[CSV] Скопирован оригинал: {filename} → {output_csv_folder}")
+        # 1. Копируем оригинальный CSV
+        shutil.copy2(file_path, csv_copy_path)
+        logging.info(f"[COPY] CSV сохранён: {filename} → {output_csv_folder}")
 
-            # 2. Конвертируем в XLSX и сохраняем в output_excel_folder
-            excel_filename = filename.replace('.csv', '.xlsx')
-            excel_path = os.path.join(output_excel_folder, excel_filename)
+        # 2. Пытаемся конвертировать с разными кодировками
+        success = False
+        last_error = None
+
+        for encoding in ENCODINGS:
             try:
-                df = pd.read_csv(file_path, delimiter=',')
-                df.to_excel(excel_path, index=False, engine='openpyxl')
-                logging.info(f"[XLSX] Успешно преобразован: {filename} → {excel_filename}")
+                # Чтение без пропуска ошибок (on_bad_lines=None)
+                df = pd.read_csv(
+                    file_path,
+                    encoding=encoding,
+                    delimiter=',',
+                    engine='python',
+                    quotechar='"',
+                    on_bad_lines=None  # Не пропускать битые строки!
+                )
+
+                # Сохранение в Excel
+                df.to_excel(
+                    excel_path,
+                    index=False,
+                    engine='openpyxl'
+                )
+                logging.info(f"[SUCCESS] Конвертирован ({encoding}): {filename}")
+                success = True
+                break
+
+            except UnicodeDecodeError:
+                continue
+            except pd.errors.ParserError as e:
+                last_error = f"Ошибка формата ({encoding}): {str(e)}"
+                continue
             except Exception as e:
-                logging.error(f"Ошибка конвертации {filename}: {e}")
-        else:
-            # Копируем НЕ-CSV файлы в output_excel_folder
-            shutil.copy2(file_path, output_excel_folder)
-            logging.info(f"Конвертация в .xlsx не нужна! Файл {filename} скопирован → {output_excel_folder}")
+                last_error = f"Неизвестная ошибка ({encoding}): {str(e)}"
+                continue
+
+        if not success:
+            error_msg = f"[FAIL] Не удалось конвертировать {filename}. Последняя ошибка: {last_error}"
+            logging.error(error_msg)
+            raise ValueError(error_msg)
 
 
 def open_excel(filepath: str) -> openpyxl.worksheet.worksheet.Worksheet:
