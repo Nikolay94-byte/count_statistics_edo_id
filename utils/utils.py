@@ -136,7 +136,7 @@ def show_in_logs_document_statistic(doc_type: str, quality_percent_list: list) -
     """Выводит логи статистики в консоль"""
     logging.info(f'[{doc_type}] Список показателей качества извлечения: {quality_percent_list}')
     if len(quality_percent_list) > 1:
-        logging.info(f'[{doc_type}] Выборочная дисперсия {statistics.variance(quality_percent_list)}')
+        #logging.info(f'[{doc_type}] Выборочная дисперсия {statistics.variance(quality_percent_list)}')
         logging.info(f'[{doc_type}] Стандартное отклонение {statistics.pstdev(quality_percent_list)}')
         logging.info(f'[{doc_type}] Размах {max(quality_percent_list) - min(quality_percent_list)}')
 
