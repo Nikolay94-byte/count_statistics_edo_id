@@ -129,6 +129,11 @@ def prepare_input_data(input_data_directory: str) -> None:
                 os.remove(target_path)
             os.rename(filepath, target_path)
         else:
+            os.makedirs(constants.OUTPUT_INPUT_DATA_FORMAT_XLSX_MAIN_DIRECTORY_PATH, exist_ok=True)
+            target_path = constants.OUTPUT_INPUT_DATA_FORMAT_XLSX_MAIN_DIRECTORY_PATH / filepath.name
+            if target_path.exists():
+                os.remove(target_path)
+            os.rename(filepath, target_path)
             break
 
 

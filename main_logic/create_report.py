@@ -1,7 +1,7 @@
+import logging
 import re
 import datetime
 from pathlib import Path
-
 import pandas as pd
 
 from utils import constants
@@ -33,14 +33,12 @@ def create_report(filepath: str) -> float:
     # оставляем необходимые атрибуты согласно классу документа
     doc_type = CLASS_ATTRIBUTE_MAPPING.get(doc_name, doc_name)
     paket_statistics_report_df = normalize_dataframe(doc_type, paket_statistics_report_df)
-    # производим подсчет
     paket_statistics_report_df = paket_statistics_report_df.fillna('')
     # Преобразование формата даты для атрибутов с _date или _birthdate в названии
     date_attrs = paket_statistics_report_df[
         paket_statistics_report_df[constants.SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME].str.contains(r'_date|_birthdate',
                                                                                              case=False, regex=True)
     ]
-
     for idx, row in date_attrs.iterrows():
         date_value = row[constants.OUTPUT_DATA_COLUMN_NAME]
         if date_value and re.match(r'^\d{4}-\d{2}-\d{2}$', str(date_value)):
@@ -49,10 +47,41 @@ def create_report(filepath: str) -> float:
                 dt = datetime.datetime.strptime(date_value, '%Y-%m-%d')
                 paket_statistics_report_df.at[idx, constants.OUTPUT_DATA_COLUMN_NAME] = dt.strftime('%d.%m.%Y')
             except ValueError:
-                # Если не удалось преобразовать, оставляем как есть
                 pass
+    # Удаление пакетов, где возможно заявление рукописное (нет ни одного значения кроме телефона и типа взыскателя)
+    if doc_name == 'APPLICATION_FOR_THE_RECOVERY':
+        all_regnumbers = paket_statistics_report_df[constants.FILE_NAME_COLUMN_NAME].unique()
+        regnumbers_to_remove = []
 
-    # Сравнение данных после возможного преобразования дат
+        for regnumber in all_regnumbers:
+            regnumber_data = paket_statistics_report_df[
+                paket_statistics_report_df[constants.FILE_NAME_COLUMN_NAME] == regnumber
+                ]
+
+            has_only_type_and_phone = True
+
+            for _, row in regnumber_data.iterrows():
+                attribute_name = row[constants.SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME]
+                output_value = row[constants.INPUT_DATA_COLUMN_NAME]
+                # Если это не type и не phone, но значение не пустое - не удаляем
+                if (attribute_name not in ['recovery_claimer_entity_type', 'recovery_claimer_entity_phone'] and
+                        str(output_value).strip() != ''):
+                    has_only_type_and_phone = False
+                    break
+
+            if has_only_type_and_phone:
+                regnumbers_to_remove.append(regnumber)
+
+        if regnumbers_to_remove:
+            logging.warning(
+                f"Удалено {len(regnumbers_to_remove)} regnumber с рукописными заявлениями: {regnumbers_to_remove}")
+            paket_statistics_report_df = paket_statistics_report_df[
+                ~paket_statistics_report_df[constants.FILE_NAME_COLUMN_NAME].isin(regnumbers_to_remove)
+            ]
+        else:
+            logging.info("Не найдено regnumber с рукописными заявлениями для удаления")
+
+    # Сравнение данных
     paket_statistics_report_df[constants.COMPARISON_COLUMN_NAME] = \
         paket_statistics_report_df[constants.OUTPUT_DATA_COLUMN_NAME].str.replace(' ', '') \
         == paket_statistics_report_df[constants.INPUT_DATA_COLUMN_NAME].str.replace(' ', '')
