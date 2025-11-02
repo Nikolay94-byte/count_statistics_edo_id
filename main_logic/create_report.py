@@ -1,3 +1,4 @@
+import pandas as pd
 import logging
 import re
 import datetime
@@ -6,99 +7,79 @@ import pandas as pd
 
 from utils import constants
 from utils.constants import (
-    CLASS_ATTRIBUTE_MAPPING,
     OUTPUT_REPORTS_DIRECTORY_PATH,
 )
-from utils.utils import normalize_dataframe
 
 
-def create_report(filepath: str) -> float:
+def calculate_metrics(etalon_df: pd.DataFrame, recognized_df: pd.DataFrame) -> pd.DataFrame:
+    """Рассчитывает метрики качества распознавания на основе эталонных и распознанных значений"""
+
+    merged_df = pd.merge(
+        etalon_df,
+        recognized_df,
+        on=[constants.FILE_NAME, constants.ATTRIBUTE_NAME, constants.ATTRIBUTE_NAME_RUS]
+    )
+
+    # 1. Оценка ячейка - сравнение значений
+    def compare_cells(reference, recognized):
+        if pd.isna(reference) and pd.isna(recognized):
+            return 1
+        elif pd.isna(reference) or pd.isna(recognized):
+            return 0
+        else:
+            ref_str = str(reference).strip().lower()
+            rec_str = str(recognized).strip().lower()
+            return 1 if ref_str == rec_str else 0
+
+    merged_df[constants.CELL_SCORE] = merged_df.apply(
+        lambda row: compare_cells(row[constants.ETALON_VALUE], row[constants.RECOGINIZED_VALUE]),
+        axis=1
+    )
+
+    # 2. Оценка столбец - среднее по группам (файл + параметр)
+    merged_df[constants.COLUMN_SCORE] = merged_df.groupby(
+        [constants.FILE_NAME, constants.ATTRIBUTE_NAME]
+    )[constants.CELL_SCORE].transform('mean')
+
+    # 3. Оценка пакет - среднее по файлам
+    package_scores = merged_df.groupby(constants.FILE_NAME)[constants.COLUMN_SCORE].mean()
+    merged_df[constants.PACKAGE_SCORE] = merged_df[constants.FILE_NAME].map(package_scores)
+
+    final_columns = [
+        constants.FILE_NAME, constants.ATTRIBUTE_NAME, constants.ATTRIBUTE_NAME_RUS,
+        constants.ETALON_VALUE, constants.RECOGINIZED_VALUE,
+        constants.CELL_SCORE, constants.COLUMN_SCORE, constants.PACKAGE_SCORE
+    ]
+
+    return merged_df[final_columns]
+
+
+def create_report(etalon_df: pd.DataFrame, recognized_df: pd.DataFrame) -> pd.DataFrame:
     """Создает отчет по качеству распознавания."""
 
-    # четвертый лист - 'исходые данные'
-    input_data_df = pd.read_excel(filepath, index_col=None, dtype=str)
+    # четвертый лист - 'эталонные значения'
+    report_etalon_df = etalon_df
+
+    # пятый лист - 'распознанные значения'
+    report_recognized_df = recognized_df
 
     # второй лист - 'детализация попакетно'
-    paket_statistics_report_df = input_data_df.copy()
-    # определяем класс документа
-    doc_name = (paket_statistics_report_df.loc[1, constants.DOC_CLASS]).upper()
-    # оставляем только необходимые колонки и переименовывем их
-    columns_to_keep = [constants.REGNUMBER, constants.ATTRIBUTE_NAME, constants.RUS_ATTRIBUTE_NAME,
-                       constants.TEXT_NORMALIZED, constants.TEXT_VERIFICATION]
-    new_columns_name = [constants.FILE_NAME_COLUMN_NAME, constants.SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME,
-                        constants.ATTRIBUTE_NAME_COLUNM_NAME, constants.INPUT_DATA_COLUMN_NAME,
-                        constants.OUTPUT_DATA_COLUMN_NAME]
-    paket_statistics_report_df = paket_statistics_report_df[columns_to_keep]
-    paket_statistics_report_df = (paket_statistics_report_df[columns_to_keep].set_axis(new_columns_name, axis=1))
-    # оставляем необходимые атрибуты согласно классу документа
-    doc_type = CLASS_ATTRIBUTE_MAPPING.get(doc_name, doc_name)
-    paket_statistics_report_df = normalize_dataframe(doc_type, paket_statistics_report_df)
-    paket_statistics_report_df = paket_statistics_report_df.fillna('')
-    # Преобразование формата даты для атрибутов с _date или _birthdate в названии
-    date_attrs = paket_statistics_report_df[
-        paket_statistics_report_df[constants.SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME].str.contains(r'_date|_birthdate',
-                                                                                             case=False, regex=True)
-    ]
-    for idx, row in date_attrs.iterrows():
-        date_value = row[constants.OUTPUT_DATA_COLUMN_NAME]
-        if date_value and re.match(r'^\d{4}-\d{2}-\d{2}$', str(date_value)):
-            try:
-                # Преобразуем из гггг-мм-дд в дд.мм.гггг
-                dt = datetime.datetime.strptime(date_value, '%Y-%m-%d')
-                paket_statistics_report_df.at[idx, constants.OUTPUT_DATA_COLUMN_NAME] = dt.strftime('%d.%m.%Y')
-            except ValueError:
-                pass
-    # Удаление пакетов, где возможно заявление рукописное (нет ни одного значения кроме телефона и типа взыскателя)
-    if doc_name == 'APPLICATION_FOR_THE_RECOVERY':
-        all_regnumbers = paket_statistics_report_df[constants.FILE_NAME_COLUMN_NAME].unique()
-        regnumbers_to_remove = []
+    paket_statistics_report_df = calculate_metrics(report_etalon_df, report_recognized_df)
 
-        for regnumber in all_regnumbers:
-            regnumber_data = paket_statistics_report_df[
-                paket_statistics_report_df[constants.FILE_NAME_COLUMN_NAME] == regnumber
-                ]
-
-            has_only_type_and_phone = True
-
-            for _, row in regnumber_data.iterrows():
-                attribute_name = row[constants.SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME]
-                output_value = row[constants.INPUT_DATA_COLUMN_NAME]
-                # Если это не type и не phone, но значение не пустое - не удаляем
-                if (attribute_name not in ['recovery_claimer_entity_type', 'recovery_claimer_entity_phone'] and
-                        str(output_value).strip() != ''):
-                    has_only_type_and_phone = False
-                    break
-
-            if has_only_type_and_phone:
-                regnumbers_to_remove.append(regnumber)
-
-        if regnumbers_to_remove:
-            logging.warning(
-                f"Удалено {len(regnumbers_to_remove)} regnumber с рукописными заявлениями: {regnumbers_to_remove}")
-            paket_statistics_report_df = paket_statistics_report_df[
-                ~paket_statistics_report_df[constants.FILE_NAME_COLUMN_NAME].isin(regnumbers_to_remove)
-            ]
-        else:
-            logging.info("Не найдено regnumber с рукописными заявлениями для удаления")
-
-    # Сравнение данных
-    paket_statistics_report_df[constants.COMPARISON_COLUMN_NAME] = \
-        paket_statistics_report_df[constants.OUTPUT_DATA_COLUMN_NAME].str.replace(' ', '') \
-        == paket_statistics_report_df[constants.INPUT_DATA_COLUMN_NAME].str.replace(' ', '')
-
-    # третий лист - 'детализация поатрибутивно' (отражает в каких атрибутах больше всего ошибок)
-    attribute_statistics_report_df = paket_statistics_report_df.copy()
-    attribute_statistics_report_df = attribute_statistics_report_df.drop\
-        ([constants.FILE_NAME_COLUMN_NAME,
-          constants.SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME,
-          constants.INPUT_DATA_COLUMN_NAME,
-          constants.OUTPUT_DATA_COLUMN_NAME,
-          ], axis=1)
-    attribute_statistics_report_series = \
-        attribute_statistics_report_df[attribute_statistics_report_df[constants.COMPARISON_COLUMN_NAME] == False]\
-            .groupby(constants.ATTRIBUTE_NAME_COLUNM_NAME).size().sort_values(ascending=False)
-    attribute_statistics_report_df_counted = attribute_statistics_report_series.reset_index\
-        (name=constants.FALSE_ATTRIBUTE_AMOUNT)
+    # третий лист - 'детализация по колонкам' (отражает в каких колонках больше всего ошибок)
+    column_quality = (
+        paket_statistics_report_df
+            .groupby(constants.ATTRIBUTE_NAME_RUS)[constants.CELL_SCORE]
+            .mean()
+            .mul(100)
+            .round(2)
+            .reset_index()
+    )
+    column_statistics_report_df = pd.DataFrame({
+        constants.COLUMN_NAME: column_quality[constants.ATTRIBUTE_NAME_RUS],
+        constants.COLUMN_QUALITY: column_quality[constants.CELL_SCORE]
+    })
+    column_statistics_report_df = column_statistics_report_df.sort_values(constants.COLUMN_QUALITY)
 
     # первый лист 'общая статистика'
     document_name = f"{Path(filepath).stem}"
@@ -122,10 +103,12 @@ def create_report(filepath: str) -> float:
         final_report_df.to_excel\
             (writer, sheet_name=constants.FINAL_REPORT_SHEET_NAME, index=False)
         paket_statistics_report_df.to_excel\
-            (writer, sheet_name=constants.PAKET_REPORT_SHEET_NAME, index=False)
-        attribute_statistics_report_df_counted.to_excel\
-            (writer, sheet_name=constants.ATTRIBUTE_STATISTICS_REPORT_SHEET_NAME, index=False)
-        input_data_df.to_excel\
-            (writer, sheet_name=constants.INPUT_DATA_SHEET_NAME, index=False)
+            (writer, sheet_name=constants.PAKET_STATISTICS_REPORT_SHEET_NAME, index=False)
+        column_statistics_report_df.to_excel\
+            (writer, sheet_name=constants.COLUMN_STATISTICS_REPORT_SHEET_NAME, index=False)
+        report_etalon_df.to_excel\
+            (writer, sheet_name=constants.ETALON_DATA_SHEET_NAME, index=False)
+        report_recognized_df.to_excel\
+            (writer, sheet_name=constants.RECOGINIZED_DATA_SHEET_NAME, index=False)
 
     return quality_percent

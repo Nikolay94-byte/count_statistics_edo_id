@@ -1,150 +1,104 @@
+import json
 import logging
-import os
-import shutil
-import statistics
 from pathlib import Path
+from typing import Optional
 
-import openpyxl
 import pandas as pd
-from pandas import DataFrame
 
 from utils import constants
 
 
-def convert_csv_to_excel_in_folder(
-        input_folder: str,
-        output_csv_folder: str,
-        output_excel_folder: str,
-) -> None:
-    """
-    Конвертирует CSV в XLSX без пропуска битых строк.
-    Определяет кодировку перебором стандартных вариантов.
-    """
-    os.makedirs(output_excel_folder, exist_ok=True)
-    os.makedirs(output_csv_folder, exist_ok=True)
+def find_file_by_name(directory: Path, base_name: str) -> Optional[Path]:
+    """Ищет файл в директории по базовому имени без учета расширения."""
+    if not directory.exists():
+        return None
 
-    # Приоритетные кодировки для кириллицы (можно добавить другие)
+    for file_path in directory.iterdir():
+        if file_path.is_file() and file_path.stem == base_name:
+            return file_path
+
+    return None
+
+
+def decoding_csv(recognized_file_path: Path) -> pd.DataFrame:
+    """Чтение CSV."""
+
     ENCODINGS = ['utf-8', 'utf-8-sig', 'windows-1251', 'cp1251', 'iso-8859-5', 'cp866']
+    recognized_df = None
+    result_encoding = None
 
-    for filename in os.listdir(input_folder):
-        if not filename.endswith('.csv'):
-            # Копируем не-CSV файлы без изменений
-            shutil.copy2(
-                os.path.join(input_folder, filename),
-                output_excel_folder
-            )
-            logging.info(f"[SKIP] Не CSV: {filename} → {output_excel_folder}")
+    for encoding in ENCODINGS:
+        try:
+            recognized_df = pd.read_csv(recognized_file_path, encoding=encoding)
+            result_encoding = encoding
+            break
+        except UnicodeDecodeError:
             continue
 
-        file_path = os.path.join(input_folder, filename)
-        csv_copy_path = os.path.join(output_csv_folder, filename)
-        excel_path = os.path.join(
-            output_excel_folder,
-            filename.replace('.csv', '.xlsx')
-        )
+    if recognized_df is None:
+        error_msg = f"Не удалось прочитать файл {recognized_file_path} с доступными кодировками"
+        logging.error(error_msg)
+        raise ValueError(error_msg)
 
-        # 1. Копируем оригинальный CSV
-        shutil.copy2(file_path, csv_copy_path)
-        logging.info(f"[COPY] CSV сохранён: {filename} → {output_csv_folder}")
+    logging.info(f"Файл {recognized_file_path} успешно прочитан (кодировка: {result_encoding})")
+    logging.debug(f"Колонки: {recognized_df.columns.tolist()}, размер: {recognized_df.shape}")
 
-        # 2. Пытаемся конвертировать с разными кодировками
-        success = False
-        last_error = None
+    return recognized_df
 
-        for encoding in ENCODINGS:
-            try:
-                # Чтение без пропуска ошибок (on_bad_lines=None)
-                df = pd.read_csv(
-                    file_path,
-                    encoding=encoding,
-                    delimiter=',',
-                    engine='python',
-                    quotechar='"',
-                    on_bad_lines=None  # Не пропускать битые строки!
-                )
+def parse_bd_file(recognized_df: pd.DataFrame) -> pd.DataFrame:
+    """Парсит данные из файла с данными из бд."""
 
-                # Сохранение в Excel
-                df.to_excel(
-                    excel_path,
-                    index=False,
-                    engine='openpyxl'
-                )
-                logging.info(f"[SUCCESS] Конвертирован ({encoding}): {filename}")
-                success = True
-                break
+    results = []
 
-            except UnicodeDecodeError:
-                continue
-            except pd.errors.ParserError as e:
-                last_error = f"Ошибка формата ({encoding}): {str(e)}"
-                continue
-            except Exception as e:
-                last_error = f"Неизвестная ошибка ({encoding}): {str(e)}"
-                continue
+    for _, row in recognized_df.iterrows():
+        filename = row['name']
+        data_object = json.loads(row['data_object'])
 
-        if not success:
-            error_msg = f"[FAIL] Не удалось конвертировать {filename}. Последняя ошибка: {last_error}"
-            logging.error(error_msg)
-            raise ValueError(error_msg)
+        file_data = {}
+        for column in data_object:
+            for row_obj in column.get('objects', []):
+                for attribute in row_obj.get('attributes', []):
+                    attr_name = attribute['name']
 
+                    if attr_name in constants.TABLE_ATTRIBUTES:
+                        value = None
+                        if attribute.get('value') and attribute['value'].get('text'):
+                            value = attribute['value']['text']
 
-def open_excel(filepath: str) -> openpyxl.worksheet.worksheet.Worksheet:
-    """Открывает файл, создает рабочую книгу для работы с данными"""
-    book = openpyxl.open(filepath)
-    sheet = book.active
-    return sheet
+                        if attr_name in file_data:
+                            if file_data[attr_name] and value:
+                                file_data[attr_name] = f"{file_data[attr_name]};{value}"
+                            elif value:
+                                file_data[attr_name] = value
+                        else:
+                            file_data[attr_name] = value
+
+        for attr_name in constants.TABLE_ATTRIBUTES.keys():
+            results.append({
+                constants.FILE_NAME: filename,
+                constants.ATTRIBUTE_NAME: attr_name,
+                constants.ATTRIBUTE_NAME_RUS: constants.TABLE_ATTRIBUTES[attr_name],
+                constants.RECOGINIZED_VALUE: file_data.get(attr_name, '')
+            })
+
+    df_result = pd.DataFrame(results)
+
+    parsed_recognized_df = df_result.sort_values(
+        [constants.FILE_NAME, constants.ATTRIBUTE_NAME]
+    ).reset_index(drop=True)
+
+    return parsed_recognized_df
 
 
-def normalize_dataframe(doc_attributes: dict, dataframe_for_formating: DataFrame) -> DataFrame:
-    """Оставляет необходимые атрибуты, переименовывает их русские названия"""
-    # оставляем только необходимые атрибуты
-    new_dataframe = dataframe_for_formating[
-        dataframe_for_formating[constants.SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME].isin(doc_attributes.keys())
-    ].copy()
-    # переименовываем значения в колонке Наим.атрибута
-    new_dataframe[constants.ATTRIBUTE_NAME_COLUNM_NAME] = new_dataframe[
-        constants.SYSTEM_ATTRIBUTE_NAME_COLUNM_NAME
-    ].map(doc_attributes)
-    return new_dataframe
+def expand_dataframe_data(df: pd.DataFrame, column_name: str) -> pd.DataFrame:
+    """Разворачивает(переносит на новую строку) значения ячеек, где перечисленно больше одного инстанса колонки."""
 
-
-def prepare_input_data(input_data_directory: str) -> None:
-    """Создает копию исходного файла, заменяя класс на Заявление на взыскание. Распределяет исходники по папкам"""
-    for filepath in Path(input_data_directory).glob('*.xlsx'):
-        input_data_df = pd.read_excel(filepath, index_col=None, dtype=str)
-        doc_name = (input_data_df.loc[1, constants.DOC_CLASS]).upper()
-        if doc_name in [constants.PERF_LIST, constants.LABOUR_COMMISSION, constants.COURT_ORDER]:
-            os.makedirs(constants.OUTPUT_INPUT_DATA_FORMAT_XLSX_MAIN_DIRECTORY_PATH, exist_ok=True)
-            os.makedirs(constants.OUTPUT_INPUT_DATA_FORMAT_XLSX_APPLICATION_DIRECTORY_PATH, exist_ok=True)
-            input_data_df[constants.DOC_CLASS] = constants.APPLICATION_FOR_THE_RECOVERY
-            application_for_the_recovery_file_name = \
-                f"{Path(filepath).stem}_{constants.APPLICATION_FOR_THE_RECOVERY}.xlsx"
-            with pd.ExcelWriter(
-                    constants.OUTPUT_INPUT_DATA_FORMAT_XLSX_APPLICATION_DIRECTORY_PATH
-                    / application_for_the_recovery_file_name
-            ) as writer:
-                input_data_df.to_excel(writer, sheet_name="Data", index=False)
-            target_path = constants.OUTPUT_INPUT_DATA_FORMAT_XLSX_MAIN_DIRECTORY_PATH / filepath.name
-            if target_path.exists():
-                os.remove(target_path)
-            os.rename(filepath, target_path)
-        else:
-            os.makedirs(constants.OUTPUT_INPUT_DATA_FORMAT_XLSX_MAIN_DIRECTORY_PATH, exist_ok=True)
-            target_path = constants.OUTPUT_INPUT_DATA_FORMAT_XLSX_MAIN_DIRECTORY_PATH / filepath.name
-            if target_path.exists():
-                os.remove(target_path)
-            os.rename(filepath, target_path)
-            break
-
-
-def show_in_logs_document_statistic(doc_type: str, quality_percent_list: list) -> None:
-    """Выводит логи статистики в консоль"""
-    logging.info(f'[{doc_type}] Список показателей качества извлечения: {quality_percent_list}')
-    if len(quality_percent_list) > 1:
-        #logging.info(f'[{doc_type}] Выборочная дисперсия {statistics.variance(quality_percent_list)}')
-        logging.info(f'[{doc_type}] Стандартное отклонение {statistics.pstdev(quality_percent_list)}')
-        logging.info(f'[{doc_type}] Размах {max(quality_percent_list) - min(quality_percent_list)}')
-
-    logging.info(
-        f"[{doc_type}] Среднее качество извлечения: {statistics.median(quality_percent_list)}"
+    expanded_df = df.copy()
+    # Разделяем значения по точке с запятой и создаем списки
+    expanded_df[column_name] = expanded_df[column_name].apply(
+        lambda x: str(x).split(';') if pd.notna(x) and ';' in str(x) else [x]
     )
+    expanded_df = expanded_df.explode(column_name, ignore_index=True)
+    expanded_df[column_name] = expanded_df[column_name].str.strip()
+
+    return expanded_df

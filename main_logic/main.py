@@ -1,63 +1,66 @@
 import logging
 import os
 import sys
-from pathlib import Path
+from tabulate import tabulate
+import pandas as pd
 
-from main_logic.check_input_excel import check_and_clean_file
+from check_input_data import check_files
 from main_logic.create_report import create_report
+from utils import constants
 from utils.constants import (
-    APPLICATION,
     INPUT_DATA_DIRECTORY_PATH,
-    MAIN_DOC,
-    OUTPUT_INPUT_DATA_FORMAT_CSV_DIRECTORY_PATH,
-    OUTPUT_INPUT_DATA_FORMAT_XLSX_APPLICATION_DIRECTORY_PATH,
-    OUTPUT_INPUT_DATA_FORMAT_XLSX_DIRECTORY_PATH,
-    OUTPUT_INPUT_DATA_FORMAT_XLSX_MAIN_DIRECTORY_PATH,
     OUTPUT_REPORTS_DIRECTORY_PATH,
 )
-from utils.utils import (
-    convert_csv_to_excel_in_folder,
-    show_in_logs_document_statistic, prepare_input_data
-)
+from utils.utils import parse_bd_file, find_file_by_name, decoding_csv, expand_dataframe_data
 
 
-def check_input_data_and_create_reports(input_data_directory: str) -> list:
-    """Проверяет исходники и создает отчеты"""
-    quality_percent_list = []
-    for filepath in Path(input_data_directory).glob('*.xlsx'):
-        logging.info(f'Начинаем проверку и редактирование исходника {Path(filepath).stem}')
-        check_and_clean_file(filepath)
-        logging.info(f'Создаем отчет по {Path(filepath).stem}')
-        quality = create_report(filepath)
-        quality_percent_list.append(quality)
-        logging.info(f'Отчет по {Path(filepath).stem} успешно создан')
-    return quality_percent_list
-
-
-def counting_statistics_edo_id() -> None:
-    """Считает статистику качество извлечения по выгрузке с прода"""
-    logging.info(
-        f'Преобразуем исходные файлы из формата .csv в формат .xlsx, а также копируем исходники в итоговую папку OUTPUT'
-    )
-    convert_csv_to_excel_in_folder(
-        INPUT_DATA_DIRECTORY_PATH,
-        OUTPUT_INPUT_DATA_FORMAT_CSV_DIRECTORY_PATH,
-        OUTPUT_INPUT_DATA_FORMAT_XLSX_DIRECTORY_PATH
-    )
+def counting_statistics_table_pim() -> None:
+    """Считает статистику качество извлечения таблиц при отправки в ПИМ"""
 
     os.makedirs(OUTPUT_REPORTS_DIRECTORY_PATH, exist_ok=True)
 
-    prepare_input_data(OUTPUT_INPUT_DATA_FORMAT_XLSX_DIRECTORY_PATH)
+    etalon_file_path = find_file_by_name(INPUT_DATA_DIRECTORY_PATH, constants.INPUT_DATA_ETALON_FILE)
+    recognized_file_path = find_file_by_name(INPUT_DATA_DIRECTORY_PATH, constants.INPUT_DATA_RECOGINIZED_FILE)
 
-    quality_percent_main_document = check_input_data_and_create_reports(
-        OUTPUT_INPUT_DATA_FORMAT_XLSX_MAIN_DIRECTORY_PATH
-    )
-    quality_percent_application = check_input_data_and_create_reports(
-        OUTPUT_INPUT_DATA_FORMAT_XLSX_APPLICATION_DIRECTORY_PATH
-    )
+    check_files(INPUT_DATA_DIRECTORY_PATH)
 
-    show_in_logs_document_statistic(MAIN_DOC, quality_percent_main_document)
-    show_in_logs_document_statistic(APPLICATION, quality_percent_application)
+    # Читаем эталонный файл
+    etalon_df = pd.read_excel(etalon_file_path, dtype=str).fillna("")
+
+    # Разворачиваем значения в эталонном файле
+    expanded_etalon_df = expand_dataframe_data(etalon_df, constants.ETALON_VALUE)
+    expanded_etalon_df = expanded_etalon_df.sort_values([constants.FILE_NAME, constants.ATTRIBUTE_NAME]).reset_index(
+        drop=True)
+    print(tabulate(expanded_etalon_df, headers='keys', tablefmt='grid', showindex=False))
+    print("\n" + "=" * 80 + "\n")
+
+    # Читаем файл с распознанными данными
+    if os.path.splitext(recognized_file_path)[1].lower() == '.csv':
+        recognized_df = decoding_csv(recognized_file_path)
+    else:
+        recognized_df = pd.read_excel(recognized_file_path, dtype=str).fillna("")
+
+    # Парсим файл с распознанными данными
+    parsed_recognized_df = parse_bd_file(recognized_df)
+
+    # Разворачиваем значения в файле с распознанными данными
+    expanded_recognized_df = expand_dataframe_data(parsed_recognized_df, constants.RECOGINIZED_VALUE)
+    print(tabulate(expanded_recognized_df, headers='keys', tablefmt='grid', showindex=False))
+    print("\n" + "=" * 80 + "\n")
+
+    logging.info(f'Создаем отчет по {Path(filepath).stem}')
+    quality_percent = create_report()
+
+    #
+    # quality_percent_main_document = check_input_data_and_create_reports(
+    #     OUTPUT_INPUT_DATA_FORMAT_XLSX_MAIN_DIRECTORY_PATH
+    # )
+    # quality_percent_application = check_input_data_and_create_reports(
+    #     OUTPUT_INPUT_DATA_FORMAT_XLSX_APPLICATION_DIRECTORY_PATH
+    # )
+    #
+    # show_in_logs_document_statistic(MAIN_DOC, quality_percent_main_document)
+    # show_in_logs_document_statistic(APPLICATION, quality_percent_application)
 
 
 if __name__ == '__main__':
@@ -69,4 +72,4 @@ if __name__ == '__main__':
             logging.FileHandler(f'{__file__}.log', encoding='utf-8'),
         ]
     )
-    counting_statistics_edo_id()
+    counting_statistics_table_pim()
