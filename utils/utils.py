@@ -78,7 +78,7 @@ def parse_bd_file(recognized_df: pd.DataFrame) -> pd.DataFrame:
                 constants.FILE_NAME: filename,
                 constants.ATTRIBUTE_NAME: attr_name,
                 constants.ATTRIBUTE_NAME_RUS: constants.TABLE_ATTRIBUTES[attr_name],
-                constants.RECOGINIZED_VALUE: file_data.get(attr_name, '')
+                constants.RECOGINIZED_VALUE: file_data.get(attr_name, None)
             })
 
     df_result = pd.DataFrame(results)
@@ -94,11 +94,13 @@ def expand_dataframe_data(df: pd.DataFrame, column_name: str) -> pd.DataFrame:
     """Разворачивает(переносит на новую строку) значения ячеек, где перечисленно больше одного инстанса колонки."""
 
     expanded_df = df.copy()
-    # Разделяем значения по точке с запятой и создаем списки
     expanded_df[column_name] = expanded_df[column_name].apply(
         lambda x: str(x).split(';') if pd.notna(x) and ';' in str(x) else [x]
     )
     expanded_df = expanded_df.explode(column_name, ignore_index=True)
-    expanded_df[column_name] = expanded_df[column_name].str.strip()
-
+    expanded_df[column_name] = expanded_df[column_name].apply(
+        lambda x: None if pd.isna(x) or str(x).strip() == 'None' else str(x).strip()
+    )
+    expanded_df = expanded_df.sort_values([constants.FILE_NAME, constants.ATTRIBUTE_NAME]).reset_index(
+        drop=True)
     return expanded_df

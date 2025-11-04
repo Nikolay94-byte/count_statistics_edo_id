@@ -23,3 +23,138 @@
 2025-11-02 12:26:07,220-[INFO]- Module: check_input_data - Line:76 - ✓ Все проверки пройдены успешно!
 2025-11-02 12:26:07,314-[INFO]- Module: utils - Line:43 - Файл H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv успешно прочитан (кодировка: windows-1251)
 2025-11-02 12:26:07,314-[DEBUG]- Module: utils - Line:44 - Колонки: ['name', 'date', 'data_object'], размер: (3, 3)
+2025-11-03 17:25:12,617-[INFO]- Module: check_input_data - Line:45 - Поиск файлов по имени в директории: H:\Python projects\count_table_pim\data\INPUT
+2025-11-03 17:29:21,425-[INFO]- Module: check_input_data - Line:45 - Поиск файлов по имени в директории: H:\Python projects\count_table_pim\data\INPUT
+2025-11-03 17:29:21,425-[INFO]- Module: check_input_data - Line:66 - ✓ Найден файл ETALON: INPUT_DATA_ETALON.xlsx
+2025-11-03 17:29:21,425-[INFO]- Module: check_input_data - Line:67 - ✓ Найден файл RECOGINIZED: INPUT_DATA_RECOGINIZED.csv
+2025-11-03 17:29:21,957-[INFO]- Module: check_input_data - Line:27 - ✓ Файл INPUT_DATA_ETALON: все необходимые колонки присутствуют
+2025-11-03 17:29:21,957-[INFO]- Module: check_input_data - Line:75 - ✓ Все проверки пройдены успешно!
+2025-11-03 19:02:55,317-[INFO]- Module: check_input_data - Line:46 - Поиск файлов по имени в директории: H:\Python projects\count_table_pim\data\INPUT
+2025-11-03 19:02:55,317-[INFO]- Module: check_input_data - Line:67 - ✓ Найден файл ETALON: INPUT_DATA_ETALON.xlsx
+2025-11-03 19:02:55,317-[INFO]- Module: check_input_data - Line:68 - ✓ Найден файл RECOGINIZED: INPUT_DATA_RECOGINIZED.csv
+2025-11-03 19:02:55,567-[INFO]- Module: check_input_data - Line:27 - ✓ Файл INPUT_DATA_ETALON: все необходимые колонки присутствуют
+2025-11-03 19:02:55,567-[WARNING]- Module: check_input_data - Line:97 - Не удалось определить doc_type: 'utf-8' codec can't decode byte 0xd2 in position 47: invalid continuation byte
+2025-11-03 19:02:55,567-[INFO]- Module: check_input_data - Line:100 - ✓ Все проверки пройдены успешно!
+2025-11-03 19:02:55,567-[INFO]- Module: main - Line:24 - Читаем файл с эталонными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_ETALON.xlsx и разворачиваем значения
+2025-11-03 19:02:55,707-[INFO]- Module: main - Line:30 - Читаем файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv
+2025-11-03 19:02:55,707-[INFO]- Module: utils - Line:43 - Файл H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv успешно прочитан (кодировка: windows-1251)
+2025-11-03 19:02:55,707-[DEBUG]- Module: utils - Line:44 - Колонки: ['name', 'date', 'data_object'], размер: (3, 3)
+2025-11-03 19:02:55,707-[INFO]- Module: main - Line:35 - Парсим файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv и разворачиваем значения
+2025-11-03 19:02:55,723-[INFO]- Module: main - Line:41 - Создаем отчет
+2025-11-03 19:02:55,848-[INFO]- Module: main - Line:43 - Среднее качество извлечения таблиц в шаблоне Класс не определен: 0.0
+2025-11-03 19:20:21,063-[INFO]- Module: check_input_data - Line:46 - Поиск файлов по имени в директории: H:\Python projects\count_table_pim\data\INPUT
+2025-11-03 19:20:21,063-[INFO]- Module: check_input_data - Line:67 - ✓ Найден файл ETALON: INPUT_DATA_ETALON.xlsx
+2025-11-03 19:20:21,063-[INFO]- Module: check_input_data - Line:68 - ✓ Найден файл RECOGINIZED: INPUT_DATA_RECOGINIZED.csv
+2025-11-03 19:20:21,329-[INFO]- Module: check_input_data - Line:27 - ✓ Файл INPUT_DATA_ETALON: все необходимые колонки присутствуют
+2025-11-03 19:20:21,329-[WARNING]- Module: check_input_data - Line:97 - Не удалось определить doc_type: 'utf-8' codec can't decode byte 0xd2 in position 47: invalid continuation byte
+2025-11-03 19:20:21,329-[INFO]- Module: check_input_data - Line:100 - ✓ Все проверки пройдены успешно!
+2025-11-03 19:20:21,329-[INFO]- Module: main - Line:24 - Читаем файл с эталонными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_ETALON.xlsx и разворачиваем значения
+2025-11-03 19:20:21,345-[INFO]- Module: main - Line:30 - Читаем файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv
+2025-11-03 19:20:21,345-[INFO]- Module: utils - Line:43 - Файл H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv успешно прочитан (кодировка: windows-1251)
+2025-11-03 19:20:21,345-[DEBUG]- Module: utils - Line:44 - Колонки: ['name', 'date', 'data_object'], размер: (3, 3)
+2025-11-03 19:20:21,345-[INFO]- Module: main - Line:35 - Парсим файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv и разворачиваем значения
+2025-11-03 19:20:21,360-[INFO]- Module: main - Line:41 - Создаем отчет
+2025-11-03 19:20:21,438-[INFO]- Module: main - Line:43 - Среднее качество извлечения таблиц в шаблоне Класс не определен: 0.0
+2025-11-03 19:37:31,412-[INFO]- Module: check_input_data - Line:46 - Поиск файлов по имени в директории: H:\Python projects\count_table_pim\data\INPUT
+2025-11-03 19:37:31,412-[INFO]- Module: check_input_data - Line:67 - ✓ Найден файл ETALON: INPUT_DATA_ETALON.xlsx
+2025-11-03 19:37:31,412-[INFO]- Module: check_input_data - Line:68 - ✓ Найден файл RECOGINIZED: INPUT_DATA_RECOGINIZED.csv
+2025-11-03 19:37:31,647-[INFO]- Module: check_input_data - Line:27 - ✓ Файл INPUT_DATA_ETALON: все необходимые колонки присутствуют
+2025-11-03 19:37:31,647-[WARNING]- Module: check_input_data - Line:97 - Не удалось определить doc_type: 'utf-8' codec can't decode byte 0xd2 in position 47: invalid continuation byte
+2025-11-03 19:37:31,647-[INFO]- Module: check_input_data - Line:100 - ✓ Все проверки пройдены успешно!
+2025-11-03 19:37:31,647-[INFO]- Module: main - Line:24 - Читаем файл с эталонными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_ETALON.xlsx и разворачиваем значения
+2025-11-03 19:37:31,678-[INFO]- Module: main - Line:30 - Читаем файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv
+2025-11-03 19:37:31,678-[INFO]- Module: utils - Line:43 - Файл H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv успешно прочитан (кодировка: windows-1251)
+2025-11-03 19:37:31,678-[DEBUG]- Module: utils - Line:44 - Колонки: ['name', 'date', 'data_object'], размер: (3, 3)
+2025-11-03 19:37:31,678-[INFO]- Module: main - Line:35 - Парсим файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv и разворачиваем значения
+2025-11-03 19:37:31,693-[INFO]- Module: main - Line:41 - Создаем отчет
+2025-11-03 19:37:31,772-[INFO]- Module: main - Line:43 - Среднее качество извлечения таблиц в шаблоне Класс не определен: 0.0
+2025-11-03 19:47:43,012-[INFO]- Module: check_input_data - Line:46 - Поиск файлов по имени в директории: H:\Python projects\count_table_pim\data\INPUT
+2025-11-03 19:47:43,012-[INFO]- Module: check_input_data - Line:67 - ✓ Найден файл ETALON: INPUT_DATA_ETALON.xlsx
+2025-11-03 19:47:43,012-[INFO]- Module: check_input_data - Line:68 - ✓ Найден файл RECOGINIZED: INPUT_DATA_RECOGINIZED.csv
+2025-11-03 19:47:43,340-[INFO]- Module: check_input_data - Line:27 - ✓ Файл INPUT_DATA_ETALON: все необходимые колонки присутствуют
+2025-11-03 19:47:43,340-[WARNING]- Module: check_input_data - Line:97 - Не удалось определить doc_type: 'utf-8' codec can't decode byte 0xd2 in position 47: invalid continuation byte
+2025-11-03 19:47:43,340-[INFO]- Module: check_input_data - Line:100 - ✓ Все проверки пройдены успешно!
+2025-11-03 19:47:43,340-[INFO]- Module: main - Line:24 - Читаем файл с эталонными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_ETALON.xlsx и разворачиваем значения
+2025-11-03 19:47:43,371-[INFO]- Module: main - Line:30 - Читаем файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv
+2025-11-03 19:47:43,371-[INFO]- Module: utils - Line:43 - Файл H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv успешно прочитан (кодировка: windows-1251)
+2025-11-03 19:47:43,371-[DEBUG]- Module: utils - Line:44 - Колонки: ['name', 'date', 'data_object'], размер: (3, 3)
+2025-11-03 19:47:43,371-[INFO]- Module: main - Line:35 - Парсим файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv и разворачиваем значения
+2025-11-03 19:47:43,387-[INFO]- Module: main - Line:41 - Создаем отчет
+2025-11-03 19:47:52,059-[INFO]- Module: check_input_data - Line:46 - Поиск файлов по имени в директории: H:\Python projects\count_table_pim\data\INPUT
+2025-11-03 19:47:52,059-[INFO]- Module: check_input_data - Line:67 - ✓ Найден файл ETALON: INPUT_DATA_ETALON.xlsx
+2025-11-03 19:47:52,059-[INFO]- Module: check_input_data - Line:68 - ✓ Найден файл RECOGINIZED: INPUT_DATA_RECOGINIZED.csv
+2025-11-03 19:47:52,278-[INFO]- Module: check_input_data - Line:27 - ✓ Файл INPUT_DATA_ETALON: все необходимые колонки присутствуют
+2025-11-03 19:47:52,278-[WARNING]- Module: check_input_data - Line:97 - Не удалось определить doc_type: 'utf-8' codec can't decode byte 0xd2 in position 47: invalid continuation byte
+2025-11-03 19:47:52,278-[INFO]- Module: check_input_data - Line:100 - ✓ Все проверки пройдены успешно!
+2025-11-03 19:47:52,278-[INFO]- Module: main - Line:24 - Читаем файл с эталонными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_ETALON.xlsx и разворачиваем значения
+2025-11-03 19:47:52,309-[INFO]- Module: main - Line:30 - Читаем файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv
+2025-11-03 19:47:52,309-[INFO]- Module: utils - Line:43 - Файл H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv успешно прочитан (кодировка: windows-1251)
+2025-11-03 19:47:52,309-[DEBUG]- Module: utils - Line:44 - Колонки: ['name', 'date', 'data_object'], размер: (3, 3)
+2025-11-03 19:47:52,309-[INFO]- Module: main - Line:35 - Парсим файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv и разворачиваем значения
+2025-11-03 19:47:52,324-[INFO]- Module: main - Line:41 - Создаем отчет
+2025-11-03 19:47:52,403-[INFO]- Module: main - Line:43 - Среднее качество извлечения таблиц в шаблоне Класс не определен: 0.0
+2025-11-03 19:48:19,177-[INFO]- Module: check_input_data - Line:46 - Поиск файлов по имени в директории: H:\Python projects\count_table_pim\data\INPUT
+2025-11-03 19:48:19,177-[INFO]- Module: check_input_data - Line:67 - ✓ Найден файл ETALON: INPUT_DATA_ETALON.xlsx
+2025-11-03 19:48:19,177-[INFO]- Module: check_input_data - Line:68 - ✓ Найден файл RECOGINIZED: INPUT_DATA_RECOGINIZED.csv
+2025-11-03 19:48:19,411-[INFO]- Module: check_input_data - Line:27 - ✓ Файл INPUT_DATA_ETALON: все необходимые колонки присутствуют
+2025-11-03 19:48:19,411-[WARNING]- Module: check_input_data - Line:97 - Не удалось определить doc_type: 'utf-8' codec can't decode byte 0xd2 in position 47: invalid continuation byte
+2025-11-03 19:48:19,411-[INFO]- Module: check_input_data - Line:100 - ✓ Все проверки пройдены успешно!
+2025-11-03 19:48:19,411-[INFO]- Module: main - Line:24 - Читаем файл с эталонными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_ETALON.xlsx и разворачиваем значения
+2025-11-03 19:48:19,443-[INFO]- Module: main - Line:30 - Читаем файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv
+2025-11-03 19:48:19,443-[INFO]- Module: utils - Line:43 - Файл H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv успешно прочитан (кодировка: windows-1251)
+2025-11-03 19:48:19,443-[DEBUG]- Module: utils - Line:44 - Колонки: ['name', 'date', 'data_object'], размер: (3, 3)
+2025-11-03 19:48:19,443-[INFO]- Module: main - Line:35 - Парсим файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv и разворачиваем значения
+2025-11-03 19:48:19,458-[INFO]- Module: main - Line:41 - Создаем отчет
+2025-11-03 19:48:19,536-[INFO]- Module: main - Line:43 - Среднее качество извлечения таблиц в шаблоне Класс не определен: 0.0
+2025-11-03 19:51:49,728-[INFO]- Module: check_input_data - Line:46 - Поиск файлов по имени в директории: H:\Python projects\count_table_pim\data\INPUT
+2025-11-03 19:51:49,728-[INFO]- Module: check_input_data - Line:67 - ✓ Найден файл ETALON: INPUT_DATA_ETALON.xlsx
+2025-11-03 19:51:49,728-[INFO]- Module: check_input_data - Line:68 - ✓ Найден файл RECOGINIZED: INPUT_DATA_RECOGINIZED.csv
+2025-11-03 19:51:50,009-[INFO]- Module: check_input_data - Line:27 - ✓ Файл INPUT_DATA_ETALON: все необходимые колонки присутствуют
+2025-11-03 19:51:50,009-[WARNING]- Module: check_input_data - Line:97 - Не удалось определить doc_type: 'utf-8' codec can't decode byte 0xd2 in position 47: invalid continuation byte
+2025-11-03 19:51:50,009-[INFO]- Module: check_input_data - Line:100 - ✓ Все проверки пройдены успешно!
+2025-11-03 19:51:50,009-[INFO]- Module: main - Line:24 - Читаем файл с эталонными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_ETALON.xlsx и разворачиваем значения
+2025-11-03 19:51:50,040-[INFO]- Module: main - Line:30 - Читаем файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv
+2025-11-03 19:51:50,040-[INFO]- Module: utils - Line:43 - Файл H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv успешно прочитан (кодировка: windows-1251)
+2025-11-03 19:51:50,040-[DEBUG]- Module: utils - Line:44 - Колонки: ['name', 'date', 'data_object'], размер: (3, 3)
+2025-11-03 19:51:50,040-[INFO]- Module: main - Line:35 - Парсим файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv и разворачиваем значения
+2025-11-03 19:51:50,056-[INFO]- Module: main - Line:41 - Создаем отчет
+2025-11-03 19:51:50,149-[INFO]- Module: main - Line:43 - Среднее качество извлечения таблиц в шаблоне Класс не определен: 34.78
+2025-11-04 11:34:07,559-[INFO]- Module: check_input_data - Line:46 - Поиск файлов по имени в директории: H:\Python projects\count_table_pim\data\INPUT
+2025-11-04 11:34:07,559-[INFO]- Module: check_input_data - Line:67 - ✓ Найден файл ETALON: INPUT_DATA_ETALON.xlsx
+2025-11-04 11:34:07,559-[INFO]- Module: check_input_data - Line:68 - ✓ Найден файл RECOGINIZED: INPUT_DATA_RECOGINIZED.csv
+2025-11-04 11:34:07,950-[INFO]- Module: check_input_data - Line:27 - ✓ Файл INPUT_DATA_ETALON: все необходимые колонки присутствуют
+2025-11-04 11:34:08,012-[WARNING]- Module: check_input_data - Line:97 - Не удалось определить doc_type: 'utf-8' codec can't decode byte 0xd2 in position 47: invalid continuation byte
+2025-11-04 11:34:08,012-[INFO]- Module: check_input_data - Line:100 - ✓ Все проверки пройдены успешно!
+2025-11-04 11:34:08,012-[INFO]- Module: main - Line:24 - Читаем файл с эталонными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_ETALON.xlsx и разворачиваем значения
+2025-11-04 11:34:08,122-[INFO]- Module: main - Line:30 - Читаем файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv
+2025-11-04 11:34:08,122-[INFO]- Module: utils - Line:43 - Файл H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv успешно прочитан (кодировка: windows-1251)
+2025-11-04 11:34:08,122-[DEBUG]- Module: utils - Line:44 - Колонки: ['name', 'date', 'data_object'], размер: (3, 3)
+2025-11-04 11:34:08,122-[INFO]- Module: main - Line:35 - Парсим файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv и разворачиваем значения
+2025-11-04 11:34:08,153-[INFO]- Module: main - Line:41 - Создаем отчет
+2025-11-04 11:34:08,309-[INFO]- Module: main - Line:43 - Среднее качество извлечения таблиц в шаблоне Класс не определен: 41.92
+2025-11-04 12:06:06,562-[INFO]- Module: check_input_data - Line:46 - Поиск файлов по имени в директории: H:\Python projects\count_table_pim\data\INPUT
+2025-11-04 12:06:06,562-[INFO]- Module: check_input_data - Line:67 - ✓ Найден файл ETALON: INPUT_DATA_ETALON.xlsx
+2025-11-04 12:06:06,562-[INFO]- Module: check_input_data - Line:68 - ✓ Найден файл RECOGINIZED: INPUT_DATA_RECOGINIZED.csv
+2025-11-04 12:06:06,828-[INFO]- Module: check_input_data - Line:27 - ✓ Файл INPUT_DATA_ETALON: все необходимые колонки присутствуют
+2025-11-04 12:06:06,828-[WARNING]- Module: check_input_data - Line:97 - Не удалось определить doc_type: 'utf-8' codec can't decode byte 0xd2 in position 47: invalid continuation byte
+2025-11-04 12:06:06,828-[INFO]- Module: check_input_data - Line:100 - ✓ Все проверки пройдены успешно!
+2025-11-04 12:06:06,828-[INFO]- Module: main - Line:24 - Читаем файл с эталонными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_ETALON.xlsx и разворачиваем значения
+2025-11-04 12:06:06,859-[INFO]- Module: main - Line:30 - Читаем файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv
+2025-11-04 12:06:06,859-[INFO]- Module: utils - Line:43 - Файл H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv успешно прочитан (кодировка: windows-1251)
+2025-11-04 12:06:06,859-[DEBUG]- Module: utils - Line:44 - Колонки: ['name', 'date', 'data_object'], размер: (3, 3)
+2025-11-04 12:06:06,859-[INFO]- Module: main - Line:35 - Парсим файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv и разворачиваем значения
+2025-11-04 12:06:06,875-[INFO]- Module: main - Line:41 - Создаем отчет
+2025-11-04 12:06:07,000-[INFO]- Module: main - Line:43 - Среднее качество извлечения таблиц в шаблоне Класс не определен: 42.0
+2025-11-04 12:09:36,332-[INFO]- Module: check_input_data - Line:46 - Поиск файлов по имени в директории: H:\Python projects\count_table_pim\data\INPUT
+2025-11-04 12:09:36,332-[INFO]- Module: check_input_data - Line:67 - ✓ Найден файл ETALON: INPUT_DATA_ETALON.xlsx
+2025-11-04 12:09:36,332-[INFO]- Module: check_input_data - Line:68 - ✓ Найден файл RECOGINIZED: INPUT_DATA_RECOGINIZED.csv
+2025-11-04 12:09:36,550-[INFO]- Module: check_input_data - Line:27 - ✓ Файл INPUT_DATA_ETALON: все необходимые колонки присутствуют
+2025-11-04 12:09:36,550-[WARNING]- Module: check_input_data - Line:97 - Не удалось определить doc_type: 'utf-8' codec can't decode byte 0xd2 in position 47: invalid continuation byte
+2025-11-04 12:09:36,550-[INFO]- Module: check_input_data - Line:100 - ✓ Все проверки пройдены успешно!
+2025-11-04 12:09:36,550-[INFO]- Module: main - Line:24 - Читаем файл с эталонными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_ETALON.xlsx и разворачиваем значения
+2025-11-04 12:09:36,582-[INFO]- Module: main - Line:30 - Читаем файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv
+2025-11-04 12:09:36,582-[INFO]- Module: utils - Line:43 - Файл H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv успешно прочитан (кодировка: windows-1251)
+2025-11-04 12:09:36,582-[DEBUG]- Module: utils - Line:44 - Колонки: ['name', 'date', 'data_object'], размер: (3, 3)
+2025-11-04 12:09:36,582-[INFO]- Module: main - Line:35 - Парсим файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv и разворачиваем значения
+2025-11-04 12:09:36,597-[INFO]- Module: main - Line:41 - Создаем отчет
+2025-11-04 12:09:36,691-[INFO]- Module: main - Line:43 - Среднее качество извлечения таблиц в шаблоне Класс не определен: 44.67

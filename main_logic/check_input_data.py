@@ -32,30 +32,30 @@ def check_columns_in_file(file_path: Path, required_columns: List[str], file_typ
         raise ValueError(error_msg)
 
 
-def check_files(filepath: str):
+def check_files(filepath: str) -> tuple[Path, Path, str]:
     """
     1 Проверяет существование файлов по имени без учета расширения:
     - INPUT_DATA_ETALON
     - INPUT_DATA_RECOGINIZED
     2 Есть ли в файле INPUT_DATA_ETALON необходимые колонки
+    3 Получает doc_type из файла с распознанными данными
     """
-
     data_path = Path(filepath)
 
     # 1. Проверяем существование файлов по имени без учета расширения
     logging.info(f"Поиск файлов по имени в директории: {filepath}")
 
-    etalon_file = find_file_by_name(data_path, constants.INPUT_DATA_ETALON_FILE)
-    recognized_file = find_file_by_name(data_path, constants.INPUT_DATA_RECOGINIZED_FILE)
+    etalon_file_path = find_file_by_name(data_path, constants.INPUT_DATA_ETALON_FILE)
+    recognized_file_path = find_file_by_name(data_path, constants.INPUT_DATA_RECOGINIZED_FILE)
 
     available_files = [f.stem for f in data_path.iterdir() if f.is_file()]
 
     missing_files = []
 
-    if etalon_file is None:
+    if etalon_file_path is None:
         missing_files.append(constants.INPUT_DATA_ETALON_FILE)
 
-    if recognized_file is None:
+    if recognized_file_path is None:
         missing_files.append(constants.INPUT_DATA_RECOGINIZED_FILE)
 
     if missing_files:
@@ -64,13 +64,39 @@ def check_files(filepath: str):
         logging.info(f"Доступные файлы в директории: {available_files}")
         raise FileNotFoundError(f"{error_msg} в директории {filepath}")
 
-    logging.info(f"✓ Найден файл ETALON: {etalon_file.name}")
-    logging.info(f"✓ Найден файл RECOGINIZED: {recognized_file.name}")
+    logging.info(f"✓ Найден файл ETALON: {etalon_file_path.name}")
+    logging.info(f"✓ Найден файл RECOGINIZED: {recognized_file_path.name}")
 
     # 2. Проверяем колонки в файле INPUT_DATA_ETALON
     check_columns_in_file(
-        etalon_file,
+        etalon_file_path,
         [constants.FILE_NAME, constants.ATTRIBUTE_NAME, constants.ATTRIBUTE_NAME_RUS, constants.ETALON_VALUE],
         constants.INPUT_DATA_ETALON_FILE
     )
+
+    # 3. Получаем doc_type из файла с распознанными данными
+    try:
+        if recognized_file_path.suffix.lower() == '.csv':
+            recognized_df = pd.read_csv(recognized_file_path)
+        else:
+            recognized_df = pd.read_excel(recognized_file_path, sheet_name=0)
+
+        if 'doc_type' in recognized_df.columns:
+            non_empty_values = recognized_df['doc_type'].dropna()
+            if len(non_empty_values) > 0:
+                doc_type = non_empty_values.iloc[0]
+                logging.info(f"✓ Определен doc_type: {doc_type}")
+            else:
+                doc_type = "Класс не определен"
+                logging.warning("✓ Столбец doc_type существует, но все значения пустые")
+        else:
+            doc_type = "Класс не определен"
+            logging.warning("✓ Столбец doc_type не найден в файле")
+
+    except Exception as e:
+        logging.warning(f"Не удалось определить doc_type: {e}")
+        doc_type = "Класс не определен"
+
     logging.info("✓ Все проверки пройдены успешно!")
+
+    return etalon_file_path, recognized_file_path, doc_type

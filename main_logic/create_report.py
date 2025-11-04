@@ -1,34 +1,113 @@
-import pandas as pd
-import logging
-import re
 import datetime
-from pathlib import Path
 import pandas as pd
-
 from utils import constants
-from utils.constants import (
-    OUTPUT_REPORTS_DIRECTORY_PATH,
-)
 
 
 def calculate_metrics(etalon_df: pd.DataFrame, recognized_df: pd.DataFrame) -> pd.DataFrame:
     """Рассчитывает метрики качества распознавания на основе эталонных и распознанных значений"""
 
+    # Создаем полный набор всех возможных строк
+    all_files = set(etalon_df[constants.FILE_NAME]).union(set(recognized_df[constants.FILE_NAME]))
+    all_attributes = set(etalon_df[constants.ATTRIBUTE_NAME]).union(set(recognized_df[constants.ATTRIBUTE_NAME]))
+
+    # Собираем русские названия (приоритет эталонным)
+    rus_names = {}
+    for file_name in all_files:
+        for attribute in all_attributes:
+            # Сначала ищем в эталонных
+            etalon_match = etalon_df[
+                (etalon_df[constants.FILE_NAME] == file_name) &
+                (etalon_df[constants.ATTRIBUTE_NAME] == attribute)
+                ]
+            if not etalon_match.empty:
+                rus_names[(file_name, attribute)] = etalon_match[constants.ATTRIBUTE_NAME_RUS].iloc[0]
+            else:
+                # Если нет в эталонных, ищем в распознанных
+                recognized_match = recognized_df[
+                    (recognized_df[constants.FILE_NAME] == file_name) &
+                    (recognized_df[constants.ATTRIBUTE_NAME] == attribute)
+                    ]
+                if not recognized_match.empty:
+                    rus_names[(file_name, attribute)] = recognized_match[constants.ATTRIBUTE_NAME_RUS].iloc[0]
+
+    # Создаем полный DataFrame с максимальным количеством строк для каждой комбинации
+    full_rows = []
+
+    for file_name in all_files:
+        for attribute in all_attributes:
+            if (file_name, attribute) not in rus_names:
+                continue
+
+            rus_name = rus_names[(file_name, attribute)]
+
+            # Определяем максимальное количество строк для этой комбинации
+            etalon_count = len(etalon_df[
+                                   (etalon_df[constants.FILE_NAME] == file_name) &
+                                   (etalon_df[constants.ATTRIBUTE_NAME] == attribute)
+                                   ])
+
+            recognized_count = len(recognized_df[
+                                       (recognized_df[constants.FILE_NAME] == file_name) &
+                                       (recognized_df[constants.ATTRIBUTE_NAME] == attribute)
+                                       ])
+
+            max_rows = max(etalon_count, recognized_count)
+
+            # Создаем строки с порядковыми номерами
+            for row_num in range(max_rows):
+                full_rows.append({
+                    constants.FILE_NAME: file_name,
+                    constants.ATTRIBUTE_NAME: attribute,
+                    constants.ATTRIBUTE_NAME_RUS: rus_name,
+                    'row_num': row_num
+                })
+
+    full_df = pd.DataFrame(full_rows)
+
+    # Добавляем порядковый номер к исходным DataFrame
+    etalon_df_with_num = etalon_df.copy()
+    recognized_df_with_num = recognized_df.copy()
+
+    etalon_df_with_num['row_num'] = etalon_df_with_num.groupby(
+        [constants.FILE_NAME, constants.ATTRIBUTE_NAME]).cumcount()
+    recognized_df_with_num['row_num'] = recognized_df_with_num.groupby(
+        [constants.FILE_NAME, constants.ATTRIBUTE_NAME]).cumcount()
+
+    # Объединяем с полным DataFrame
     merged_df = pd.merge(
-        etalon_df,
-        recognized_df,
-        on=[constants.FILE_NAME, constants.ATTRIBUTE_NAME, constants.ATTRIBUTE_NAME_RUS]
+        full_df,
+        etalon_df_with_num[[constants.FILE_NAME, constants.ATTRIBUTE_NAME, 'row_num', constants.ETALON_VALUE]],
+        on=[constants.FILE_NAME, constants.ATTRIBUTE_NAME, 'row_num'],
+        how='left'
     )
 
-    # 1. Оценка ячейка - сравнение значений
+    merged_df = pd.merge(
+        merged_df,
+        recognized_df_with_num[[constants.FILE_NAME, constants.ATTRIBUTE_NAME, 'row_num', constants.RECOGINIZED_VALUE]],
+        on=[constants.FILE_NAME, constants.ATTRIBUTE_NAME, 'row_num'],
+        how='left'
+    )
+
+    # Удаляем временную колонку
+    merged_df = merged_df.drop('row_num', axis=1)
+
     def compare_cells(reference, recognized):
-        if pd.isna(reference) and pd.isna(recognized):
+        # Приводим к строке для сравнения, но сохраняем логику пустоты
+        ref_str = str(reference) if pd.notna(reference) else ""
+        rec_str = str(recognized) if pd.notna(recognized) else ""
+
+        # Убираем пробелы для проверки на пустоту
+        ref_clean = ref_str.strip()
+        rec_clean = rec_str.strip()
+
+        # Оба пустые (после нормализации)
+        if not ref_clean and not rec_clean:
             return 1
-        elif pd.isna(reference) or pd.isna(recognized):
+        # Один пустой, другой нет
+        elif not ref_clean or not rec_clean:
             return 0
+        # Оба не пустые - сравниваем как есть
         else:
-            ref_str = str(reference).strip().lower()
-            rec_str = str(recognized).strip().lower()
             return 1 if ref_str == rec_str else 0
 
     merged_df[constants.CELL_SCORE] = merged_df.apply(
@@ -37,13 +116,31 @@ def calculate_metrics(etalon_df: pd.DataFrame, recognized_df: pd.DataFrame) -> p
     )
 
     # 2. Оценка столбец - среднее по группам (файл + параметр)
-    merged_df[constants.COLUMN_SCORE] = merged_df.groupby(
+    column_scores = merged_df.groupby(
         [constants.FILE_NAME, constants.ATTRIBUTE_NAME]
-    )[constants.CELL_SCORE].transform('mean')
+    )[constants.CELL_SCORE].mean().round(2)
 
-    # 3. Оценка пакет - среднее по файлам
-    package_scores = merged_df.groupby(constants.FILE_NAME)[constants.COLUMN_SCORE].mean()
+    # Создаем колонку с оценками столбцов, но оставляем только в первой строке для каждого параметра
+    merged_df[constants.COLUMN_SCORE] = merged_df.apply(
+        lambda row: column_scores.get((row[constants.FILE_NAME], row[constants.ATTRIBUTE_NAME]), 0),
+        axis=1
+    )
+
+    # Оставляем значение только в первой строке для каждого параметра
+    mask_column = merged_df.duplicated(subset=[constants.FILE_NAME, constants.ATTRIBUTE_NAME], keep='first')
+    merged_df.loc[mask_column, constants.COLUMN_SCORE] = None
+
+    # 3. Оценка пакет - среднее по файлам (по уникальным колонкам)
+    package_scores = merged_df.drop_duplicates(
+        subset=[constants.FILE_NAME, constants.ATTRIBUTE_NAME]
+    ).groupby(constants.FILE_NAME)[constants.CELL_SCORE].mean().round(2)
+
+    # Создаем колонку с оценками пакетов, но оставляем только в первой строке для каждого файла
     merged_df[constants.PACKAGE_SCORE] = merged_df[constants.FILE_NAME].map(package_scores)
+
+    # Оставляем значение только в первой строке для каждого файла
+    mask_package = merged_df.duplicated(subset=[constants.FILE_NAME], keep='first')
+    merged_df.loc[mask_package, constants.PACKAGE_SCORE] = None
 
     final_columns = [
         constants.FILE_NAME, constants.ATTRIBUTE_NAME, constants.ATTRIBUTE_NAME_RUS,
@@ -54,7 +151,7 @@ def calculate_metrics(etalon_df: pd.DataFrame, recognized_df: pd.DataFrame) -> p
     return merged_df[final_columns]
 
 
-def create_report(etalon_df: pd.DataFrame, recognized_df: pd.DataFrame) -> pd.DataFrame:
+def create_report(etalon_df: pd.DataFrame, recognized_df: pd.DataFrame, doc_type: str) -> pd.DataFrame:
     """Создает отчет по качеству распознавания."""
 
     # четвертый лист - 'эталонные значения'
@@ -82,24 +179,22 @@ def create_report(etalon_df: pd.DataFrame, recognized_df: pd.DataFrame) -> pd.Da
     column_statistics_report_df = column_statistics_report_df.sort_values(constants.COLUMN_QUALITY)
 
     # первый лист 'общая статистика'
-    document_name = f"{Path(filepath).stem}"
+    report_doc_type = doc_type
     count_date = datetime.date.today()
-    amount_examples = paket_statistics_report_df[constants.FILE_NAME_COLUMN_NAME].nunique()
-    true_attribute_amount = (paket_statistics_report_df[constants.COMPARISON_COLUMN_NAME] == True).sum()
-    false_attribute_amount = (paket_statistics_report_df[constants.COMPARISON_COLUMN_NAME] == False).sum()
-    quality_percent = round(true_attribute_amount * 100/(true_attribute_amount + false_attribute_amount), 1)
+    amount_examples = paket_statistics_report_df[constants.FILE_NAME].nunique()
+    quality_percent = paket_statistics_report_df[constants.PACKAGE_SCORE].mean() * 100
+    quality_percent = round(quality_percent, 2)
+
     final_report_df = pd.DataFrame({
-        constants.DOCUMENT_NAME: [document_name],
+        constants.DOCUMENT_NAME: [report_doc_type],
         constants.COUNT_DATE: [count_date],
         constants.AMOUNT_EXAMPLES: [amount_examples],
-        constants.TRUE_ATTRIBUTE_AMOUNT: [true_attribute_amount],
-        constants.FALSE_ATTRIBUTE_AMOUNT: [false_attribute_amount],
         constants.QUALITY_PERCENT: [quality_percent],
     })
 
-    report_file_name = f"{document_name}_report.xlsx"
+    report_file_name = f"{doc_type}_report.xlsx"
 
-    with pd.ExcelWriter(OUTPUT_REPORTS_DIRECTORY_PATH / report_file_name) as writer:
+    with pd.ExcelWriter(constants.OUTPUT_REPORTS_DIRECTORY_PATH / report_file_name) as writer:
         final_report_df.to_excel\
             (writer, sheet_name=constants.FINAL_REPORT_SHEET_NAME, index=False)
         paket_statistics_report_df.to_excel\
