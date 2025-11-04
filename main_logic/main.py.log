@@ -158,3 +158,94 @@
 2025-11-04 12:09:36,582-[INFO]- Module: main - Line:35 - Парсим файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv и разворачиваем значения
 2025-11-04 12:09:36,597-[INFO]- Module: main - Line:41 - Создаем отчет
 2025-11-04 12:09:36,691-[INFO]- Module: main - Line:43 - Среднее качество извлечения таблиц в шаблоне Класс не определен: 44.67
+2025-11-04 12:18:30,425-[INFO]- Module: check_input_data - Line:46 - Поиск файлов по имени в директории: H:\Python projects\count_table_pim\data\INPUT
+2025-11-04 12:18:30,425-[INFO]- Module: check_input_data - Line:67 - ✓ Найден файл ETALON: INPUT_DATA_ETALON.xlsx
+2025-11-04 12:18:30,425-[INFO]- Module: check_input_data - Line:68 - ✓ Найден файл RECOGINIZED: INPUT_DATA_RECOGINIZED.xlsx
+2025-11-04 12:18:30,707-[INFO]- Module: check_input_data - Line:27 - ✓ Файл INPUT_DATA_ETALON: все необходимые колонки присутствуют
+2025-11-04 12:18:30,722-[WARNING]- Module: check_input_data - Line:94 - ✓ Столбец doc_type не найден в файле
+2025-11-04 12:18:30,722-[INFO]- Module: check_input_data - Line:100 - ✓ Все проверки пройдены успешно!
+2025-11-04 12:18:30,722-[INFO]- Module: main - Line:24 - Читаем файл с эталонными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_ETALON.xlsx и разворачиваем значения
+2025-11-04 12:18:30,738-[INFO]- Module: main - Line:30 - Читаем файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.xlsx
+2025-11-04 12:18:30,738-[INFO]- Module: main - Line:35 - Парсим файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.xlsx и разворачиваем значения
+2025-11-04 12:34:16,906-[INFO]- Module: check_input_data - Line:46 - Поиск файлов по имени в директории: H:\Python projects\count_table_pim\data\INPUT
+2025-11-04 12:34:16,906-[INFO]- Module: check_input_data - Line:67 - ✓ Найден файл ETALON: INPUT_DATA_ETALON.xlsx
+2025-11-04 12:34:16,906-[INFO]- Module: check_input_data - Line:68 - ✓ Найден файл RECOGINIZED: INPUT_DATA_RECOGINIZED.xlsx
+2025-11-04 12:34:17,140-[INFO]- Module: check_input_data - Line:27 - ✓ Файл INPUT_DATA_ETALON: все необходимые колонки присутствуют
+2025-11-04 12:34:17,140-[WARNING]- Module: check_input_data - Line:94 - ✓ Столбец doc_type не найден в файле
+2025-11-04 12:34:17,140-[INFO]- Module: check_input_data - Line:100 - ✓ Все проверки пройдены успешно!
+2025-11-04 12:34:17,140-[INFO]- Module: main - Line:24 - Читаем файл с эталонными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_ETALON.xlsx
+2025-11-04 12:34:17,156-[INFO]- Module: main - Line:37 - Эталонные данные уже имеют правильную структуру, используем как есть
+2025-11-04 12:34:17,171-[INFO]- Module: main - Line:46 - Читаем файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.xlsx
+2025-11-04 12:34:17,171-[INFO]- Module: main - Line:65 - Распознанные данные уже распаршены, используем как есть
+2025-11-04 12:34:17,171-[INFO]- Module: main - Line:76 - Распознанные данные уже развернуты, используем как есть
+2025-11-04 12:34:17,187-[INFO]- Module: main - Line:82 - Создаем отчет
+2025-11-04 12:34:17,296-[INFO]- Module: main - Line:84 - Среднее качество извлечения таблиц в шаблоне Класс не определен: 66.67
+2025-11-04 12:54:40,477-[INFO]- Module: check_input_data - Line:46 - Поиск файлов по имени в директории: H:\Python projects\count_table_pim\data\INPUT
+2025-11-04 12:54:40,477-[ERROR]- Module: check_input_data - Line:63 - Файлы не найдены: INPUT_DATA_ETALON
+2025-11-04 12:54:40,477-[INFO]- Module: check_input_data - Line:64 - Доступные файлы в директории: ['INPUT_DATA_RECOGINIZED', 'INPUT_DATA_RECOGINIZED']
+2025-11-04 12:55:49,577-[INFO]- Module: check_input_data - Line:46 - Поиск файлов по имени в директории: H:\Python projects\count_table_pim\data\INPUT
+2025-11-04 12:55:49,577-[INFO]- Module: check_input_data - Line:67 - ✓ Найден файл ETALON: INPUT_DATA_ETALON.xlsx
+2025-11-04 12:55:49,577-[INFO]- Module: check_input_data - Line:68 - ✓ Найден файл RECOGINIZED: INPUT_DATA_RECOGINIZED.csv
+2025-11-04 12:55:49,812-[INFO]- Module: check_input_data - Line:27 - ✓ Файл INPUT_DATA_ETALON: все необходимые колонки присутствуют
+2025-11-04 12:55:49,827-[WARNING]- Module: check_input_data - Line:97 - Не удалось определить doc_type: 'utf-8' codec can't decode byte 0xd2 in position 47: invalid continuation byte
+2025-11-04 12:55:49,827-[INFO]- Module: check_input_data - Line:100 - ✓ Все проверки пройдены успешно!
+2025-11-04 12:55:49,827-[INFO]- Module: main - Line:24 - Читаем файл с эталонными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_ETALON.xlsx
+2025-11-04 12:55:49,827-[INFO]- Module: main - Line:37 - Эталонные данные уже имеют правильную структуру, используем как есть
+2025-11-04 12:55:49,843-[INFO]- Module: main - Line:46 - Читаем файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv
+2025-11-04 12:55:49,843-[INFO]- Module: utils - Line:43 - Файл H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv успешно прочитан (кодировка: windows-1251)
+2025-11-04 12:55:49,843-[DEBUG]- Module: utils - Line:44 - Колонки: ['name', 'date', 'data_object'], размер: (3, 3)
+2025-11-04 12:55:49,843-[INFO]- Module: main - Line:62 - Парсим файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.csv
+2025-11-04 12:55:49,843-[INFO]- Module: main - Line:73 - Разворачиваем распознанные данные
+2025-11-04 12:55:49,859-[INFO]- Module: main - Line:82 - Создаем отчет
+2025-11-04 12:55:49,937-[INFO]- Module: main - Line:84 - Среднее качество извлечения таблиц в шаблоне Класс не определен: 44.67
+2025-11-04 12:56:48,665-[INFO]- Module: check_input_data - Line:46 - Поиск файлов по имени в директории: H:\Python projects\count_table_pim\data\INPUT
+2025-11-04 12:56:48,665-[INFO]- Module: check_input_data - Line:67 - ✓ Найден файл ETALON: INPUT_DATA_ETALON.xlsx
+2025-11-04 12:56:48,665-[INFO]- Module: check_input_data - Line:68 - ✓ Найден файл RECOGINIZED: INPUT_DATA_RECOGINIZED.xlsx
+2025-11-04 12:56:48,899-[INFO]- Module: check_input_data - Line:27 - ✓ Файл INPUT_DATA_ETALON: все необходимые колонки присутствуют
+2025-11-04 12:56:48,915-[WARNING]- Module: check_input_data - Line:94 - ✓ Столбец doc_type не найден в файле
+2025-11-04 12:56:48,915-[INFO]- Module: check_input_data - Line:100 - ✓ Все проверки пройдены успешно!
+2025-11-04 12:56:48,915-[INFO]- Module: main - Line:24 - Читаем файл с эталонными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_ETALON.xlsx
+2025-11-04 12:56:48,930-[INFO]- Module: main - Line:37 - Эталонные данные уже имеют правильную структуру, используем как есть
+2025-11-04 12:56:48,946-[INFO]- Module: main - Line:46 - Читаем файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.xlsx
+2025-11-04 12:56:48,946-[INFO]- Module: main - Line:65 - Распознанные данные уже распаршены, используем как есть
+2025-11-04 12:56:48,946-[INFO]- Module: main - Line:76 - Распознанные данные уже развернуты, используем как есть
+2025-11-04 12:56:48,962-[INFO]- Module: main - Line:82 - Создаем отчет
+2025-11-04 12:56:49,055-[INFO]- Module: main - Line:84 - Среднее качество извлечения таблиц в шаблоне Класс не определен: 66.67
+2025-11-04 13:02:34,732-[INFO]- Module: check_input_data - Line:46 - Поиск файлов по имени в директории: H:\Python projects\count_table_pim\data\INPUT
+2025-11-04 13:02:34,732-[INFO]- Module: check_input_data - Line:67 - ✓ Найден файл ETALON: INPUT_DATA_ETALON.xlsx
+2025-11-04 13:02:34,732-[INFO]- Module: check_input_data - Line:68 - ✓ Найден файл RECOGINIZED: INPUT_DATA_RECOGINIZED.xlsx
+2025-11-04 13:02:34,935-[INFO]- Module: check_input_data - Line:27 - ✓ Файл INPUT_DATA_ETALON: все необходимые колонки присутствуют
+2025-11-04 13:02:34,951-[WARNING]- Module: check_input_data - Line:94 - ✓ Столбец doc_type не найден в файле
+2025-11-04 13:02:34,951-[INFO]- Module: check_input_data - Line:100 - ✓ Все проверки пройдены успешно!
+2025-11-04 13:02:34,951-[INFO]- Module: main - Line:24 - Читаем файл с эталонными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_ETALON.xlsx
+2025-11-04 13:02:34,951-[INFO]- Module: main - Line:37 - Эталонные данные уже имеют правильную структуру, используем как есть
+2025-11-04 13:02:34,966-[INFO]- Module: main - Line:46 - Читаем файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.xlsx
+2025-11-04 13:02:34,966-[INFO]- Module: main - Line:65 - Распознанные данные уже распаршены, используем как есть
+2025-11-04 13:02:34,966-[INFO]- Module: main - Line:76 - Распознанные данные уже развернуты, используем как есть
+2025-11-04 13:02:34,982-[INFO]- Module: main - Line:82 - Создаем отчет
+2025-11-04 13:02:35,076-[INFO]- Module: main - Line:84 - Среднее качество извлечения таблиц в шаблоне Класс не определен: 62.0
+2025-11-04 13:10:52,624-[INFO]- Module: check_input_data - Line:46 - Поиск файлов по имени в директории: H:\Python projects\count_table_pim\data\INPUT
+2025-11-04 13:10:52,640-[INFO]- Module: check_input_data - Line:67 - ✓ Найден файл ETALON: INPUT_DATA_ETALON.xlsx
+2025-11-04 13:10:52,640-[INFO]- Module: check_input_data - Line:68 - ✓ Найден файл RECOGINIZED: INPUT_DATA_RECOGINIZED.xlsx
+2025-11-04 13:10:52,859-[INFO]- Module: check_input_data - Line:27 - ✓ Файл INPUT_DATA_ETALON: все необходимые колонки присутствуют
+2025-11-04 13:10:52,874-[WARNING]- Module: check_input_data - Line:94 - ✓ Столбец doc_type не найден в файле
+2025-11-04 13:10:52,874-[INFO]- Module: check_input_data - Line:100 - ✓ Все проверки пройдены успешно!
+2025-11-04 13:10:52,874-[INFO]- Module: main - Line:24 - Читаем файл с эталонными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_ETALON.xlsx
+2025-11-04 13:10:52,874-[INFO]- Module: main - Line:37 - Эталонные данные уже имеют правильную структуру, используем как есть
+2025-11-04 13:10:52,890-[INFO]- Module: main - Line:46 - Читаем файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.xlsx
+2025-11-04 13:10:52,890-[INFO]- Module: main - Line:65 - Распознанные данные уже распаршены, используем как есть
+2025-11-04 13:10:52,890-[INFO]- Module: main - Line:76 - Распознанные данные уже развернуты, используем как есть
+2025-11-04 13:10:52,906-[INFO]- Module: main - Line:82 - Создаем отчет
+2025-11-04 13:12:29,198-[INFO]- Module: check_input_data - Line:46 - Поиск файлов по имени в директории: H:\Python projects\count_table_pim\data\INPUT
+2025-11-04 13:12:29,214-[INFO]- Module: check_input_data - Line:67 - ✓ Найден файл ETALON: INPUT_DATA_ETALON.xlsx
+2025-11-04 13:12:29,214-[INFO]- Module: check_input_data - Line:68 - ✓ Найден файл RECOGINIZED: INPUT_DATA_RECOGINIZED.xlsx
+2025-11-04 13:12:29,433-[INFO]- Module: check_input_data - Line:27 - ✓ Файл INPUT_DATA_ETALON: все необходимые колонки присутствуют
+2025-11-04 13:12:29,448-[WARNING]- Module: check_input_data - Line:94 - ✓ Столбец doc_type не найден в файле
+2025-11-04 13:12:29,448-[INFO]- Module: check_input_data - Line:100 - ✓ Все проверки пройдены успешно!
+2025-11-04 13:12:29,448-[INFO]- Module: main - Line:24 - Читаем файл с эталонными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_ETALON.xlsx
+2025-11-04 13:12:29,448-[INFO]- Module: main - Line:37 - Эталонные данные уже имеют правильную структуру, используем как есть
+2025-11-04 13:12:29,464-[INFO]- Module: main - Line:46 - Читаем файл с распознанными данными H:\Python projects\count_table_pim\data\INPUT\INPUT_DATA_RECOGINIZED.xlsx
+2025-11-04 13:12:29,464-[INFO]- Module: main - Line:65 - Распознанные данные уже распаршены, используем как есть
+2025-11-04 13:12:29,464-[INFO]- Module: main - Line:76 - Распознанные данные уже развернуты, используем как есть
+2025-11-04 13:12:29,479-[INFO]- Module: main - Line:82 - Создаем отчет
+2025-11-04 13:12:29,573-[INFO]- Module: main - Line:84 - Среднее качество извлечения таблиц в шаблоне Класс не определен: 62.0

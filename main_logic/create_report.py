@@ -92,21 +92,16 @@ def calculate_metrics(etalon_df: pd.DataFrame, recognized_df: pd.DataFrame) -> p
     merged_df = merged_df.drop('row_num', axis=1)
 
     def compare_cells(reference, recognized):
-        # Приводим к строке для сравнения, но сохраняем логику пустоты
         ref_str = str(reference) if pd.notna(reference) else ""
         rec_str = str(recognized) if pd.notna(recognized) else ""
 
-        # Убираем пробелы для проверки на пустоту
         ref_clean = ref_str.strip()
         rec_clean = rec_str.strip()
 
-        # Оба пустые (после нормализации)
         if not ref_clean and not rec_clean:
             return 1
-        # Один пустой, другой нет
         elif not ref_clean or not rec_clean:
             return 0
-        # Оба не пустые - сравниваем как есть
         else:
             return 1 if ref_str == rec_str else 0
 
@@ -133,7 +128,7 @@ def calculate_metrics(etalon_df: pd.DataFrame, recognized_df: pd.DataFrame) -> p
     # 3. Оценка пакет - среднее по файлам (по уникальным колонкам)
     package_scores = merged_df.drop_duplicates(
         subset=[constants.FILE_NAME, constants.ATTRIBUTE_NAME]
-    ).groupby(constants.FILE_NAME)[constants.CELL_SCORE].mean().round(2)
+    ).groupby(constants.FILE_NAME)[constants.COLUMN_SCORE].mean().round(2)
 
     # Создаем колонку с оценками пакетов, но оставляем только в первой строке для каждого файла
     merged_df[constants.PACKAGE_SCORE] = merged_df[constants.FILE_NAME].map(package_scores)
@@ -166,15 +161,17 @@ def create_report(etalon_df: pd.DataFrame, recognized_df: pd.DataFrame, doc_type
     # третий лист - 'детализация по колонкам' (отражает в каких колонках больше всего ошибок)
     column_quality = (
         paket_statistics_report_df
-            .groupby(constants.ATTRIBUTE_NAME_RUS)[constants.CELL_SCORE]
+            .dropna(subset=[constants.COLUMN_SCORE])
+            .groupby(constants.ATTRIBUTE_NAME_RUS)[constants.COLUMN_SCORE]
             .mean()
             .mul(100)
             .round(2)
             .reset_index()
     )
+
     column_statistics_report_df = pd.DataFrame({
         constants.COLUMN_NAME: column_quality[constants.ATTRIBUTE_NAME_RUS],
-        constants.COLUMN_QUALITY: column_quality[constants.CELL_SCORE]
+        constants.COLUMN_QUALITY: column_quality[constants.COLUMN_SCORE]
     })
     column_statistics_report_df = column_statistics_report_df.sort_values(constants.COLUMN_QUALITY)
 
