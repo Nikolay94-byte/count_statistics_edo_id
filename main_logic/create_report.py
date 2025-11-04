@@ -6,39 +6,19 @@ from utils import constants
 def calculate_metrics(etalon_df: pd.DataFrame, recognized_df: pd.DataFrame) -> pd.DataFrame:
     """Рассчитывает метрики качества распознавания на основе эталонных и распознанных значений"""
 
-    # Создаем полный набор всех возможных строк
+    # Создаем полный набор всех возможных файлов
     all_files = set(etalon_df[constants.FILE_NAME]).union(set(recognized_df[constants.FILE_NAME]))
-    all_attributes = set(etalon_df[constants.ATTRIBUTE_NAME]).union(set(recognized_df[constants.ATTRIBUTE_NAME]))
 
-    # Собираем русские названия (приоритет эталонным)
-    rus_names = {}
-    for file_name in all_files:
-        for attribute in all_attributes:
-            # Сначала ищем в эталонных
-            etalon_match = etalon_df[
-                (etalon_df[constants.FILE_NAME] == file_name) &
-                (etalon_df[constants.ATTRIBUTE_NAME] == attribute)
-                ]
-            if not etalon_match.empty:
-                rus_names[(file_name, attribute)] = etalon_match[constants.ATTRIBUTE_NAME_RUS].iloc[0]
-            else:
-                # Если нет в эталонных, ищем в распознанных
-                recognized_match = recognized_df[
-                    (recognized_df[constants.FILE_NAME] == file_name) &
-                    (recognized_df[constants.ATTRIBUTE_NAME] == attribute)
-                    ]
-                if not recognized_match.empty:
-                    rus_names[(file_name, attribute)] = recognized_match[constants.ATTRIBUTE_NAME_RUS].iloc[0]
+    # Берем только те атрибуты из константы, которые есть в эталонных данных
+    etalon_attributes = set(etalon_df[constants.ATTRIBUTE_NAME])
+    available_attributes = set(constants.TABLE_ATTRIBUTES.keys()) & etalon_attributes
 
     # Создаем полный DataFrame с максимальным количеством строк для каждой комбинации
     full_rows = []
 
     for file_name in all_files:
-        for attribute in all_attributes:
-            if (file_name, attribute) not in rus_names:
-                continue
-
-            rus_name = rus_names[(file_name, attribute)]
+        for attribute in available_attributes:
+            rus_name = constants.TABLE_ATTRIBUTES[attribute]
 
             # Определяем максимальное количество строк для этой комбинации
             etalon_count = len(etalon_df[
@@ -53,14 +33,15 @@ def calculate_metrics(etalon_df: pd.DataFrame, recognized_df: pd.DataFrame) -> p
 
             max_rows = max(etalon_count, recognized_count)
 
-            # Создаем строки с порядковыми номерами
-            for row_num in range(max_rows):
-                full_rows.append({
-                    constants.FILE_NAME: file_name,
-                    constants.ATTRIBUTE_NAME: attribute,
-                    constants.ATTRIBUTE_NAME_RUS: rus_name,
-                    'row_num': row_num
-                })
+            # Если есть хотя бы одна строка с данными, создаем строки
+            if max_rows > 0:
+                for row_num in range(max_rows):
+                    full_rows.append({
+                        constants.FILE_NAME: file_name,
+                        constants.ATTRIBUTE_NAME: attribute,
+                        constants.ATTRIBUTE_NAME_RUS: rus_name,
+                        'row_num': row_num
+                    })
 
     full_df = pd.DataFrame(full_rows)
 

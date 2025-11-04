@@ -23,14 +23,18 @@ CELL_SCORE = 'Оценка ячейка'
 COLUMN_SCORE = 'Оценка столбец'
 PACKAGE_SCORE = 'Оценка пакет'
 
-# Словарь наименования колонок таблиц, по которым ведется подсчет
+# Наименования колонок таблиц процесса kpss_uvhd, по которым ведется подсчет (не в каждом шаблоне есть все эти колонки)
 TABLE_ATTRIBUTES = {
     'table_description_column_row_attribute': 'Наименование товара/услуги',
     'table_qty_column_row_attribute': 'Количество товара/услуг по позициям',
     'table_unit_column_row_attribute': 'Ед.изм',
     'table_cost_column_row_attribute': 'Цена по позициям',
     'table_cost_without_tax_column_row_attribute': 'Сумма без НДС по позициям',
-    'table_cost_with_tax_column_row_attribute': 'Сумма с НДС по позициям'
+    'table_tax_column_row_attribute': 'Сумма НДС по позициям',
+    'table_cost_with_tax_column_row_attribute': 'Сумма с НДС по позициям',
+    'table_code_column_row_attribute': 'Код вида товара',
+    'table_unit_code_column_row_attribute': 'Код ед.изм',
+    'table_tax_rate_column_row_attribute': 'Ставка НДС по позициям',
 }
 
 # Названия листов в excel-файле отчета
