@@ -1,7 +1,6 @@
 import logging
 import os
 import sys
-from tabulate import tabulate
 import pandas as pd
 
 from check_input_data import check_files
@@ -40,9 +39,6 @@ def counting_statistics_table_pim() -> None:
         logging.info("Разворачиваем эталонные данные")
         expanded_etalon_df = expand_dataframe_data(etalon_df, constants.ETALON_VALUE)
 
-    print(tabulate(expanded_etalon_df, headers='keys', tablefmt='grid', showindex=False))
-    print("\n" + "=" * 80 + "\n")
-
     logging.info(f"Читаем файл с распознанными данными {recognized_file_path}")
     if os.path.splitext(recognized_file_path)[1].lower() == '.csv':
         recognized_df = decoding_csv(recognized_file_path)
@@ -75,9 +71,6 @@ def counting_statistics_table_pim() -> None:
     else:
         logging.info("Распознанные данные уже развернуты, используем как есть")
         expanded_recognized_df = parsed_recognized_df
-
-    print(tabulate(expanded_recognized_df, headers='keys', tablefmt='grid', showindex=False))
-    print("\n" + "=" * 80 + "\n")
 
     logging.info(f'Создаем отчет')
     quality_percent = create_report(expanded_etalon_df, expanded_recognized_df, doc_type)

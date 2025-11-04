@@ -6,6 +6,28 @@ from utils import constants
 def calculate_metrics(etalon_df: pd.DataFrame, recognized_df: pd.DataFrame) -> pd.DataFrame:
     """Рассчитывает метрики качества распознавания на основе эталонных и распознанных значений"""
 
+    def compare_cells(reference, recognized):
+        """Сравнивает две ячейки и возвращает оценку 0 или 1"""
+        ref_str = str(reference) if pd.notna(reference) else ""
+        rec_str = str(recognized) if pd.notna(recognized) else ""
+
+        ref_clean = ref_str.strip()
+        rec_clean = rec_str.strip()
+
+        if not ref_clean and not rec_clean:
+            return 1
+        elif not ref_clean or not rec_clean:
+            return 0
+        else:
+            return 1 if ref_str == rec_str else 0
+
+    def count_rows_for_attribute(df, file_name, attribute):
+        """Считает количество строк для конкретного файла и атрибута"""
+        return len(df[
+                       (df[constants.FILE_NAME] == file_name) &
+                       (df[constants.ATTRIBUTE_NAME] == attribute)
+                       ])
+
     # Создаем полный набор всех возможных файлов
     all_files = set(etalon_df[constants.FILE_NAME]).union(set(recognized_df[constants.FILE_NAME]))
 
@@ -21,16 +43,8 @@ def calculate_metrics(etalon_df: pd.DataFrame, recognized_df: pd.DataFrame) -> p
             rus_name = constants.TABLE_ATTRIBUTES[attribute]
 
             # Определяем максимальное количество строк для этой комбинации
-            etalon_count = len(etalon_df[
-                                   (etalon_df[constants.FILE_NAME] == file_name) &
-                                   (etalon_df[constants.ATTRIBUTE_NAME] == attribute)
-                                   ])
-
-            recognized_count = len(recognized_df[
-                                       (recognized_df[constants.FILE_NAME] == file_name) &
-                                       (recognized_df[constants.ATTRIBUTE_NAME] == attribute)
-                                       ])
-
+            etalon_count = count_rows_for_attribute(etalon_df, file_name, attribute)
+            recognized_count = count_rows_for_attribute(recognized_df, file_name, attribute)
             max_rows = max(etalon_count, recognized_count)
 
             # Если есть хотя бы одна строка с данными, создаем строки
@@ -49,43 +63,28 @@ def calculate_metrics(etalon_df: pd.DataFrame, recognized_df: pd.DataFrame) -> p
     etalon_df_with_num = etalon_df.copy()
     recognized_df_with_num = recognized_df.copy()
 
-    etalon_df_with_num['row_num'] = etalon_df_with_num.groupby(
-        [constants.FILE_NAME, constants.ATTRIBUTE_NAME]).cumcount()
-    recognized_df_with_num['row_num'] = recognized_df_with_num.groupby(
-        [constants.FILE_NAME, constants.ATTRIBUTE_NAME]).cumcount()
+    for df in [etalon_df_with_num, recognized_df_with_num]:
+        df['row_num'] = df.groupby([constants.FILE_NAME, constants.ATTRIBUTE_NAME]).cumcount()
 
     # Объединяем с полным DataFrame
+    merge_columns = [constants.FILE_NAME, constants.ATTRIBUTE_NAME, 'row_num']
+
     merged_df = pd.merge(
         full_df,
-        etalon_df_with_num[[constants.FILE_NAME, constants.ATTRIBUTE_NAME, 'row_num', constants.ETALON_VALUE]],
-        on=[constants.FILE_NAME, constants.ATTRIBUTE_NAME, 'row_num'],
+        etalon_df_with_num[merge_columns + [constants.ETALON_VALUE]],
+        on=merge_columns,
         how='left'
     )
 
     merged_df = pd.merge(
         merged_df,
-        recognized_df_with_num[[constants.FILE_NAME, constants.ATTRIBUTE_NAME, 'row_num', constants.RECOGINIZED_VALUE]],
-        on=[constants.FILE_NAME, constants.ATTRIBUTE_NAME, 'row_num'],
+        recognized_df_with_num[merge_columns + [constants.RECOGINIZED_VALUE]],
+        on=merge_columns,
         how='left'
     )
 
-    # Удаляем временную колонку
+    # Удаляем временную колонку и рассчитываем оценки
     merged_df = merged_df.drop('row_num', axis=1)
-
-    def compare_cells(reference, recognized):
-        ref_str = str(reference) if pd.notna(reference) else ""
-        rec_str = str(recognized) if pd.notna(recognized) else ""
-
-        ref_clean = ref_str.strip()
-        rec_clean = rec_str.strip()
-
-        if not ref_clean and not rec_clean:
-            return 1
-        elif not ref_clean or not rec_clean:
-            return 0
-        else:
-            return 1 if ref_str == rec_str else 0
-
     merged_df[constants.CELL_SCORE] = merged_df.apply(
         lambda row: compare_cells(row[constants.ETALON_VALUE], row[constants.RECOGINIZED_VALUE]),
         axis=1
