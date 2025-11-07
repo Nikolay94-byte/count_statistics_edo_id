@@ -24,20 +24,14 @@ def counting_statistics_table_pim() -> None:
     etalon_df = pd.read_excel(etalon_file_path, dtype=str).fillna("")
 
     # Проверяем, нужно ли разворачивать эталонные данные
-    # Проверяем наличие колонок, которые должны быть после разворачивания
-    has_expanded_structure = (
-            constants.FILE_NAME in etalon_df.columns and
-            constants.ATTRIBUTE_NAME in etalon_df.columns and
-            constants.ATTRIBUTE_NAME_RUS in etalon_df.columns and
-            constants.ETALON_VALUE in etalon_df.columns
-    )
-
-    if has_expanded_structure:
-        logging.info("Эталонные данные уже имеют правильную структуру, используем как есть")
-        expanded_etalon_df = etalon_df
-    else:
+    # Проверяем, есть ли значения с разделителем ';' в колонке ETALON_VALUE
+    needs_expanding = etalon_df[constants.ETALON_VALUE].astype(str).str.contains(';', na=False).any()
+    if needs_expanding:
         logging.info("Разворачиваем эталонные данные")
         expanded_etalon_df = expand_dataframe_data(etalon_df, constants.ETALON_VALUE)
+    else:
+        logging.info("Эталонные данные уже развернуты, используем как есть")
+        expanded_etalon_df = etalon_df
 
     logging.info(f"Читаем файл с распознанными данными {recognized_file_path}")
     if os.path.splitext(recognized_file_path)[1].lower() == '.csv':
